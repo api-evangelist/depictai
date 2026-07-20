@@ -1,0 +1,48 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-lite-openapi.json, openapi/depictai-portal-openapi.json, openapi/depictai-storefront-openapi.json
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - cookie
+  - header
+  - query
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: Auth0
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+    tokenUrl: https://depict.eu.auth0.com/oauth/token
+    scopes: 3
+  sources:
+  - openapi/depictai-lite-openapi.json
+  - openapi/depictai-portal-openapi.json
+- name: APIKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  sources:
+  - openapi/depictai-storefront-openapi.json
+- name: APIKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  sources:
+  - openapi/depictai-storefront-openapi.json
+- name: APIKeyCookie
+  type: apiKey
+  in: cookie
+  parameter: X-API-KEY
+  sources:
+  - openapi/depictai-storefront-openapi.json
+- name: HTTPBearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/depictai-storefront-openapi.json
