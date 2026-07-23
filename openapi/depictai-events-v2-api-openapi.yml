@@ -1,0 +1,519 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Events (v2) API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Events (v2)
+paths:
+  /create-events:
+    post:
+      tags:
+      - Events (v2)
+      summary: Create Events
+      description: "There are 5 types of events:\n- page_view\n- click\n- add_to_cart\n- purchase\n- element_visible\n\nFor most integrations, we recommend sending `add_to_cart` events. Note that most of the event fields are not mandatory.\nSee more details about each event field below.\n\nFor events of type `click` the `recommendation_id` for the clicked recommendation (which is returned from the `/recommend` endpoint)\nshould be set if available.\n\n\nExamples requests:\n\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"page_view\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"click\",</mark>\n    \"user_id\": \"ga1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"bla-key-xxx\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\",\n    <mark>\"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\",</mark>\n    <mark>\"click_location\": \"landing_page_recommendation_1\"</mark>\n}]\n</pre>\n\n\n<details>\n  <summary>View more examples</summary>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"add_to_cart\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"purchase\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/checkout.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"element_visible\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/checkout.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\",\n    <mark>\"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"</mark>\n}]\n</pre>\n</details>"
+      operationId: create_events_create_events_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      - name: user-agent
+        in: header
+        required: false
+        schema:
+          type: string
+          title: User-Agent
+      - name: x-forwarded-for
+        in: header
+        required: false
+        schema:
+          type: string
+          title: X-Forwarded-For
+      - name: x-forwarded-host
+        in: header
+        required: false
+        schema:
+          type: string
+          title: X-Forwarded-Host
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Event'
+              title: Request
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/track:
+    post:
+      tags:
+      - Events (v2)
+      summary: Track V2
+      operationId: track_v2_v2_track_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackV2Request'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+  /v2/create-events:
+    post:
+      tags:
+      - Events (v2)
+      summary: Create Events V2
+      operationId: create_events_v2_v2_create_events_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackV2Request'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+components:
+  schemas:
+    PurchasedProduct:
+      properties:
+        sku:
+          type: string
+          minLength: 1
+          title: Sku
+          description: Stock keeping unit, a distinct item for sale. If you are using Google Analytics, it should be the same id used for products there.
+        price:
+          anyOf:
+          - type: number
+            minimum: 0
+          - type: string
+          title: Price
+          description: Price per unit. If there are discounts because of quantity, the unit price should be adjusted accordingly.
+        quantity:
+          type: integer
+          minimum: 1
+          title: Quantity
+          description: The number of times the product was purchased.
+      additionalProperties: false
+      type: object
+      required:
+      - sku
+      - price
+      - quantity
+      title: PurchasedProduct
+    EEventType:
+      type: string
+      enum:
+      - page_view
+      - click
+      - add_to_cart
+      - purchase
+      - element_visible
+      - ws_click
+      - recommendations_inserted
+      title: EEventType
+    ProductUnavailableEvent:
+      properties:
+        user_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: User Id
+          description: User Id. Persistent between devices, typically on a logged in user.
+        session_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Session Id
+          description: Session Id. Unique to a browser/app and stored locally, e.g. cookie or localStorage.
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id.
+        event_type:
+          const: product_unavailable
+          title: Event Type
+          description: 'The type identifier for this event: product_unavailable.'
+        product_id:
+          type: string
+          minLength: 1
+          title: Product Id
+          description: Main product identifier
+        unavailability_type:
+          allOf:
+          - $ref: '#/components/schemas/EUnavailabilityType'
+          description: Reason the product isn't available for purchase
+      additionalProperties: false
+      type: object
+      required:
+      - event_type
+      - product_id
+      - unavailability_type
+      title: ProductUnavailableEvent
+    UserTransactionMappingEvent:
+      properties:
+        user_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: User Id
+          description: User Id. Persistent between devices, typically on a logged in user.
+        session_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Session Id
+          description: Session Id. Unique to a browser/app and stored locally, e.g. cookie or localStorage.
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id.
+        transaction_id:
+          type: string
+          minLength: 1
+          title: Transaction Id
+          description: Unique identifier for the transaction.
+        event_type:
+          anyOf:
+          - const: transaction_mapping
+          - type: 'null'
+          title: Event Type
+          description: 'The type identifier for this event: transaction_mapping.'
+      additionalProperties: false
+      type: object
+      required:
+      - transaction_id
+      title: UserTransactionMappingEvent
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PurchaseEvent:
+      properties:
+        user_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: User Id
+          description: User Id. Persistent between devices, typically on a logged in user.
+        session_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Session Id
+          description: Session Id. Unique to a browser/app and stored locally, e.g. cookie or localStorage.
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id.
+        transaction_id:
+          type: string
+          minLength: 1
+          title: Transaction Id
+          description: Unique identifier for the transaction.
+        event_type:
+          anyOf:
+          - const: purchase
+          - type: 'null'
+          title: Event Type
+          description: 'The type identifier for this event: purchase.'
+        currency:
+          type: string
+          pattern: ^AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD$
+          title: Currency
+          description: Currency the purchase was paid in
+        products:
+          items:
+            $ref: '#/components/schemas/PurchasedProduct'
+          type: array
+          minItems: 1
+          title: Products
+          description: All the products purchased in this transaction
+      additionalProperties: false
+      type: object
+      required:
+      - transaction_id
+      - currency
+      - products
+      title: PurchaseEvent
+    TrackV2Request:
+      properties:
+        tenant:
+          type: string
+          minLength: 1
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          minLength: 1
+          title: Market
+          description: Market identifier
+        events:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/UserTransactionMappingEvent'
+            - $ref: '#/components/schemas/PurchaseEvent'
+            - $ref: '#/components/schemas/ProductUnavailableEvent'
+          type: array
+          title: Events
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - events
+      title: TrackV2Request
+    EUnavailabilityType:
+      type: string
+      enum:
+      - out_of_stock
+      - missing
+      title: EUnavailabilityType
+    Event:
+      properties:
+        tenant:
+          type: string
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        deduplication_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Deduplication Id
+          description: If retrying creating events, this should be set to a unique value common across all requests with the same event
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EEventType'
+          description: Type of event
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+          description: Customer identifier
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id
+        ab_test_group:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ab Test Group
+          description: A/B test group identifier. Not required.
+        product_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Product Id
+          description: Main product identifier
+        variant_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Variant Ids
+          description: Identifiers of variants for this product. Not required.
+        entity_identifiers:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Entity Identifiers
+          description: Key-value object containing additional identifiers for the product
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: The value of `document.location.href` in the user's browser
+        entity_price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Entity Price
+          description: Current price of product. Not required.
+        currency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Currency
+          description: Currency of product (ISO 4217 code). Not required.
+        document_referrer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Referrer
+          description: The value of `document.referrer` in the user's browser
+        document_width:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Width
+          description: The value of `document.width` in the user's browser
+        attribution_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Id
+          description: Keyword specifying what led to this event. Not required.
+        recommendation_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Recommendation Id
+          description: Unique identifier returned from the `/recommend` endpoint
+        search_result_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Search Result Id
+          description: Unique identifier of the search result.
+        product_listing_result_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Product Listing Result Id
+          description: Unique identifier of the product listing result.
+        click_location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Click Location
+          description: Keyword specifying what element was clicked. Not required.
+        page_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Page Url
+          description: The URL of the product page visited
+        recommendation_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Recommendation Type
+          description: The type of recommendations inserted
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - type
+      title: Event
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Search Metrics API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Search Metrics
+paths:
+  /api/v1/merchants/{merchant_id}/search/metrics/queries:
+    get:
+      tags:
+      - Search Metrics
+      summary: Get Search Query Stats Endpoint
+      operationId: get_search_query_stats_endpoint_api_v1_merchants__merchant_id__search_metrics_queries_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: start_timestamp
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Start Timestamp
+      - name: end_timestamp
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: End Timestamp
+      - name: max_queries_per_market
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          title: Max Queries Per Market
+      - name: market
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchQueryStatsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MarketSearchQueries:
+      properties:
+        market:
+          type: string
+          title: Market
+        locale:
+          type: string
+          title: Locale
+        top_queries:
+          items:
+            $ref: '#/components/schemas/SearchQuery'
+          type: array
+          title: Top Queries
+        top_no_result_queries:
+          items:
+            $ref: '#/components/schemas/SearchQuery'
+          type: array
+          title: Top No Result Queries
+      type: object
+      required:
+      - market
+      - locale
+      - top_queries
+      - top_no_result_queries
+      title: MarketSearchQueries
+    SearchQuery:
+      properties:
+        query:
+          type: string
+          title: Query
+        count:
+          type: integer
+          title: Count
+        locale:
+          type: string
+          title: Locale
+      type: object
+      required:
+      - query
+      - count
+      - locale
+      title: SearchQuery
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SearchQueryStatsResponse:
+      properties:
+        markets:
+          items:
+            $ref: '#/components/schemas/MarketSearchQueries'
+          type: array
+          title: Markets
+        prev_markets:
+          items:
+            $ref: '#/components/schemas/MarketSearchQueries'
+          type: array
+          title: Prev Markets
+      type: object
+      required:
+      - markets
+      - prev_markets
+      title: SearchQueryStatsResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

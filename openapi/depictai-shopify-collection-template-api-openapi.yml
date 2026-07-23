@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Shopify Collection Template API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Shopify Collection Template
+paths:
+  /shopify-collection-template/{merchant_id}/{collection_id}/templates:
+    get:
+      summary: Get Collection Templates
+      description: Returns a list of all collection template suffixes for the main theme of the merchant
+      operationId: get_collection_templates_shopify_collection_template__merchant_id___collection_id__templates_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCollectionTemplatesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify Collection Template
+  /shopify-collection-template/active/{collection_id}:
+    get:
+      summary: Get Active Collection Template
+      operationId: get_active_collection_template_shopify_collection_template_active__collection_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionTemplate'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify Collection Template
+  /shopify-collection-template/{collection_id}/activate:
+    post:
+      summary: Activate Collection Template
+      operationId: activate_collection_template_shopify_collection_template__collection_id__activate_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: template_suffix
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Template Suffix
+      - name: theme_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Theme Id
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionTemplate'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify Collection Template
+  /shopify-collection-template/{merchant_id}/columns-settings:
+    put:
+      summary: Update Columns Settings
+      operationId: update_columns_settings_shopify_collection_template__merchant_id__columns_settings_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiteColumnSettings'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify Collection Template
+components:
+  schemas:
+    ThemeOnboardingStatus:
+      type: string
+      enum:
+      - success
+      - warning
+      - failure
+      - pending
+      title: ThemeOnboardingStatus
+    LiteColumnSettings:
+      properties:
+        desktop_columns:
+          type: integer
+          title: Desktop Columns
+        mobile_columns:
+          type: integer
+          title: Mobile Columns
+      type: object
+      required:
+      - desktop_columns
+      - mobile_columns
+      title: LiteColumnSettings
+    CollectionTemplate:
+      properties:
+        template_suffix:
+          type: string
+          title: Template Suffix
+        is_depict_template:
+          type: boolean
+          title: Is Depict Template
+      type: object
+      required:
+      - template_suffix
+      - is_depict_template
+      title: CollectionTemplate
+    CollectionTemplateWithActiveAndWrittenStatus:
+      properties:
+        template_suffix:
+          type: string
+          title: Template Suffix
+        is_depict_template:
+          type: boolean
+          title: Is Depict Template
+        active:
+          type: boolean
+          title: Active
+        written:
+          type: boolean
+          title: Written
+      type: object
+      required:
+      - template_suffix
+      - is_depict_template
+      - active
+      - written
+      title: CollectionTemplateWithActiveAndWrittenStatus
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GetCollectionTemplatesResponse:
+      properties:
+        theme_onboarding_status:
+          $ref: '#/components/schemas/ThemeOnboardingStatus'
+        user_approved:
+          type: boolean
+          title: User Approved
+        templates:
+          items:
+            $ref: '#/components/schemas/CollectionTemplateWithActiveAndWrittenStatus'
+          type: array
+          title: Templates
+      type: object
+      required:
+      - theme_onboarding_status
+      - user_approved
+      - templates
+      title: GetCollectionTemplatesResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

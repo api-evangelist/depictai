@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Users API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Users
+paths:
+  /users/me:
+    get:
+      summary: Read Users Me
+      operationId: read_users_me_users_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiteUser'
+      security:
+      - Auth0: []
+      tags:
+      - Users
+components:
+  schemas:
+    LiteUser:
+      properties:
+        email:
+          type: string
+          title: Email
+        segment_user_id:
+          type: string
+          title: Segment User Id
+        is_superuser:
+          type: boolean
+          title: Is Superuser
+        intercom_hash:
+          type: string
+          title: Intercom Hash
+        shopify_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Shopify Domain
+      type: object
+      required:
+      - email
+      - segment_user_id
+      - is_superuser
+      - intercom_hash
+      - shopify_domain
+      title: LiteUser
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

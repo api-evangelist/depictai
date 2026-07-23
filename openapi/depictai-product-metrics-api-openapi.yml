@@ -1,0 +1,433 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Product Metrics API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Product Metrics
+paths:
+  /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/basic:
+    get:
+      tags:
+      - Product Metrics
+      summary: Get Product Basic Metrics Endpoint
+      operationId: get_product_basic_metrics_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_basic_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: From Date
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: To Date
+      - name: market_group
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market Group
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductBasicMetricsResponse'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/overview/chart:
+    get:
+      tags:
+      - Product Metrics
+      summary: Get Product Overview Chart Endpoint
+      operationId: get_product_overview_chart_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_overview_chart_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: market_group
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market Group
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductOverviewChartResponse'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/weekly:
+    get:
+      tags:
+      - Product Metrics
+      summary: Get Product Weekly Stats Endpoint
+      operationId: get_product_weekly_stats_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_weekly_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: market_group
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market Group
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductWeeklyStatsResponse'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/toplist:
+    get:
+      tags:
+      - Product Metrics
+      summary: Get Product Toplist Endpoint
+      operationId: get_product_toplist_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_toplist_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: market_group
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market Group
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductToplistResponse'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ProductWeeklyStatsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WeeklyDailyDataPoint'
+          type: array
+          title: Data
+          default: []
+        currency:
+          type: string
+          title: Currency
+          default: ''
+      type: object
+      title: ProductWeeklyStatsResponse
+    ProductBasicMetricsResponse:
+      properties:
+        currency:
+          type: string
+          title: Currency
+          default: ''
+        clicks:
+          type: integer
+          title: Clicks
+          default: 0
+        prev_clicks:
+          type: integer
+          title: Prev Clicks
+          default: 0
+        views:
+          type: integer
+          title: Views
+          default: 0
+        prev_views:
+          type: integer
+          title: Prev Views
+          default: 0
+        sold:
+          type: integer
+          title: Sold
+          default: 0
+        prev_sold:
+          type: integer
+          title: Prev Sold
+          default: 0
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+          default: 0
+        prev_revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Prev Revenue
+          default: 0
+        add_to_carts:
+          type: integer
+          title: Add To Carts
+          default: 0
+        prev_add_to_carts:
+          type: integer
+          title: Prev Add To Carts
+          default: 0
+        inventory:
+          type: integer
+          title: Inventory
+          default: 0
+        ctr:
+          type: number
+          title: Ctr
+          default: 0
+        prev_ctr:
+          type: number
+          title: Prev Ctr
+          default: 0
+        add_to_cart_rate:
+          type: number
+          title: Add To Cart Rate
+          default: 0
+        prev_add_to_cart_rate:
+          type: number
+          title: Prev Add To Cart Rate
+          default: 0
+        str:
+          type: number
+          title: Str
+          default: 0
+        prev_str:
+          type: number
+          title: Prev Str
+          default: 0
+      type: object
+      title: ProductBasicMetricsResponse
+    WeeklyDailyDataPoint:
+      properties:
+        date:
+          type: string
+          title: Date
+        add_to_carts:
+          type: integer
+          title: Add To Carts
+          default: 0
+        orders:
+          type: integer
+          title: Orders
+          default: 0
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+          default: 0
+      type: object
+      required:
+      - date
+      title: WeeklyDailyDataPoint
+    ProductOverviewChartResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ChartDataPoint'
+          type: array
+          title: Data
+          default: []
+        currency:
+          type: string
+          title: Currency
+          default: ''
+      type: object
+      title: ProductOverviewChartResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ProductToplistResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CollectionPosition'
+          type: array
+          title: Data
+          default: []
+      type: object
+      title: ProductToplistResponse
+    CollectionPosition:
+      properties:
+        collection_id:
+          type: string
+          title: Collection Id
+        clicks:
+          type: integer
+          title: Clicks
+          default: 0
+        position:
+          type: integer
+          title: Position
+          default: 0
+        total_products:
+          type: integer
+          title: Total Products
+          default: 0
+      type: object
+      required:
+      - collection_id
+      title: CollectionPosition
+    ChartDataPoint:
+      properties:
+        week:
+          type: string
+          title: Week
+        views:
+          type: integer
+          title: Views
+          default: 0
+        clicks:
+          type: integer
+          title: Clicks
+          default: 0
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+          default: 0
+      type: object
+      required:
+      - week
+      title: ChartDataPoint
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

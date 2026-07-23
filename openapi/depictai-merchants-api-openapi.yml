@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Merchants API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Merchants
+paths:
+  /api/v1/merchants:
+    get:
+      tags:
+      - Merchants
+      summary: List Merchants Endpoint
+      operationId: list_merchants_endpoint_api_v1_merchants_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: lite_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Lite Only
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMerchantsResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchants/{merchant_id}:
+    get:
+      tags:
+      - Merchants
+      summary: Get Merchant Endpoint
+      operationId: get_merchant_endpoint_api_v1_merchants__merchant_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMerchantResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MerchantProductStatus:
+      properties:
+        recommendations_state:
+          type: string
+          title: Recommendations State
+          default: inactive
+        search_state:
+          type: string
+          title: Search State
+          default: inactive
+        plp_state:
+          type: string
+          title: Plp State
+          default: inactive
+      type: object
+      title: MerchantProductStatus
+    ListMerchantsResult:
+      properties:
+        merchants:
+          items:
+            $ref: '#/components/schemas/app__usecase__list_merchants__Merchant'
+          type: array
+          title: Merchants
+          default: []
+      type: object
+      title: ListMerchantsResult
+    app__usecase__list_merchants__Merchant:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+        default_market_id:
+          type: string
+          title: Default Market Id
+        default_locale_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Locale Id
+        market_groups:
+          items:
+            $ref: '#/components/schemas/app__usecase__list_merchants__MarketGroup'
+          type: array
+          title: Market Groups
+          default: []
+        product_status:
+          anyOf:
+          - $ref: '#/components/schemas/MerchantProductStatus'
+          - type: 'null'
+        can_edit_plp_rules:
+          type: boolean
+          title: Can Edit Plp Rules
+          default: false
+      type: object
+      required:
+      - id
+      - display_name
+      - default_market_id
+      - default_locale_id
+      title: Merchant
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    app__usecase__list_merchants__MarketGroup:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+      type: object
+      required:
+      - id
+      - display_name
+      title: MarketGroup
+    GetMerchantResult:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+        default_market_id:
+          type: string
+          title: Default Market Id
+        default_locale_id:
+          type: string
+          title: Default Locale Id
+        base_currency:
+          type: string
+          title: Base Currency
+        has_completed_onboarding:
+          type: boolean
+          title: Has Completed Onboarding
+        markets:
+          items:
+            type: string
+          type: array
+          title: Markets
+        locale_ids:
+          items:
+            type: string
+          type: array
+          title: Locale Ids
+        product_status:
+          anyOf:
+          - $ref: '#/components/schemas/MerchantProductStatus'
+          - type: 'null'
+        can_edit_plp_rules:
+          type: boolean
+          title: Can Edit Plp Rules
+          default: false
+      type: object
+      required:
+      - id
+      - display_name
+      - default_market_id
+      - default_locale_id
+      - base_currency
+      - has_completed_onboarding
+      - markets
+      - locale_ids
+      title: GetMerchantResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test merchant API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: merchant
+paths:
+  /merchants/:
+    get:
+      tags:
+      - merchant
+      summary: Read Authorized Merchants
+      operationId: read_authorized_merchants_merchants__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LiteMerchant'
+                type: array
+                title: Response Read Authorized Merchants Merchants  Get
+      security:
+      - Auth0: []
+  /merchants/{merchant_id}:
+    get:
+      tags:
+      - merchant
+      summary: Get Merchant
+      operationId: get_merchant_merchants__merchant_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiteMerchant'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /merchants/{merchant_id}/column-settings:
+    put:
+      tags:
+      - merchant
+      summary: Update Column Settings
+      operationId: update_column_settings_merchants__merchant_id__column_settings_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ColumnSettings'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /merchants/{merchant_id}/variant_group_by_name:
+    put:
+      tags:
+      - merchant
+      summary: Update Variant Group By Name
+      operationId: update_variant_group_by_name_merchants__merchant_id__variant_group_by_name_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: variant_group_by_name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Variant Group By Name
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /merchants/{merchant_id}/ingestion-status:
+    get:
+      tags:
+      - merchant
+      summary: Get Shopify Ingestion Status
+      operationId: get_shopify_ingestion_status_merchants__merchant_id__ingestion_status_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionStatusDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /merchants/{merchant_id}/storefront-password-protected:
+    get:
+      tags:
+      - merchant
+      summary: Get Storefront Password Protected
+      operationId: get_storefront_password_protected_merchants__merchant_id__storefront_password_protected_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Get Storefront Password Protected Merchants  Merchant Id  Storefront Password Protected Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    IngestionStatusDTO:
+      properties:
+        has_run_at_least_one_ingestion:
+          type: boolean
+          title: Has Run At Least One Ingestion
+        completion_percentage:
+          type: number
+          title: Completion Percentage
+      type: object
+      required:
+      - has_run_at_least_one_ingestion
+      - completion_percentage
+      title: IngestionStatusDTO
+    LiteMerchant:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+        start_timestamp:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Start Timestamp
+        base_currency:
+          type: string
+          pattern: ^AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD$
+          title: Base Currency
+        has_completed_onboarding:
+          type: boolean
+          title: Has Completed Onboarding
+          default: false
+        auto_activate_all_collections:
+          type: boolean
+          title: Auto Activate All Collections
+          default: false
+        desktop_columns:
+          type: integer
+          title: Desktop Columns
+        mobile_columns:
+          type: integer
+          title: Mobile Columns
+        shopify_domain:
+          type: string
+          title: Shopify Domain
+        shopify_app_installed:
+          type: boolean
+          title: Shopify App Installed
+        has_run_at_least_one_ingestion:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Run At Least One Ingestion
+        multi_store_group_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Multi Store Group Id
+        multi_store_activation_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Multi Store Activation Code
+        variant_group_by_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Variant Group By Name
+      type: object
+      required:
+      - id
+      - display_name
+      - base_currency
+      - desktop_columns
+      - mobile_columns
+      - shopify_domain
+      - shopify_app_installed
+      - has_run_at_least_one_ingestion
+      - multi_store_group_id
+      - multi_store_activation_code
+      - variant_group_by_name
+      title: LiteMerchant
+    ColumnSettings:
+      properties:
+        mobile_columns:
+          type: integer
+          title: Mobile Columns
+        desktop_columns:
+          type: integer
+          title: Desktop Columns
+      type: object
+      required:
+      - mobile_columns
+      - desktop_columns
+      title: ColumnSettings
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

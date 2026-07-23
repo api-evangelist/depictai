@@ -1,0 +1,420 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Media API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Media
+paths:
+  /media/{merchant_id}/upload:
+    post:
+      summary: Upload
+      description: Uploads media to shopify and waits until the file is ready in Shopify.
+      operationId: upload_media__merchant_id__upload_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: collection_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The collection in which the merchant is when uploading the media. Used to determine the related collections.
+          title: Collection Id
+        description: The collection in which the merchant is when uploading the media. Used to determine the related collections.
+      - name: alt_text
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Alt text for the uploaded file
+          title: Alt Text
+        description: Alt text for the uploaded file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_media__merchant_id__upload_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/GetMediaInfoNodeMediaImage'
+                - $ref: '#/components/schemas/GetMediaInfoNodeVideo'
+                title: Response Upload Media  Merchant Id  Upload Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Media
+  /media/{merchant_id}/upload_media_from_url:
+    post:
+      summary: Upload Media From Url
+      description: Uploads media to shopify from a URL by first creating a fileobject and then calling the upload_file endpoint
+      operationId: upload_media_from_url_media__merchant_id__upload_media_from_url_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Url
+      - name: media_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/MediaType'
+      - name: collection_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The collection in which the merchant is when uploading the media. Used to determine the related collections.
+          title: Collection Id
+        description: The collection in which the merchant is when uploading the media. Used to determine the related collections.
+      - name: alt_text
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Alt text for the uploaded file
+          title: Alt Text
+        description: Alt text for the uploaded file
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/GetMediaInfoNodeMediaImage'
+                - $ref: '#/components/schemas/GetMediaInfoNodeVideo'
+                title: Response Upload Media From Url Media  Merchant Id  Upload Media From Url Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Media
+components:
+  schemas:
+    FileErrorCode:
+      type: string
+      enum:
+      - UNKNOWN
+      - INVALID_SIGNED_URL
+      - IMAGE_DOWNLOAD_FAILURE
+      - IMAGE_PROCESSING_FAILURE
+      - MEDIA_TIMEOUT_ERROR
+      - EXTERNAL_VIDEO_NOT_FOUND
+      - EXTERNAL_VIDEO_UNLISTED
+      - EXTERNAL_VIDEO_INVALID_ASPECT_RATIO
+      - EXTERNAL_VIDEO_EMBED_DISABLED
+      - EXTERNAL_VIDEO_EMBED_NOT_FOUND_OR_TRANSCODING
+      - GENERIC_FILE_DOWNLOAD_FAILURE
+      - GENERIC_FILE_INVALID_SIZE
+      - VIDEO_METADATA_READ_ERROR
+      - VIDEO_INVALID_FILETYPE_ERROR
+      - VIDEO_MIN_WIDTH_ERROR
+      - VIDEO_MAX_WIDTH_ERROR
+      - VIDEO_MIN_HEIGHT_ERROR
+      - VIDEO_MAX_HEIGHT_ERROR
+      - VIDEO_MIN_DURATION_ERROR
+      - VIDEO_MAX_DURATION_ERROR
+      - VIDEO_VALIDATION_ERROR
+      - MODEL3D_VALIDATION_ERROR
+      - MODEL3D_THUMBNAIL_GENERATION_ERROR
+      - MODEL3D_THUMBNAIL_REGENERATION_ERROR
+      - MODEL3D_GLB_TO_USDZ_CONVERSION_ERROR
+      - MODEL3D_GLB_OUTPUT_CREATION_ERROR
+      - MODEL3D_PROCESSING_FAILURE
+      - UNSUPPORTED_IMAGE_FILE_TYPE
+      - INVALID_IMAGE_FILE_SIZE
+      - INVALID_IMAGE_ASPECT_RATIO
+      - INVALID_IMAGE_RESOLUTION
+      - FILE_STORAGE_LIMIT_EXCEEDED
+      - DUPLICATE_FILENAME_ERROR
+      title: FileErrorCode
+    GetMediaInfoNodeVideoSources:
+      properties:
+        format:
+          type: string
+          title: Format
+        height:
+          type: integer
+          title: Height
+        width:
+          type: integer
+          title: Width
+        mimeType:
+          type: string
+          title: Mimetype
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - format
+      - height
+      - width
+      - mimeType
+      - url
+      title: GetMediaInfoNodeVideoSources
+    GetMediaInfoNodeMediaImageImage:
+      properties:
+        altText:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alttext
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        url:
+          title: Url
+        width:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Width
+      type: object
+      required:
+      - altText
+      - height
+      - id
+      - url
+      - width
+      title: GetMediaInfoNodeMediaImageImage
+    FileStatus:
+      type: string
+      enum:
+      - UPLOADED
+      - PROCESSING
+      - READY
+      - FAILED
+      title: FileStatus
+    GetMediaInfoNodeVideo:
+      properties:
+        __typename:
+          type: string
+          enum:
+          - Video
+          const: Video
+          title: '  Typename'
+        id:
+          type: string
+          title: Id
+        fileStatus:
+          $ref: '#/components/schemas/FileStatus'
+        filename:
+          type: string
+          title: Filename
+        fileErrors:
+          items:
+            $ref: '#/components/schemas/GetMediaInfoNodeVideoFileErrors'
+          type: array
+          title: Fileerrors
+        alt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt
+        mediaContentType:
+          $ref: '#/components/schemas/MediaContentType'
+        sources:
+          items:
+            $ref: '#/components/schemas/GetMediaInfoNodeVideoSources'
+          type: array
+          title: Sources
+      type: object
+      required:
+      - __typename
+      - id
+      - fileStatus
+      - filename
+      - fileErrors
+      - alt
+      - mediaContentType
+      - sources
+      title: GetMediaInfoNodeVideo
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MediaContentType:
+      type: string
+      enum:
+      - VIDEO
+      - EXTERNAL_VIDEO
+      - MODEL_3D
+      - IMAGE
+      title: MediaContentType
+    GetMediaInfoNodeMediaImage:
+      properties:
+        __typename:
+          type: string
+          enum:
+          - MediaImage
+          const: MediaImage
+          title: '  Typename'
+        id:
+          type: string
+          title: Id
+        fileStatus:
+          $ref: '#/components/schemas/FileStatus'
+        fileErrors:
+          items:
+            $ref: '#/components/schemas/GetMediaInfoNodeMediaImageFileErrors'
+          type: array
+          title: Fileerrors
+        mediaContentType:
+          $ref: '#/components/schemas/MediaContentType'
+        alt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/GetMediaInfoNodeMediaImageImage'
+          - type: 'null'
+      type: object
+      required:
+      - __typename
+      - id
+      - fileStatus
+      - fileErrors
+      - mediaContentType
+      - alt
+      - image
+      title: GetMediaInfoNodeMediaImage
+    GetMediaInfoNodeMediaImageFileErrors:
+      properties:
+        code:
+          $ref: '#/components/schemas/FileErrorCode'
+        details:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Details
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - code
+      - details
+      - message
+      title: GetMediaInfoNodeMediaImageFileErrors
+    GetMediaInfoNodeVideoFileErrors:
+      properties:
+        code:
+          $ref: '#/components/schemas/FileErrorCode'
+        details:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Details
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - code
+      - details
+      - message
+      title: GetMediaInfoNodeVideoFileErrors
+    Body_upload_media__merchant_id__upload_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_media__merchant_id__upload_post
+    MediaType:
+      type: string
+      enum:
+      - image
+      - video
+      title: MediaType
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

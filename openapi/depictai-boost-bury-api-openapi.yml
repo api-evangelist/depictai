@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Boost Bury API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Boost Bury
+paths:
+  /boost-bury:
+    get:
+      summary: Get Rules
+      operationId: get_rules_boost_bury_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BoostBuryRuleWithId'
+                title: Response Get Rules Boost Bury Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Boost Bury
+  /boost-bury/tags:
+    get:
+      summary: Get Available Tags
+      operationId: get_available_tags_boost_bury_tags_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                title: Response Get Available Tags Boost Bury Tags Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Boost Bury
+  /boost-bury/rules:
+    put:
+      summary: Update Rules
+      operationId: update_rules_boost_bury_rules_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRulesRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Boost Bury
+components:
+  schemas:
+    CollectionBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - collection
+          const: collection
+          title: Type
+          default: collection
+        collection_id:
+          type: string
+          title: Collection Id
+      type: object
+      required:
+      - strength
+      - collection_id
+      title: CollectionBoostBuryRule
+    BadgeBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - badge
+          const: badge
+          title: Type
+          default: badge
+        badge:
+          $ref: '#/components/schemas/ProductBadgeType'
+      type: object
+      required:
+      - strength
+      - badge
+      title: BadgeBoostBuryRule
+    UpdateRulesRequest:
+      properties:
+        rules:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/BadgeBoostBuryRule'
+            - $ref: '#/components/schemas/CollectionBoostBuryRule'
+            - $ref: '#/components/schemas/TagBoostBuryRule'
+            discriminator:
+              propertyName: type
+              mapping:
+                badge: '#/components/schemas/BadgeBoostBuryRule'
+                collection: '#/components/schemas/CollectionBoostBuryRule'
+                tag: '#/components/schemas/TagBoostBuryRule'
+          type: array
+          title: Rules
+      type: object
+      required:
+      - rules
+      title: UpdateRulesRequest
+    ProductBadgeType:
+      type: string
+      enum:
+      - on_sale
+      - out_of_stock
+      - new_in
+      - bestseller
+      - slow_mover
+      - few_variants_available
+      - trending
+      title: ProductBadgeType
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TagBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - tag
+          const: tag
+          title: Type
+          default: tag
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - strength
+      - tags
+      title: TagBoostBuryRule
+    BoostBuryRuleWithId:
+      properties:
+        id:
+          type: integer
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        rule:
+          oneOf:
+          - $ref: '#/components/schemas/BadgeBoostBuryRule'
+          - $ref: '#/components/schemas/CollectionBoostBuryRule'
+          - $ref: '#/components/schemas/TagBoostBuryRule'
+          title: Rule
+          discriminator:
+            propertyName: type
+            mapping:
+              badge: '#/components/schemas/BadgeBoostBuryRule'
+              collection: '#/components/schemas/CollectionBoostBuryRule'
+              tag: '#/components/schemas/TagBoostBuryRule'
+      type: object
+      required:
+      - id
+      - created_at
+      - rule
+      title: BoostBuryRuleWithId
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

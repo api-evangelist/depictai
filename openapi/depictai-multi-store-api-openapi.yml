@@ -1,0 +1,480 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test multi-store API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: multi-store
+paths:
+  /multi-store/stores/{merchant_id}:
+    get:
+      tags:
+      - multi-store
+      summary: Get Stores
+      operationId: get_stores_multi_store_stores__merchant_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiteMultiStoreGroupMerchant'
+                title: Response Get Stores Multi Store Stores  Merchant Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /multi-store/connect-store/{merchant_id}:
+    post:
+      tags:
+      - multi-store
+      summary: Connect Multi Store
+      operationId: connect_multi_store_multi_store_connect_store__merchant_id__post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: activation_code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Activation Code
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /multi-store/disconnect/{merchant_id}:
+    post:
+      tags:
+      - multi-store
+      summary: Disconnect Store From Group
+      operationId: disconnect_store_from_group_multi_store_disconnect__merchant_id__post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /multi-store/collection-mappings/{group_id}:
+    get:
+      tags:
+      - multi-store
+      summary: Get Collection Mappings
+      operationId: get_collection_mappings_multi_store_collection_mappings__group_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Group Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiteMultiStoreCollectionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - multi-store
+      summary: Update Collection Mappings
+      operationId: update_collection_mappings_multi_store_collection_mappings__group_id__post
+      security:
+      - Auth0: []
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Group Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionMappingUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /multi-store/replication-data/{collection_id}:
+    get:
+      tags:
+      - multi-store
+      summary: Get Collection Replication Data
+      operationId: get_collection_replication_data_multi_store_replication_data__collection_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiteMultiStoreMerchantCollectionReplication'
+                title: Response Get Collection Replication Data Multi Store Replication Data  Collection Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /multi-store/collection-replication:
+    post:
+      tags:
+      - multi-store
+      summary: Update Collection Replication
+      operationId: update_collection_replication_multi_store_collection_replication_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/LiteMultiStoreMerchantCollectionReplication'
+              type: array
+              title: Collection Replications
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - Auth0: []
+  /multi-store/create-collection-mappings/{merchant_id}:
+    post:
+      tags:
+      - multi-store
+      summary: Create Collection Mappings
+      operationId: create_collection_mappings_multi_store_create_collection_mappings__merchant_id__post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ConnectCollectionRequest:
+      properties:
+        group_collection_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Collection Id
+        collections:
+          items:
+            $ref: '#/components/schemas/LiteMultiStoreMerchantCollection'
+          type: array
+          title: Collections
+      type: object
+      required:
+      - group_collection_id
+      - collections
+      title: ConnectCollectionRequest
+    LiteMultiStoreCollectionResponse:
+      properties:
+        connections:
+          items:
+            $ref: '#/components/schemas/LiteMultiStoreCollectionMappings'
+          type: array
+          title: Connections
+        collections:
+          items:
+            $ref: '#/components/schemas/LiteMultiStoreCollection'
+          type: array
+          title: Collections
+      type: object
+      required:
+      - connections
+      - collections
+      title: LiteMultiStoreCollectionResponse
+    LiteMultiStoreCollectionMapping:
+      properties:
+        merchant_id:
+          type: string
+          title: Merchant Id
+        collection_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Collection Id
+        suggested_collection_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Suggested Collection Id
+      type: object
+      required:
+      - merchant_id
+      - collection_id
+      - suggested_collection_id
+      title: LiteMultiStoreCollectionMapping
+    LiteMultiStoreCollection:
+      properties:
+        merchant_id:
+          type: string
+          title: Merchant Id
+        collection_id:
+          type: string
+          title: Collection Id
+        title:
+          type: string
+          title: Title
+        handle:
+          type: string
+          title: Handle
+        image_urls:
+          items:
+            type: string
+          type: array
+          title: Image Urls
+      type: object
+      required:
+      - merchant_id
+      - collection_id
+      - title
+      - handle
+      - image_urls
+      title: LiteMultiStoreCollection
+    LiteMultiStoreGroupMerchant:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+        shopify_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Shopify Domain
+        group_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Group Id
+      type: object
+      required:
+      - id
+      - display_name
+      - shopify_domain
+      - group_id
+      title: LiteMultiStoreGroupMerchant
+    LiteMultiStoreCollectionMappings:
+      properties:
+        group_collection_id:
+          type: string
+          title: Group Collection Id
+        collections:
+          items:
+            $ref: '#/components/schemas/LiteMultiStoreCollectionMapping'
+          type: array
+          title: Collections
+      type: object
+      required:
+      - group_collection_id
+      - collections
+      title: LiteMultiStoreCollectionMappings
+    LiteMultiStoreMerchantCollection:
+      properties:
+        merchant_id:
+          type: string
+          title: Merchant Id
+        collection_id:
+          type: string
+          title: Collection Id
+      type: object
+      required:
+      - merchant_id
+      - collection_id
+      title: LiteMultiStoreMerchantCollection
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CollectionMappingUpdateRequest:
+      properties:
+        connect:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectCollectionRequest'
+          - type: 'null'
+        disconnect:
+          anyOf:
+          - $ref: '#/components/schemas/DisconnectCollectionRequest'
+          - type: 'null'
+      type: object
+      required:
+      - connect
+      - disconnect
+      title: CollectionMappingUpdateRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DisconnectCollectionRequest:
+      properties:
+        collections:
+          items:
+            $ref: '#/components/schemas/LiteMultiStoreMerchantCollection'
+          type: array
+          title: Collections
+      type: object
+      required:
+      - collections
+      title: DisconnectCollectionRequest
+    LiteMultiStoreMerchantCollectionReplication:
+      properties:
+        merchant_id:
+          type: string
+          title: Merchant Id
+        replication_merchant_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Replication Merchant Id
+        collection:
+          $ref: '#/components/schemas/LiteMultiStoreCollection'
+      type: object
+      required:
+      - merchant_id
+      - replication_merchant_id
+      - collection
+      title: LiteMultiStoreMerchantCollectionReplication
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

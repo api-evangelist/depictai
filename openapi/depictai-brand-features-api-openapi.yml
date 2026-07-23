@@ -1,0 +1,681 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Brand Features API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Brand Features
+paths:
+  /brand-features/{collection_id}:
+    put:
+      summary: Update
+      operationId: update_brand_features__collection_id__put
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: version
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Version
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandFeatureUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiteMultiStoreDataNotFound'
+                title: Response Update Brand Features  Collection Id  Put
+        '400':
+          description: Returned when the update is not possible.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringDetailError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Brand Features
+  /brand-features/content-block-clicks/{collection_id}:
+    get:
+      summary: Get Content Block Clicks
+      operationId: get_content_block_clicks_brand_features_content_block_clicks__collection_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: from_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: From Date
+      - name: to_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: To Date
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiteCollectionContentBlockClicksRow'
+                title: Response Get Content Block Clicks Brand Features Content Block Clicks  Collection Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Brand Features
+  /brand-features/metaobject/{metaobject_id}:
+    put:
+      summary: Update Metaobject
+      description: This endpoint should be used to update already existing metaobjects data.
+      operationId: update_metaobject_brand_features_metaobject__metaobject_id__put
+      security:
+      - Auth0: []
+      parameters:
+      - name: metaobject_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Metaobject Id
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProAbTest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Brand Features
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProSpaceContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - space
+          const: space
+          title: Type
+          default: space
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+      type: object
+      title: ProSpaceContent
+    ProInstagramVideoContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - instagram_video
+          const: instagram_video
+          title: Type
+          default: instagram_video
+        gid:
+          type: string
+          title: Gid
+        creator:
+          type: string
+          title: Creator
+        post_url:
+          type: string
+          title: Post Url
+        post_id:
+          type: string
+          title: Post Id
+        media_id:
+          type: string
+          title: Media Id
+      type: object
+      required:
+      - gid
+      - creator
+      - post_url
+      - post_id
+      - media_id
+      title: ProInstagramVideoContent
+    StringDetailError:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringDetailError
+    ProInstagramImageContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - instagram_image
+          const: instagram_image
+          title: Type
+          default: instagram_image
+        gid:
+          type: string
+          title: Gid
+        creator:
+          type: string
+          title: Creator
+        post_url:
+          type: string
+          title: Post Url
+        post_id:
+          type: string
+          title: Post Id
+        media_id:
+          type: string
+          title: Media Id
+        alt_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Text
+      type: object
+      required:
+      - gid
+      - creator
+      - post_url
+      - post_id
+      - media_id
+      title: ProInstagramImageContent
+    ProImageContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - image
+          const: image
+          title: Type
+          default: image
+        gid:
+          type: string
+          title: Gid
+        filename:
+          type: string
+          title: Filename
+        alt_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Text
+      type: object
+      required:
+      - gid
+      - filename
+      title: ProImageContent
+    LiteCollectionContentBlockClicksRow:
+      properties:
+        content_block_id:
+          type: integer
+          title: Content Block Id
+        handle:
+          type: string
+          title: Handle
+        nbr_clicks:
+          type: integer
+          title: Nbr Clicks
+      type: object
+      required:
+      - content_block_id
+      - handle
+      - nbr_clicks
+      title: LiteCollectionContentBlockClicksRow
+    BrandFeatureUpdateRequest:
+      properties:
+        brand_feature_type:
+          $ref: '#/components/schemas/BrandFeatureType'
+        upsert_metaobjects:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ProContentBlock'
+            type: array
+          - items:
+              $ref: '#/components/schemas/ProImageSetting'
+            type: array
+          - items:
+              $ref: '#/components/schemas/ProProductDuplicate'
+            type: array
+          - items:
+              $ref: '#/components/schemas/ProAbTest'
+            type: array
+          title: Upsert Metaobjects
+        delete_metaobjects_by_handle:
+          items:
+            type: string
+          type: array
+          title: Delete Metaobjects By Handle
+      type: object
+      required:
+      - brand_feature_type
+      - upsert_metaobjects
+      - delete_metaobjects_by_handle
+      title: BrandFeatureUpdateRequest
+    ProContentBlock:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+          description: The handle is used as an id to identify the content block across stores in a multi-store environment as well as between server and local state. It is created when the content block is created for the first time and stays the same across updates. It is mapped to the actual handle of the metaobject in Shopify. This allows us to use the `metaobjectByHandle` query.
+        index:
+          type: integer
+          title: Index
+        span_rows:
+          type: integer
+          title: Span Rows
+        aspect_ratio:
+          type: number
+          title: Aspect Ratio
+        span_columns:
+          type: integer
+          title: Span Columns
+        visibility:
+          anyOf:
+          - type: string
+            enum:
+            - desktop
+            - mobile
+          - type: 'null'
+          title: Visibility
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/ProImageContent'
+          - $ref: '#/components/schemas/ProVideoContent'
+          - $ref: '#/components/schemas/ProSpaceContent'
+          - $ref: '#/components/schemas/ProInstagramImageContent'
+          - $ref: '#/components/schemas/ProInstagramVideoContent'
+          title: Content
+        hover_image:
+          anyOf:
+          - $ref: '#/components/schemas/ProImageContent'
+          - $ref: '#/components/schemas/ProInstagramImageContent'
+          - type: 'null'
+          title: Hover Image
+        link:
+          anyOf:
+          - $ref: '#/components/schemas/ContentLink'
+          - type: 'null'
+        text:
+          anyOf:
+          - $ref: '#/components/schemas/ProContentBlockText'
+          - type: 'null'
+      type: object
+      required:
+      - handle
+      - index
+      - span_rows
+      - aspect_ratio
+      - span_columns
+      - content
+      title: ProContentBlock
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LinkType:
+      type: string
+      enum:
+      - collection
+      - page
+      - product
+      - article
+      - url
+      title: LinkType
+    ProAbTest:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        start_date:
+          type: string
+          title: Start Date
+        end_date:
+          type: string
+          title: End Date
+        experiment_name:
+          type: string
+          title: Experiment Name
+        notify_email:
+          type: string
+          title: Notify Email
+        generated_conclusion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Generated Conclusion
+      type: object
+      required:
+      - handle
+      - start_date
+      - end_date
+      - experiment_name
+      - notify_email
+      title: ProAbTest
+    ProContentBlockText:
+      properties:
+        header:
+          anyOf:
+          - $ref: '#/components/schemas/ContentBlockTextProperties'
+          - type: 'null'
+        body:
+          anyOf:
+          - $ref: '#/components/schemas/ContentBlockTextProperties'
+          - type: 'null'
+        horizontal_alignment:
+          anyOf:
+          - type: string
+            enum:
+            - start
+            - center
+            - end
+          - type: 'null'
+          title: Horizontal Alignment
+        vertical_alignment:
+          anyOf:
+          - type: string
+            enum:
+            - start
+            - center
+            - end
+          - type: 'null'
+          title: Vertical Alignment
+        background_overlay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Background Overlay
+        gap:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gap
+      type: object
+      title: ProContentBlockText
+    ContentLink:
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkType'
+        gid:
+          type: string
+          title: Gid
+        handle:
+          type: string
+          title: Handle
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+      type: object
+      required:
+      - type
+      - gid
+      - handle
+      title: ContentLink
+    LiteMultiStoreDataNotFound:
+      properties:
+        feature_type:
+          $ref: '#/components/schemas/BrandFeatureType'
+        target_merchant_display_name:
+          type: string
+          title: Target Merchant Display Name
+        message:
+          type: string
+          title: Message
+        product_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Product Id
+      type: object
+      required:
+      - feature_type
+      - target_merchant_display_name
+      - message
+      title: LiteMultiStoreDataNotFound
+    ProImageSetting:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        product_gid:
+          type: string
+          title: Product Gid
+        default_image_gid:
+          type: string
+          title: Default Image Gid
+        hover_image_gid:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hover Image Gid
+      type: object
+      required:
+      - handle
+      - product_gid
+      - default_image_gid
+      title: ProImageSetting
+    BrandFeatureType:
+      type: string
+      enum:
+      - content_block
+      - image_setting
+      - product_duplicate
+      - ab_test
+      title: BrandFeatureType
+    ProVideoContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - video
+          const: video
+          title: Type
+          default: video
+        gid:
+          type: string
+          title: Gid
+        filename:
+          type: string
+          title: Filename
+      type: object
+      required:
+      - gid
+      - filename
+      title: ProVideoContent
+    ContentBlockTextProperties:
+      properties:
+        html_tag:
+          type: string
+          title: Html Tag
+        color_hex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color Hex
+        bold:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Bold
+        italic:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Italic
+        underline:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Underline
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+      type: object
+      required:
+      - html_tag
+      title: ContentBlockTextProperties
+    ProProductDuplicate:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        product_gid:
+          type: string
+          title: Product Gid
+        default_image_gid:
+          type: string
+          title: Default Image Gid
+        hover_image_gid:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hover Image Gid
+        index:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Index
+        created_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - handle
+      - product_gid
+      - default_image_gid
+      title: ProProductDuplicate
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

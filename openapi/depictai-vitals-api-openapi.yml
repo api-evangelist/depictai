@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Vitals API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Vitals
+paths:
+  /vitals:
+    post:
+      summary: Vitals
+      operationId: vitals_vitals_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vitals'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Vitals
+components:
+  schemas:
+    Vitals:
+      properties:
+        appId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Appid
+        appLoadId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Apploadid
+        metrics:
+          items:
+            $ref: '#/components/schemas/Metric'
+          type: array
+          title: Metrics
+        origin:
+          type: string
+          title: Origin
+        path:
+          type: string
+          title: Path
+        shopId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Shopid
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+      type: object
+      required:
+      - appId
+      - appLoadId
+      - metrics
+      - origin
+      - path
+      - shopId
+      - userId
+      title: Vitals
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Metric:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          enum:
+          - TTFB
+          - FCP
+          - LCP
+          - FID
+          - CLS
+          - INP
+          title: Name
+        value:
+          type: number
+          title: Value
+      type: object
+      required:
+      - id
+      - name
+      - value
+      title: Metric
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

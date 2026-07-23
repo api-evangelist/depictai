@@ -1,0 +1,271 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Ab Test
+paths:
+  /ab-test/{collection_id}/metrics:
+    get:
+      summary: Get Metrics
+      operationId: get_metrics_ab_test__collection_id__metrics_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: from_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: From Date
+      - name: to_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: To Date
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbTestMetrics'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Ab Test
+  /ab-test/generate_conclusion:
+    put:
+      summary: Generate Conclusion
+      operationId: generate_conclusion_ab_test_generate_conclusion_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateConclusionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: string
+                - type: 'null'
+                title: Response Generate Conclusion Ab Test Generate Conclusion Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Ab Test
+components:
+  schemas:
+    AbTimeseriesMetric:
+      properties:
+        day:
+          type: string
+          title: Day
+        metric_a:
+          anyOf:
+          - type: integer
+          - type: number
+          title: Metric A
+        metric_b:
+          anyOf:
+          - type: integer
+          - type: number
+          title: Metric B
+      type: object
+      required:
+      - day
+      - metric_a
+      - metric_b
+      title: AbTimeseriesMetric
+    AbTestMetrics:
+      properties:
+        page_views:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Page Views
+        clicks:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Clicks
+        click_thru_rate:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Click Thru Rate
+        p_value_click_thru_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: P Value Click Thru Rate
+        add_to_carts:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Add To Carts
+        add_to_cart_thru_rate:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Add To Cart Thru Rate
+        p_value_add_to_cart_thru_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: P Value Add To Cart Thru Rate
+        purchases:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Purchases
+        purchases_thru_rate:
+          items:
+            $ref: '#/components/schemas/AbTimeseriesMetric'
+          type: array
+          title: Purchases Thru Rate
+        p_value_purchases_thru_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: P Value Purchases Thru Rate
+      type: object
+      required:
+      - page_views
+      - clicks
+      - click_thru_rate
+      - p_value_click_thru_rate
+      - add_to_carts
+      - add_to_cart_thru_rate
+      - p_value_add_to_cart_thru_rate
+      - purchases
+      - purchases_thru_rate
+      - p_value_purchases_thru_rate
+      title: AbTestMetrics
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GenerateConclusionRequest:
+      properties:
+        metaobject:
+          $ref: '#/components/schemas/ProAbTest'
+        data:
+          $ref: '#/components/schemas/AbTestMetrics'
+      type: object
+      required:
+      - metaobject
+      - data
+      title: GenerateConclusionRequest
+    ProAbTest:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        start_date:
+          type: string
+          title: Start Date
+        end_date:
+          type: string
+          title: End Date
+        experiment_name:
+          type: string
+          title: Experiment Name
+        notify_email:
+          type: string
+          title: Notify Email
+        generated_conclusion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Generated Conclusion
+      type: object
+      required:
+      - handle
+      - start_date
+      - end_date
+      - experiment_name
+      - notify_email
+      title: ProAbTest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

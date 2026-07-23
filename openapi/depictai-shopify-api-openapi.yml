@@ -1,0 +1,153 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Shopify API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Shopify
+paths:
+  /shopify/app-url/{merchant_id}:
+    get:
+      summary: Get App Url
+      operationId: get_app_url_shopify_app_url__merchant_id__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: string
+                - type: 'null'
+                title: Response Get App Url Shopify App Url  Merchant Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify
+  /shopify/storefront_api_credentials:
+    get:
+      summary: Get Storefront Api Credentials
+      operationId: get_storefront_api_credentials_shopify_storefront_api_credentials_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyStorefrontApiCredentials'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify
+  /shopify/proxy/{merchant_id}/admin-api/graphql.json:
+    post:
+      summary: Shopify Admin Api
+      operationId: shopify_admin_api_shopify_proxy__merchant_id__admin_api_graphql_json_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Shopify
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ShopifyStorefrontApiCredentials:
+      properties:
+        storefront_api_key:
+          type: string
+          title: Storefront Api Key
+        store_domain:
+          type: string
+          title: Store Domain
+      type: object
+      required:
+      - storefront_api_key
+      - store_domain
+      title: ShopifyStorefrontApiCredentials
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

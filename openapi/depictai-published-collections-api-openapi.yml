@@ -1,0 +1,255 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Published Collections API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Published Collections
+paths:
+  /published-collections/:
+    get:
+      summary: Get Published Collections
+      operationId: get_published_collections_published_collections__get
+      security:
+      - Auth0: []
+      parameters:
+      - name: sort_order
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublishedCollectionsSortOrder'
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LitePublishedCollectionDto'
+                title: Response Get Published Collections Published Collections  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Published Collections
+  /published-collections/{collection_id}:
+    post:
+      summary: Create Published Collection
+      operationId: create_published_collection_published_collections__collection_id__post
+      security:
+      - Auth0: []
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Collection Id
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePublishedCollectionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Published Collections
+  /published-collections/like:
+    put:
+      summary: Update Likes Published Collection
+      operationId: update_likes_published_collection_published_collections_like_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikedCollectionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Published Collections
+components:
+  schemas:
+    LiteFeatures:
+      type: string
+      enum:
+      - content_block
+      - product_duplicate
+      - image_setting
+      title: LiteFeatures
+    PublishedCollectionsSortOrder:
+      type: string
+      enum:
+      - published_at
+      - popular
+      title: PublishedCollectionsSortOrder
+    LitePublishedCollectionDto:
+      properties:
+        merchant_id:
+          type: string
+          title: Merchant Id
+        collection_id:
+          type: string
+          title: Collection Id
+        title:
+          type: string
+          title: Title
+        handle:
+          type: string
+          title: Handle
+        preview_url:
+          type: string
+          title: Preview Url
+        used_features:
+          items:
+            $ref: '#/components/schemas/LiteFeatures'
+          type: array
+          title: Used Features
+        likes:
+          type: integer
+          title: Likes
+        published_at:
+          type: string
+          format: date-time
+          title: Published At
+        merchant_display_name:
+          type: string
+          title: Merchant Display Name
+        shopify_base_url:
+          type: string
+          title: Shopify Base Url
+      type: object
+      required:
+      - merchant_id
+      - collection_id
+      - title
+      - handle
+      - preview_url
+      - used_features
+      - likes
+      - published_at
+      - merchant_display_name
+      - shopify_base_url
+      title: LitePublishedCollectionDto
+    LikedCollectionRequest:
+      properties:
+        collection_id:
+          type: string
+          title: Collection Id
+        merchant_id:
+          type: string
+          title: Merchant Id
+        likes:
+          type: integer
+          title: Likes
+      type: object
+      required:
+      - collection_id
+      - merchant_id
+      - likes
+      title: LikedCollectionRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CreatePublishedCollectionRequest:
+      properties:
+        template_suffix:
+          type: string
+          title: Template Suffix
+        used_features:
+          items:
+            $ref: '#/components/schemas/LiteFeatures'
+          type: array
+          title: Used Features
+      type: object
+      required:
+      - template_suffix
+      - used_features
+      title: CreatePublishedCollectionRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

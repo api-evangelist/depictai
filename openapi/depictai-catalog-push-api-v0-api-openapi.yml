@@ -1,0 +1,868 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Catalog Push API (v0) API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Catalog Push API (v0)
+paths:
+  /catalog/v0/product_ids:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: List Product Ids
+      operationId: list_product_ids_catalog_v0_product_ids_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response List Product Ids Catalog V0 Product Ids Get
+      security:
+      - HTTPBearer: []
+  /catalog/v0/category_ids:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: List Category Ids
+      operationId: list_category_ids_catalog_v0_category_ids_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response List Category Ids Catalog V0 Category Ids Get
+      security:
+      - HTTPBearer: []
+  /catalog/v0/products:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: Get Products
+      operationId: get_products_catalog_v0_products_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: product_ids
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          title: Product Ids
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIProduct-Output'
+                title: Response Get Products Catalog V0 Products Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Catalog Push API (v0)
+      summary: Upsert Products
+      operationId: upsert_products_catalog_v0_products_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertProductsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Catalog Push API (v0)
+      summary: Delete Products
+      operationId: delete_products_catalog_v0_products_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: product_id
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          title: Product Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /catalog/v0/categories:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: Get Categories
+      operationId: get_categories_catalog_v0_categories_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: category_ids
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          title: Category Ids
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APICategory-Output'
+                title: Response Get Categories Catalog V0 Categories Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Catalog Push API (v0)
+      summary: Upsert Categories
+      operationId: upsert_categories_catalog_v0_categories_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCategoriesRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Catalog Push API (v0)
+      summary: Delete Categories
+      operationId: delete_categories_catalog_v0_categories_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: category_id
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          title: Category Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /catalog/v0/product_attribute_config:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: Get Product Attribute Config
+      operationId: get_product_attribute_config_catalog_v0_product_attribute_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeMetadata'
+                type: object
+                title: Response Get Product Attribute Config Catalog V0 Product Attribute Config Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - Catalog Push API (v0)
+      summary: Set Product Attribute Config
+      operationId: set_product_attribute_config_catalog_v0_product_attribute_config_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetProductAttributeConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /catalog/v0/category_attribute_config:
+    get:
+      tags:
+      - Catalog Push API (v0)
+      summary: Get Category Attribute Config
+      operationId: get_category_attribute_config_catalog_v0_category_attribute_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeMetadata'
+                type: object
+                title: Response Get Category Attribute Config Catalog V0 Category Attribute Config Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - Catalog Push API (v0)
+      summary: Set Category Attribute Config
+      operationId: set_category_attribute_config_catalog_v0_category_attribute_config_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetCatalogAttributeConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    SetProductAttributeConfigRequest:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeConfig'
+          type: object
+          title: Attributes
+        locales:
+          items:
+            type: string
+          type: array
+          title: Locales
+        pricelists:
+          items:
+            type: string
+          type: array
+          title: Pricelists
+        inventories:
+          items:
+            type: string
+          type: array
+          title: Inventories
+      additionalProperties: false
+      type: object
+      required:
+      - merchant
+      - attributes
+      - locales
+      - pricelists
+      - inventories
+      title: SetProductAttributeConfigRequest
+    Gender:
+      type: string
+      enum:
+      - unisex
+      - men
+      - women
+      title: Gender
+    realtime__routes__catalog_routes__APIProduct__APILocaleAttributes:
+      properties:
+        locale_id:
+          type: string
+          title: Locale Id
+        title:
+          type: string
+          title: Title
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        color_name:
+          type: string
+          title: Color Name
+        size_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size Name
+        material:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Material
+        custom_attributes:
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: number
+            - type: string
+            - type: boolean
+            - items:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: array
+            - additionalProperties:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: object
+            - type: 'null'
+          type: object
+          title: Custom Attributes
+          default: {}
+      additionalProperties: false
+      type: object
+      required:
+      - locale_id
+      - title
+      - color_name
+      title: APILocaleAttributes
+    APICategory-Input:
+      properties:
+        category_id:
+          type: string
+          title: Category Id
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+        locale_attributes:
+          items:
+            $ref: '#/components/schemas/realtime__routes__catalog_routes__APICategory__APILocaleAttributes'
+          type: array
+          title: Locale Attributes
+        store_attributes:
+          title: Store Attributes
+        display_breadcrumb:
+          type: boolean
+          title: Display Breadcrumb
+          default: true
+        appear_in_quicklinks:
+          type: boolean
+          title: Appear In Quicklinks
+          default: false
+        show_in_filter:
+          type: boolean
+          title: Show In Filter
+          default: true
+        show_in_search_suggestions:
+          type: boolean
+          title: Show In Search Suggestions
+          default: true
+      additionalProperties: false
+      type: object
+      required:
+      - category_id
+      - locale_attributes
+      title: APICategory
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    realtime__routes__catalog_routes__APICategory__APILocaleAttributes:
+      properties:
+        locale_id:
+          type: string
+          title: Locale Id
+        title:
+          type: string
+          title: Title
+        uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Uri
+      additionalProperties: false
+      type: object
+      required:
+      - locale_id
+      - title
+      title: APILocaleAttributes
+    APIInventoryAttributes:
+      properties:
+        inventory_id:
+          type: string
+          title: Inventory Id
+        in_stock:
+          type: boolean
+          title: In Stock
+        quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quantity
+        custom_attributes:
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: number
+            - type: string
+            - type: boolean
+            - items:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: array
+            - additionalProperties:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: object
+            - type: 'null'
+          type: object
+          title: Custom Attributes
+          default: {}
+      additionalProperties: false
+      type: object
+      required:
+      - inventory_id
+      - in_stock
+      title: APIInventoryAttributes
+    Age:
+      type: string
+      enum:
+      - baby
+      - kid
+      - teen
+      - adult
+      title: Age
+    APIProduct-Input:
+      properties:
+        product_id:
+          type: string
+          title: Product Id
+        item_group_id:
+          type: string
+          title: Item Group Id
+        main_product_id:
+          type: string
+          title: Main Product Id
+        image_urls:
+          items:
+            type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          type: array
+          minItems: 1
+          title: Image Urls
+        category_ids:
+          items:
+            type: string
+          type: array
+          title: Category Ids
+        brand:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Brand
+        inactive:
+          type: boolean
+          title: Inactive
+          default: false
+        transaction_product_id:
+          type: string
+          title: Transaction Product Id
+          description: The id by which this product is known in the order data in Google Analytics. Merchants should use the same id for the DPC purchase events.
+        locale_attributes:
+          items:
+            $ref: '#/components/schemas/realtime__routes__catalog_routes__APIProduct__APILocaleAttributes'
+          type: array
+          title: Locale Attributes
+        inventory_attributes:
+          items:
+            $ref: '#/components/schemas/APIInventoryAttributes'
+          type: array
+          title: Inventory Attributes
+        store_attributes:
+          title: Store Attributes
+        pricelist_attributes:
+          items:
+            $ref: '#/components/schemas/APIPricelistAttributes'
+          type: array
+          title: Pricelist Attributes
+        gender:
+          anyOf:
+          - $ref: '#/components/schemas/Gender'
+          - type: 'null'
+        age:
+          anyOf:
+          - $ref: '#/components/schemas/Age'
+          - type: 'null'
+        size:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size
+        is_second_hand:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Second Hand
+        color_hex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color Hex
+        custom_attributes:
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: number
+            - type: string
+            - type: boolean
+            - items:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: array
+            - additionalProperties:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: object
+            - type: 'null'
+          type: object
+          title: Custom Attributes
+          default: {}
+      additionalProperties: false
+      type: object
+      required:
+      - product_id
+      - item_group_id
+      - main_product_id
+      - image_urls
+      - category_ids
+      - transaction_product_id
+      - locale_attributes
+      - inventory_attributes
+      - pricelist_attributes
+      title: APIProduct
+    Dimension:
+      type: string
+      enum:
+      - base
+      - inventory
+      - locale
+      - store
+      - pricelist
+      title: Dimension
+    UpsertProductsRequest:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+        products:
+          items:
+            $ref: '#/components/schemas/APIProduct-Input'
+          type: array
+          title: Products
+      additionalProperties: false
+      type: object
+      required:
+      - merchant
+      - products
+      title: UpsertProductsRequest
+    AttributeMetadata:
+      properties:
+        attribute_type:
+          $ref: '#/components/schemas/AttributeType'
+        dimension:
+          $ref: '#/components/schemas/Dimension'
+        required:
+          type: boolean
+          title: Required
+          default: true
+        dimension_keys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          title: Dimension Keys
+      additionalProperties: false
+      type: object
+      required:
+      - attribute_type
+      - dimension
+      - dimension_keys
+      title: AttributeMetadata
+      description: Full information about an attribute, generated during ingestion
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SetCatalogAttributeConfigRequest:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeConfig'
+          type: object
+          title: Attributes
+        locales:
+          items:
+            type: string
+          type: array
+          title: Locales
+      additionalProperties: false
+      type: object
+      required:
+      - merchant
+      - attributes
+      - locales
+      title: SetCatalogAttributeConfigRequest
+    APIProduct-Output:
+      type: object
+      title: APIProduct
+    UpsertCategoriesRequest:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+        categories:
+          items:
+            $ref: '#/components/schemas/APICategory-Input'
+          type: array
+          title: Categories
+      additionalProperties: false
+      type: object
+      required:
+      - merchant
+      - categories
+      title: UpsertCategoriesRequest
+    APIPricelistAttributes:
+      properties:
+        pricelist_id:
+          type: string
+          title: Pricelist Id
+        sale_price:
+          anyOf:
+          - type: number
+            minimum: 0
+          - type: string
+          title: Sale Price
+        original_price:
+          anyOf:
+          - type: number
+            minimum: 0
+          - type: string
+          title: Original Price
+        currency:
+          type: string
+          pattern: ^AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD$
+          title: Currency
+        custom_attributes:
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: number
+            - type: string
+            - type: boolean
+            - items:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: array
+            - additionalProperties:
+                anyOf:
+                - type: integer
+                - type: number
+                - type: string
+                - type: boolean
+                - type: 'null'
+              type: object
+            - type: 'null'
+          type: object
+          title: Custom Attributes
+          default: {}
+      additionalProperties: false
+      type: object
+      required:
+      - pricelist_id
+      - sale_price
+      - original_price
+      - currency
+      title: APIPricelistAttributes
+    AttributeConfig:
+      properties:
+        attribute_type:
+          $ref: '#/components/schemas/AttributeType'
+        dimension:
+          $ref: '#/components/schemas/Dimension'
+        required:
+          type: boolean
+          title: Required
+          default: true
+      additionalProperties: false
+      type: object
+      required:
+      - attribute_type
+      - dimension
+      title: AttributeConfig
+      description: The configuration of an attribute, available before ingestion
+    AttributeType:
+      type: string
+      enum:
+      - bool
+      - int
+      - float
+      - str
+      - datetime
+      - gender
+      - age
+      - color_hex
+      - dict[str,]
+      - list[bool]
+      - list[int]
+      - list[float]
+      - list[str]
+      - list[dict[str,]]
+      - any
+      - uuid
+      - list[uuid]
+      title: AttributeType
+    APICategory-Output:
+      type: object
+      title: APICategory
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Onboarding API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Onboarding
+paths:
+  /onboarding/themes:
+    get:
+      summary: Get Themes
+      operationId: get_themes_onboarding_themes_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5
+          title: Limit
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Page
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShopifyThemeWithDepictInfo'
+                title: Response Get Themes Onboarding Themes Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Onboarding
+  /onboarding/{merchant_id}/themes/main:
+    get:
+      summary: Get Main Theme
+      operationId: get_main_theme_onboarding__merchant_id__themes_main_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyThemeWithDepictInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Onboarding
+  /onboarding/{merchant_id}/onboardings:
+    get:
+      summary: Get Onboarding Bundles
+      operationId: get_onboarding_bundles_onboarding__merchant_id__onboardings_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThemeOnboardingResult'
+                title: Response Get Onboarding Bundles Onboarding  Merchant Id  Onboardings Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Onboarding
+components:
+  schemas:
+    ShopifyThemeWithDepictInfo:
+      properties:
+        theme_id:
+          type: integer
+          title: Theme Id
+        name:
+          type: string
+          title: Name
+        role:
+          type: string
+          title: Role
+        depict_added:
+          type: boolean
+          title: Depict Added
+        has_depict_collection_template:
+          type: boolean
+          title: Has Depict Collection Template
+      type: object
+      required:
+      - theme_id
+      - name
+      - role
+      - depict_added
+      - has_depict_collection_template
+      title: ShopifyThemeWithDepictInfo
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ThemeOnboardingResult:
+      properties:
+        theme_id:
+          type: integer
+          title: Theme Id
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        has_changes:
+          type: boolean
+          title: Has Changes
+        resources:
+          items:
+            $ref: '#/components/schemas/OriginalThemeOnboardingResource'
+          type: array
+          title: Resources
+      type: object
+      required:
+      - theme_id
+      - timestamp
+      - has_changes
+      - resources
+      title: ThemeOnboardingResult
+    ThemeOnboardingResource:
+      properties:
+        path:
+          type: string
+          format: path
+          title: Path
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - path
+      - content
+      title: ThemeOnboardingResource
+    OriginalThemeOnboardingResource:
+      properties:
+        path:
+          type: string
+          format: path
+          title: Path
+        content:
+          type: string
+          title: Content
+        type:
+          type: string
+          enum:
+          - collection_template
+          - product_grid
+          - product_card
+          - settings
+          - empty_template
+          - empty_grid
+          title: Type
+        patched_resource:
+          anyOf:
+          - $ref: '#/components/schemas/ThemeOnboardingResource'
+          - type: 'null'
+        changed:
+          type: boolean
+          title: Changed
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - path
+      - content
+      - type
+      - patched_resource
+      - changed
+      - error
+      title: OriginalThemeOnboardingResource
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

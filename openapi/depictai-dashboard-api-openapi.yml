@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Dashboard API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Dashboard
+paths:
+  /dashboard/stats:
+    post:
+      summary: Get Stats
+      operationId: get_stats_dashboard_stats_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDashboardStatsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDashboardStatsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Dashboard
+  /dashboard/changelog:
+    get:
+      summary: Get Changelog
+      operationId: get_changelog_dashboard_changelog_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Page
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          title: Limit
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Changelog Dashboard Changelog Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Dashboard
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GetDashboardStatsResponse:
+      properties:
+        orders:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Orders
+        revenue_estimate:
+          additionalProperties:
+            type: number
+          type: object
+          title: Revenue Estimate
+        revenue_by_currency:
+          additionalProperties:
+            additionalProperties:
+              type: number
+            type: object
+          type: object
+          title: Revenue By Currency
+      type: object
+      required:
+      - orders
+      - revenue_estimate
+      - revenue_by_currency
+      title: GetDashboardStatsResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GetDashboardStatsRequest:
+      properties:
+        from_date:
+          type: string
+          format: date
+          title: From Date
+        to_date:
+          type: string
+          format: date
+          title: To Date
+      type: object
+      required:
+      - from_date
+      - to_date
+      title: GetDashboardStatsRequest
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

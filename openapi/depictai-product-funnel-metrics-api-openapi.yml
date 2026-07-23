@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Product Funnel Metrics API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Product Funnel Metrics
+paths:
+  /product-funnel-metrics/metrics:
+    get:
+      summary: Get Product Funnel Metrics
+      description: "Get product funnel metrics for a given merchant and date range.\nReturns metrics including clicks, add to carts, orders, and various rates.\n\nArgs:\n    from_date: Start date for current period metrics\n    to_date: End date for current period metrics\n    merchant_id: Merchant ID to get metrics for\n    offset: Number of records to skip (for pagination)\n    order: Sort order for results (DESC or ASC)\n    order_by: Field to sort by (d_score, clicks, add_to_carts, or orders)\n    page_size: Number of records to return per page"
+      operationId: get_product_funnel_metrics_product_funnel_metrics_metrics_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: from_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: From Date
+      - name: to_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: To Date
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: order
+        in: query
+        required: false
+        schema:
+          enum:
+          - DESC
+          - ASC
+          type: string
+          default: DESC
+          title: Order
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          enum:
+          - d_score
+          - clicks
+          - add_to_carts
+          - orders
+          type: string
+          default: d_score
+          title: Order By
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Page Size
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductFunnelMetricsResponse'
+                title: Response Get Product Funnel Metrics Product Funnel Metrics Metrics Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Product Funnel Metrics
+components:
+  schemas:
+    ShopifyImage:
+      properties:
+        id:
+          type: string
+          title: Id
+        url:
+          type: string
+          title: Url
+        width:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Width
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        alt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt
+      additionalProperties: false
+      type: object
+      required:
+      - id
+      - url
+      title: ShopifyImage
+    ProductStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - DRAFT
+      title: ProductStatus
+    VariantOption:
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - name
+      - value
+      title: VariantOption
+    OnSaleProductBadge:
+      properties:
+        type:
+          type: string
+          enum:
+          - on_sale
+          const: on_sale
+          title: Type
+        sale_percentage:
+          type: integer
+          title: Sale Percentage
+      type: object
+      required:
+      - type
+      - sale_percentage
+      title: OnSaleProductBadge
+    NewInProductBadge:
+      properties:
+        type:
+          type: string
+          enum:
+          - new_in
+          const: new_in
+          title: Type
+        published_at:
+          type: string
+          format: date-time
+          title: Published At
+      type: object
+      required:
+      - type
+      - published_at
+      title: NewInProductBadge
+    BestsellerProductBadge:
+      properties:
+        value:
+          type: number
+          title: Value
+        n_days:
+          type: integer
+          title: N Days
+        type:
+          type: string
+          enum:
+          - bestseller
+          const: bestseller
+          title: Type
+      type: object
+      required:
+      - value
+      - n_days
+      - type
+      title: BestsellerProductBadge
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SlowMoverProductBadge:
+      properties:
+        value:
+          type: number
+          title: Value
+        n_days:
+          type: integer
+          title: N Days
+        type:
+          type: string
+          enum:
+          - slow_mover
+          const: slow_mover
+          title: Type
+      type: object
+      required:
+      - value
+      - n_days
+      - type
+      title: SlowMoverProductBadge
+    FewVariantsAvailableProductBadge:
+      properties:
+        type:
+          type: string
+          enum:
+          - few_variants_available
+          const: few_variants_available
+          title: Type
+        variant_options_available:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Variant Options Available
+        n_variants_total:
+          type: integer
+          title: N Variants Total
+      type: object
+      required:
+      - type
+      - variant_options_available
+      - n_variants_total
+      title: FewVariantsAvailableProductBadge
+    LiteProductDto:
+      properties:
+        main_product_id:
+          type: string
+          title: Main Product Id
+        title:
+          type: string
+          title: Title
+        handle:
+          type: string
+          title: Handle
+        images:
+          items:
+            $ref: '#/components/schemas/ShopifyImage'
+          type: array
+          title: Images
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+        price:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Price
+        status:
+          $ref: '#/components/schemas/ProductStatus'
+        in_stock:
+          type: boolean
+          title: In Stock
+        quantity:
+          type: integer
+          title: Quantity
+        badges:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/OnSaleProductBadge'
+            - $ref: '#/components/schemas/OutOfStockProductBadge'
+            - $ref: '#/components/schemas/NewInProductBadge'
+            - $ref: '#/components/schemas/BestsellerProductBadge'
+            - $ref: '#/components/schemas/SlowMoverProductBadge'
+            - $ref: '#/components/schemas/TrendingProductBadge'
+            - $ref: '#/components/schemas/FewVariantsAvailableProductBadge'
+            discriminator:
+              propertyName: type
+              mapping:
+                bestseller: '#/components/schemas/BestsellerProductBadge'
+                few_variants_available: '#/components/schemas/FewVariantsAvailableProductBadge'
+                new_in: '#/components/schemas/NewInProductBadge'
+                on_sale: '#/components/schemas/OnSaleProductBadge'
+                out_of_stock: '#/components/schemas/OutOfStockProductBadge'
+                slow_mover: '#/components/schemas/SlowMoverProductBadge'
+                trending: '#/components/schemas/TrendingProductBadge'
+          type: array
+          title: Badges
+        n_sold_current_period:
+          type: integer
+          title: N Sold Current Period
+        n_sold_last_7_days:
+          type: integer
+          title: N Sold Last 7 Days
+        clicks_current_period:
+          type: integer
+          title: Clicks Current Period
+        skus:
+          items:
+            type: string
+          type: array
+          title: Skus
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        published_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Published At
+        variants:
+          items:
+            $ref: '#/components/schemas/LiteVariant'
+          type: array
+          title: Variants
+      type: object
+      required:
+      - main_product_id
+      - title
+      - handle
+      - images
+      - tags
+      - price
+      - status
+      - in_stock
+      - quantity
+      - badges
+      - n_sold_current_period
+      - n_sold_last_7_days
+      - clicks_current_period
+      - skus
+      - created_at
+      - published_at
+      - variants
+      title: LiteProductDto
+    LiteVariant:
+      properties:
+        id:
+          type: string
+          title: Id
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        selected_options:
+          items:
+            $ref: '#/components/schemas/VariantOption'
+          type: array
+          title: Selected Options
+      type: object
+      required:
+      - id
+      - image_url
+      - selected_options
+      title: LiteVariant
+    OutOfStockProductBadge:
+      properties:
+        type:
+          type: string
+          enum:
+          - out_of_stock
+          const: out_of_stock
+          title: Type
+      type: object
+      required:
+      - type
+      title: OutOfStockProductBadge
+    CollectionInfo:
+      properties:
+        collection_id:
+          type: string
+          title: Collection Id
+        position:
+          type: integer
+          title: Position
+        title:
+          type: string
+          title: Title
+        n_products:
+          type: integer
+          title: N Products
+        image_urls:
+          items:
+            type: string
+          type: array
+          title: Image Urls
+        product_images:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Product Images
+      type: object
+      required:
+      - collection_id
+      - position
+      - title
+      - n_products
+      - image_urls
+      - product_images
+      title: CollectionInfo
+    ProductFunnelMetricsResponse:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+        main_product_id:
+          type: string
+          title: Main Product Id
+        clicks:
+          type: integer
+          title: Clicks
+        prev_clicks:
+          type: integer
+          title: Prev Clicks
+        add_to_carts:
+          type: integer
+          title: Add To Carts
+        prev_add_to_carts:
+          type: integer
+          title: Prev Add To Carts
+        orders:
+          type: integer
+          title: Orders
+        prev_orders:
+          type: integer
+          title: Prev Orders
+        click_through_rate:
+          type: number
+          title: Click Through Rate
+        add_to_cart_rate:
+          type: number
+          title: Add To Cart Rate
+        order_through_rate:
+          type: number
+          title: Order Through Rate
+        d_score:
+          type: number
+          title: D Score
+        prev_d_score:
+          type: number
+          title: Prev D Score
+        normalized_d_score:
+          type: number
+          title: Normalized D Score
+        normalized_prev_d_score:
+          type: number
+          title: Normalized Prev D Score
+        product:
+          $ref: '#/components/schemas/LiteProductDto'
+        collections:
+          items:
+            $ref: '#/components/schemas/CollectionInfo'
+          type: array
+          title: Collections
+      type: object
+      required:
+      - merchant
+      - main_product_id
+      - clicks
+      - prev_clicks
+      - add_to_carts
+      - prev_add_to_carts
+      - orders
+      - prev_orders
+      - click_through_rate
+      - add_to_cart_rate
+      - order_through_rate
+      - d_score
+      - prev_d_score
+      - normalized_d_score
+      - normalized_prev_d_score
+      - product
+      - collections
+      title: ProductFunnelMetricsResponse
+    TrendingProductBadge:
+      properties:
+        value:
+          type: number
+          title: Value
+        n_days:
+          type: integer
+          title: N Days
+        type:
+          type: string
+          enum:
+          - trending
+          const: trending
+          title: Type
+      type: object
+      required:
+      - value
+      - n_days
+      - type
+      title: TrendingProductBadge
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test merchant-create API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: merchant-create
+paths:
+  /merchant-create/:
+    post:
+      tags:
+      - merchant-create
+      summary: Create Merchant
+      operationId: create_merchant_merchant_create__post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiteMerchant'
+      security:
+      - Auth0: []
+components:
+  schemas:
+    LiteMerchant:
+      properties:
+        id:
+          type: string
+          title: Id
+        display_name:
+          type: string
+          title: Display Name
+        start_timestamp:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Start Timestamp
+        base_currency:
+          type: string
+          pattern: ^AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD$
+          title: Base Currency
+        has_completed_onboarding:
+          type: boolean
+          title: Has Completed Onboarding
+          default: false
+        auto_activate_all_collections:
+          type: boolean
+          title: Auto Activate All Collections
+          default: false
+        desktop_columns:
+          type: integer
+          title: Desktop Columns
+        mobile_columns:
+          type: integer
+          title: Mobile Columns
+        shopify_domain:
+          type: string
+          title: Shopify Domain
+        shopify_app_installed:
+          type: boolean
+          title: Shopify App Installed
+        has_run_at_least_one_ingestion:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Run At Least One Ingestion
+        multi_store_group_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Multi Store Group Id
+        multi_store_activation_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Multi Store Activation Code
+        variant_group_by_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Variant Group By Name
+      type: object
+      required:
+      - id
+      - display_name
+      - base_currency
+      - desktop_columns
+      - mobile_columns
+      - shopify_domain
+      - shopify_app_installed
+      - has_run_at_least_one_ingestion
+      - multi_store_group_id
+      - multi_store_activation_code
+      - variant_group_by_name
+      title: LiteMerchant
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

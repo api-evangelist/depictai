@@ -1,0 +1,511 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Recommendations (v2) API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Recommendations (v2)
+paths:
+  /v2/recommend/products/general:
+    post:
+      tags:
+      - Recommendations (v2)
+      summary: Recommend For User
+      description: "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>"
+      operationId: Recommend_for_User_v2_recommend_products_general_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneralRecommendRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/recommend/products/product:
+    post:
+      tags:
+      - Recommendations (v2)
+      summary: Recommend For Product And User
+      description: "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>"
+      operationId: Recommend_for_Product_and_User_v2_recommend_products_product_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/recommend/products/category:
+    post:
+      tags:
+      - Recommendations (v2)
+      summary: Recommend For Category And User
+      description: "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8804-8b7105a9c8a5\"\n    }]\n}\n</pre>"
+      operationId: Recommend_for_Category_and_User_v2_recommend_products_category_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRecommendRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/recommend/products/products:
+    post:
+      tags:
+      - Recommendations (v2)
+      summary: Recommend For Products And User
+      description: "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>"
+      operationId: Recommend_for_Products_and_User_v2_recommend_products_products_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendForManyRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    RecommendRequest:
+      properties:
+        tenant:
+          type: string
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: Locale identifier
+        type:
+          type: string
+          title: Type
+          description: Type of the recommendation, e.g. `cross_sell`
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 128
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of recommendations returned.
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+          description: Customer identifier
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id
+        document_referrer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Referrer
+        metadata:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Metadata that can be used to modify the behaviour of the recommendation system
+        product_id:
+          type: string
+          title: Product Id
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - type
+      - product_id
+      title: RecommendRequest
+    CategoryRecommendRequest:
+      properties:
+        tenant:
+          type: string
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: Locale identifier
+        type:
+          type: string
+          title: Type
+          description: Type of the recommendation, e.g. `cross_sell`
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 128
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of recommendations returned.
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+          description: Customer identifier
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id
+        document_referrer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Referrer
+        metadata:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Metadata that can be used to modify the behaviour of the recommendation system
+        category_id:
+          type: string
+          title: Category Id
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - type
+      - category_id
+      title: CategoryRecommendRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GeneralRecommendRequest:
+      properties:
+        tenant:
+          type: string
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: Locale identifier
+        type:
+          type: string
+          title: Type
+          description: Type of the recommendation, e.g. `cross_sell`
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 128
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of recommendations returned.
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+          description: Customer identifier
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id
+        document_referrer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Referrer
+        metadata:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Metadata that can be used to modify the behaviour of the recommendation system
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - type
+      title: GeneralRecommendRequest
+    RecommendResponse:
+      properties:
+        displays:
+          items:
+            type: object
+          type: array
+          title: Displays
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        variant:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Variant
+        experiment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Experiment Id
+      additionalProperties: false
+      type: object
+      required:
+      - displays
+      title: RecommendResponse
+    RecommendForManyRequest:
+      properties:
+        tenant:
+          type: string
+          title: Tenant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: Locale identifier
+        type:
+          type: string
+          title: Type
+          description: Type of the recommendation, e.g. `cross_sell`
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 128
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of recommendations returned.
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+          description: Customer identifier
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        dsid:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Dsid
+          description: Populated for integrations performed by Depict.ai only. Depict.ai Session Id
+        document_referrer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Referrer
+        metadata:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Metadata that can be used to modify the behaviour of the recommendation system
+        product_ids:
+          items:
+            type: string
+          type: array
+          title: Product Ids
+      additionalProperties: false
+      type: object
+      required:
+      - tenant
+      - market
+      - type
+      - product_ids
+      title: RecommendForManyRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,820 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Settings API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Settings
+paths:
+  /settings/subscription/basic:
+    post:
+      summary: Create Subscription Basic
+      operationId: create_subscription_basic_settings_subscription_basic_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: return_url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Return Url
+      - name: interval
+        in: query
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/AppPricingInterval'
+          default: EVERY_30_DAYS
+          title: Interval
+      - name: testChargeSecret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Testchargesecret
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/SubscriptionDiscount'
+              - type: 'null'
+              title: Discount
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyAppSubscriptionCreatePayload'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/subscription/essentials:
+    post:
+      summary: Create Subscription Essentials
+      operationId: create_subscription_essentials_settings_subscription_essentials_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: return_url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Return Url
+      - name: interval
+        in: query
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/AppPricingInterval'
+          default: EVERY_30_DAYS
+          title: Interval
+      - name: testChargeSecret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Testchargesecret
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/SubscriptionDiscount'
+              - type: 'null'
+              title: Discount
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyAppSubscriptionCreatePayload'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/subscription/pro:
+    post:
+      summary: Create Subscription Pro
+      operationId: create_subscription_pro_settings_subscription_pro_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: return_url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Return Url
+      - name: interval
+        in: query
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/AppPricingInterval'
+          default: EVERY_30_DAYS
+          title: Interval
+      - name: testChargeSecret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Testchargesecret
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/SubscriptionDiscount'
+              - type: 'null'
+              title: Discount
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyAppSubscriptionCreatePayload'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/subscription:
+    delete:
+      summary: Cancel Subscription
+      operationId: cancel_subscription_settings_subscription_delete
+      security:
+      - Auth0: []
+      parameters:
+      - name: subscription_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subscription Id
+      - name: collection_ids
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          default: []
+          title: Collection Ids
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/subscription/status:
+    get:
+      summary: Subscription Status
+      operationId: subscription_status_settings_subscription_status_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/track/{merchant_id}/install:
+    post:
+      summary: Track Install
+      operationId: track_install_settings_track__merchant_id__install_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/{merchant_id}/wizard-complete:
+    post:
+      summary: Mark Wizard As Complete
+      operationId: mark_wizard_as_complete_settings__merchant_id__wizard_complete_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/track/insight-widget-seen:
+    post:
+      summary: Insight Widget Seen
+      operationId: insight_widget_seen_settings_track_insight_widget_seen_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: widget_name
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Widget Name
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/dynamic-status:
+    get:
+      summary: Get Dynamic Status
+      operationId: get_dynamic_status_settings_dynamic_status_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicStatusConfig'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+    put:
+      summary: Update Dynamic Status
+      operationId: update_dynamic_status_settings_dynamic_status_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DynamicStatusConfig'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /settings/sync-data:
+    post:
+      summary: Trigger Sync
+      operationId: trigger_sync_settings_sync_data_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Settings
+  /api/v1/settings/{merchant_id}/auto-hide:
+    get:
+      tags:
+      - Settings
+      summary: Get Auto Hide Settings Endpoint
+      operationId: get_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoHideSettingsResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Settings
+      summary: Update Auto Hide Settings Endpoint
+      operationId: update_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAutoHideSettingsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAutoHideSettingsResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/settings/{merchant_id}/auto-hide/exclude-products:
+    put:
+      tags:
+      - Settings
+      summary: Update Auto Hide Exclude Products Endpoint
+      operationId: update_auto_hide_exclude_products_endpoint_api_v1_settings__merchant_id__auto_hide_exclude_products_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExcludeProductsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateExcludeProductsResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UpdateExcludeProductsRequest:
+      properties:
+        main_product_ids:
+          items:
+            type: string
+          type: array
+          title: Main Product Ids
+        exclude:
+          type: boolean
+          title: Exclude
+      type: object
+      required:
+      - main_product_ids
+      - exclude
+      title: UpdateExcludeProductsRequest
+    UpdateExcludeProductsResult:
+      properties:
+        exclude_main_product_ids:
+          items:
+            type: string
+          type: array
+          title: Exclude Main Product Ids
+      type: object
+      required:
+      - exclude_main_product_ids
+      title: UpdateExcludeProductsResult
+    SubscriptionStatus:
+      properties:
+        num_active_collections:
+          type: integer
+          title: Num Active Collections
+        max_active_collections:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Active Collections
+        is_trial:
+          type: boolean
+          title: Is Trial
+        trial_days_left:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Days Left
+        proj_sessions:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Proj Sessions
+        num_sessions:
+          type: integer
+          title: Num Sessions
+        max_sessions:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Sessions
+        days_until_reset:
+          type: integer
+          title: Days Until Reset
+        frozen:
+          type: boolean
+          title: Frozen
+        installed_recently:
+          type: boolean
+          title: Installed Recently
+        store_error:
+          anyOf:
+          - type: string
+            enum:
+            - invalid_api_key
+            - payment_required
+            - unknown
+          - type: 'null'
+          title: Store Error
+        subscription:
+          anyOf:
+          - $ref: '#/components/schemas/ActiveSubscriptionDTO'
+          - type: 'null'
+      type: object
+      required:
+      - num_active_collections
+      - max_active_collections
+      - is_trial
+      - trial_days_left
+      - proj_sessions
+      - num_sessions
+      - max_sessions
+      - days_until_reset
+      - frozen
+      - installed_recently
+      - store_error
+      - subscription
+      title: SubscriptionStatus
+    ActiveSubscriptionDTO:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          $ref: '#/components/schemas/SubscriptionName'
+        price:
+          type: string
+          title: Price
+        interval:
+          $ref: '#/components/schemas/AppPricingInterval'
+        billing_on:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Billing On
+        trial_ends_on:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trial Ends On
+        test:
+          type: boolean
+          title: Test
+        status:
+          type: string
+          enum:
+          - pending
+          - accepted
+          - active
+          - declined
+          - expired
+          - frozen
+          - cancelled
+          title: Status
+      type: object
+      required:
+      - id
+      - name
+      - price
+      - interval
+      - billing_on
+      - trial_ends_on
+      - test
+      - status
+      title: ActiveSubscriptionDTO
+    ShopifyAppSubscriptionCreatePayload:
+      properties:
+        confirmation_url:
+          type: string
+          title: Confirmation Url
+      type: object
+      required:
+      - confirmation_url
+      title: ShopifyAppSubscriptionCreatePayload
+    SubscriptionName:
+      type: string
+      enum:
+      - Basic
+      - Essential
+      - Pro
+      - Custom
+      title: SubscriptionName
+    GetAutoHideSettingsResult:
+      properties:
+        auto_hide_oos:
+          type: boolean
+          title: Auto Hide Oos
+        exclude_main_product_ids:
+          items:
+            type: string
+          type: array
+          title: Exclude Main Product Ids
+      type: object
+      required:
+      - auto_hide_oos
+      - exclude_main_product_ids
+      title: GetAutoHideSettingsResult
+    UpdateAutoHideSettingsResult:
+      properties:
+        auto_hide_oos:
+          type: boolean
+          title: Auto Hide Oos
+        exclude_main_product_ids:
+          items:
+            type: string
+          type: array
+          title: Exclude Main Product Ids
+      type: object
+      required:
+      - auto_hide_oos
+      - exclude_main_product_ids
+      title: UpdateAutoHideSettingsResult
+    DynamicStatusConfig:
+      properties:
+        new_in_days:
+          type: integer
+          title: New In Days
+        bestseller_n_products:
+          type: integer
+          title: Bestseller N Products
+        slowmover_n_products:
+          type: integer
+          title: Slowmover N Products
+        low_in_stock_percentage:
+          type: integer
+          title: Low In Stock Percentage
+        order_data_days:
+          type: integer
+          title: Order Data Days
+        trending_n_products:
+          type: integer
+          title: Trending N Products
+          default: 30
+      type: object
+      required:
+      - new_in_days
+      - bestseller_n_products
+      - slowmover_n_products
+      - low_in_stock_percentage
+      - order_data_days
+      title: DynamicStatusConfig
+    AppPricingInterval:
+      type: string
+      enum:
+      - ANNUAL
+      - EVERY_30_DAYS
+      title: AppPricingInterval
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SubscriptionDiscount:
+      properties:
+        percentage:
+          type: number
+          title: Percentage
+        duration_intervals:
+          type: integer
+          title: Duration Intervals
+      type: object
+      required:
+      - percentage
+      - duration_intervals
+      title: SubscriptionDiscount
+    UpdateAutoHideSettingsRequest:
+      properties:
+        auto_hide_oos:
+          type: boolean
+          title: Auto Hide Oos
+      type: object
+      required:
+      - auto_hide_oos
+      title: UpdateAutoHideSettingsRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

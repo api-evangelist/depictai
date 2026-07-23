@@ -1,0 +1,1010 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Listing (v3) API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Listing (v3)
+paths:
+  /v3/listings:
+    get:
+      tags:
+      - Listing (v3)
+      summary: Get Listings
+      description: "Returns the full listing hierarchy. Useful for navigation menus, listing selection dialogs, etc.\nCan optionally be filtered to only show listings of certain types.\n\nExample response:\n<pre>\n[\n    {\n        \"listing_id\": \"f346c448-4cf1-4373-9156-49e222cd6db0\",\n        \"listing_type\": \"smart_pick\",\n        \"show_in_breadcrumbs\": false,\n        \"show_in_quicklinks\": false,\n        \"title\": \"Trending\",\n        \"children\": []\n    },\n    {\n        \"listing_id\": \"2efca23d-f077-4477-8830-cc7143c49173\",\n        \"external_id\": \"1001\",\n        \"listing_type\": \"category\",\n        \"show_in_breadcrumbs\": true,\n        \"show_in_quicklinks\": true,\n        \"title\": \"Clothes\",\n        \"slug\": \"mens-cloths\",\n        \"children\": [\n            {\n                \"listing_id\": \"06b234cf-ce21-4252-90e6-db47246b1d98\",\n                \"external_id\": \"1011\",\n                \"listing_type\": \"category\",\n                \"show_in_breadcrumbs\": true,\n                \"show_in_quicklinks\": true,\n                \"title\": \"Suits\",\n                \"slug\": \"mens-suits\",\n                \"children\": []\n            },\n            {\n                \"listing_id\": \"1e648857-4aad-4606-9e7a-5290cb3576e5\",\n                \"external_id\": \"1012\",\n                \"listing_type\": \"category\",\n                \"show_in_breadcrumbs\": true,\n                \"show_in_quicklinks\": true,\n                \"title\": \"Shirts\",\n                \"slug\": \"mens-shirts\",\n                \"children\": []\n            }\n        ]\n    }\n]\n</pre>"
+      operationId: Get_Listings_v3_listings_get
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: merchant
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant
+      - name: market
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Market
+      - name: locale
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Locale
+      - name: types
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionType'
+          default: []
+          title: Types
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListListingsResponseItem'
+                title: Response Get Listings V3 Listings Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v3/listings/external_id/{external_id}:
+    get:
+      tags:
+      - Listing (v3)
+      summary: Get Listing Via External Id
+      description: "Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID,\nor \"external\" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.\n\nUseful for showing breadcrumbs and other navigation elements while showing a product listing page.\n\nExample response:\n<pre>\n{\n    \"listing_id\": \"06b234cf-ce21-4252-90e6-db47246b1d98\",\n    \"external_id\": \"1011\",\n    \"listing_type\": \"category\",\n    \"show_in_breadcrumbs\": true,\n    \"show_in_quicklinks\": true,\n    \"title\": \"Suits\",\n    \"slug\": \"mens-suits\",\n    \"ancestors\": [\n        {\n            \"listing_id\": \"2efca23d-f077-4477-8830-cc7143c49173\",\n            \"external_id\": \"1001\",\n            \"listing_type\": \"category\",\n            \"show_in_breadcrumbs\": true,\n            \"show_in_quicklinks\": true,\n            \"title\": \"Clothes\",\n            \"slug\": \"mens-cloths\"\n        }\n    ],\n    \"siblings\": [\n        {\n            \"listing_id\": \"1e648857-4aad-4606-9e7a-5290cb3576e5\",\n            \"external_id\": \"1012\",\n            \"listing_type\": \"category\",\n            \"show_in_breadcrumbs\": true,\n            \"show_in_quicklinks\": true,\n            \"title\": \"Shirts\",\n            \"slug\": \"mens-shirts\"\n        }\n    ],\n    \"children\": []\n}\n</pre>"
+      operationId: Get_Listing_via_External_ID_v3_listings_external_id__external_id__get
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: external_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+      - name: merchant
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant
+      - name: market
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Market
+      - name: locale
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Locale
+      - name: listing_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Listing Id
+      - name: session_id
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Session Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetListingResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v3/listings/{listing_id}:
+    get:
+      tags:
+      - Listing (v3)
+      summary: Get Listing
+      description: "Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID,\nor \"external\" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.\n\nUseful for showing breadcrumbs and other navigation elements while showing a product listing page.\n\nExample response:\n<pre>\n{\n    \"listing_id\": \"06b234cf-ce21-4252-90e6-db47246b1d98\",\n    \"external_id\": \"1011\",\n    \"listing_type\": \"category\",\n    \"show_in_breadcrumbs\": true,\n    \"show_in_quicklinks\": true,\n    \"title\": \"Suits\",\n    \"slug\": \"mens-suits\",\n    \"ancestors\": [\n        {\n            \"listing_id\": \"2efca23d-f077-4477-8830-cc7143c49173\",\n            \"external_id\": \"1001\",\n            \"listing_type\": \"category\",\n            \"show_in_breadcrumbs\": true,\n            \"show_in_quicklinks\": true,\n            \"title\": \"Clothes\",\n            \"slug\": \"mens-cloths\"\n        }\n    ],\n    \"siblings\": [\n        {\n            \"listing_id\": \"1e648857-4aad-4606-9e7a-5290cb3576e5\",\n            \"external_id\": \"1012\",\n            \"listing_type\": \"category\",\n            \"show_in_breadcrumbs\": true,\n            \"show_in_quicklinks\": true,\n            \"title\": \"Shirts\",\n            \"slug\": \"mens-shirts\"\n        }\n    ],\n    \"children\": []\n}\n</pre>"
+      operationId: Get_Listing_v3_listings__listing_id__get
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: listing_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Listing Id
+      - name: merchant
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Merchant
+      - name: market
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Market
+      - name: locale
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Locale
+      - name: external_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+      - name: session_id
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Session Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetListingResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v3/listings/external_id/{external_id}/products:
+    post:
+      tags:
+      - Listing (v3)
+      summary: Get Products In Listing, Via External Id
+      description: "Returns products in a listing, optionally filtered. Used for product listing pages.\n\nExample response:\n<pre>\n{\n    \"displays\": [\n        {\n        \"variant_index\": 1,\n        \"variant_displays\": [\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1500-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\",\n                \"https://example.cdn.com/2.jpg\",\n                ]\n            },\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"200\",\n            \"product_id\": \"1500-10-200\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\",\n                \"https://example.cdn.com/2.jpg\",\n                ]\n            },\n        ],\n        \"product_listing_result_id\": \"50877e3b-26a4-4ea7-a6e1-1a7696f76f66\"\n        },\n        {\n        \"variant_index\": 0,\n        \"variant_displays\": [\n            {\n            \"in_stock\": false,\n            \"original_price\": 1400,\n            \"sale_price\": 1200,\n            \"title\": \"Collar Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1600-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/10.jpg\",\n                \"https://example.cdn.com/11.jpg\",\n                ]\n            }\n        ],\n        \"product_listing_result_id\": \"671740b5-6828-41fc-8a3f-2869993d000c\"\n        }\n    ],\n    \"n_hits\": 2,\n    \"sorts\": [\n        {\n        \"field\": \"_relevance\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Recommended\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Recommended\"\n            ]\n        }\n        },\n        {\n        \"field\": \"title\",\n        \"order\": \"asc\",\n        \"meta\": {\n            \"title\": \"Alphabetical, A-Z\",\n            \"values\": [\n            \"asc\"\n            ],\n            \"names\": [\n            \"Alphabetical, A-Z\"\n            ]\n        }\n        },\n        {\n        \"field\": \"title\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Alphabetical, Z-A\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Alphabetical, Z-A\"\n            ]\n        }\n        },\n        {\n        \"field\": \"sale_price\",\n        \"order\": \"asc\",\n        \"meta\": {\n            \"title\": \"Price, low to high\",\n            \"values\": [\n            \"asc\"\n            ],\n            \"names\": [\n            \"Price, low to high\"\n            ]\n        }\n        },\n        {\n        \"field\": \"sale_price\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Price, high to low\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Price, high to low\"\n            ]\n        }\n        }\n    ],\n    \"filters\": [\n        {\n        \"field\": \"sale_price\",\n        \"op\": \"inrange\",\n        \"data\": [\n            1200,\n            1999\n        ],\n        \"meta\": {\n            \"group_title\": \"Price\",\n            \"type\": \"range\",\n            \"min\": 1200,\n            \"max\": 1999,\n            \"currency\": \"SEK\"\n        },\n        \"id\": \"price0\"\n        },\n        {\n        \"field\": \"size_name\",\n        \"op\": \"in\",\n        \"meta\": {\n            \"group_title\": \"Size\",\n            \"type\": \"checkbox-grid\",\n            \"values\": [\n            \"200\",\n            \"210\",\n            ],\n            \"counts\": [\n            1,\n            2\n            ]\n        },\n        \"id\": \"size1\"\n        }\n    ],\n    \"product_listing_request_id\": \"4bf1eeb0-0b0a-4b0e-9b0a-0a0b0a0b0a0b\",\n    \"cursor\": \"eyJjIjogMjAsICJyIjogMjB9\"\n    }\n</pre>"
+      operationId: Get_Products_in_Listing__via_external_ID_v3_listings_external_id__external_id__products_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: external_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+      - name: listing_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Listing Id
+      - name: x-use-db-display-store
+        in: header
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: X-Use-Db-Display-Store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductListingRequestV3'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListingResponseV3'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v3/listings/{listing_id}/products:
+    post:
+      tags:
+      - Listing (v3)
+      summary: Get Products In Listing
+      description: "Returns products in a listing, optionally filtered. Used for product listing pages.\n\nExample response:\n<pre>\n{\n    \"displays\": [\n        {\n        \"variant_index\": 1,\n        \"variant_displays\": [\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1500-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\",\n                \"https://example.cdn.com/2.jpg\",\n                ]\n            },\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"200\",\n            \"product_id\": \"1500-10-200\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\",\n                \"https://example.cdn.com/2.jpg\",\n                ]\n            },\n        ],\n        \"product_listing_result_id\": \"50877e3b-26a4-4ea7-a6e1-1a7696f76f66\"\n        },\n        {\n        \"variant_index\": 0,\n        \"variant_displays\": [\n            {\n            \"in_stock\": false,\n            \"original_price\": 1400,\n            \"sale_price\": 1200,\n            \"title\": \"Collar Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1600-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/10.jpg\",\n                \"https://example.cdn.com/11.jpg\",\n                ]\n            }\n        ],\n        \"product_listing_result_id\": \"671740b5-6828-41fc-8a3f-2869993d000c\"\n        }\n    ],\n    \"n_hits\": 2,\n    \"sorts\": [\n        {\n        \"field\": \"_relevance\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Recommended\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Recommended\"\n            ]\n        }\n        },\n        {\n        \"field\": \"title\",\n        \"order\": \"asc\",\n        \"meta\": {\n            \"title\": \"Alphabetical, A-Z\",\n            \"values\": [\n            \"asc\"\n            ],\n            \"names\": [\n            \"Alphabetical, A-Z\"\n            ]\n        }\n        },\n        {\n        \"field\": \"title\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Alphabetical, Z-A\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Alphabetical, Z-A\"\n            ]\n        }\n        },\n        {\n        \"field\": \"sale_price\",\n        \"order\": \"asc\",\n        \"meta\": {\n            \"title\": \"Price, low to high\",\n            \"values\": [\n            \"asc\"\n            ],\n            \"names\": [\n            \"Price, low to high\"\n            ]\n        }\n        },\n        {\n        \"field\": \"sale_price\",\n        \"order\": \"desc\",\n        \"meta\": {\n            \"title\": \"Price, high to low\",\n            \"values\": [\n            \"desc\"\n            ],\n            \"names\": [\n            \"Price, high to low\"\n            ]\n        }\n        }\n    ],\n    \"filters\": [\n        {\n        \"field\": \"sale_price\",\n        \"op\": \"inrange\",\n        \"data\": [\n            1200,\n            1999\n        ],\n        \"meta\": {\n            \"group_title\": \"Price\",\n            \"type\": \"range\",\n            \"min\": 1200,\n            \"max\": 1999,\n            \"currency\": \"SEK\"\n        },\n        \"id\": \"price0\"\n        },\n        {\n        \"field\": \"size_name\",\n        \"op\": \"in\",\n        \"meta\": {\n            \"group_title\": \"Size\",\n            \"type\": \"checkbox-grid\",\n            \"values\": [\n            \"200\",\n            \"210\",\n            ],\n            \"counts\": [\n            1,\n            2\n            ]\n        },\n        \"id\": \"size1\"\n        }\n    ],\n    \"product_listing_request_id\": \"4bf1eeb0-0b0a-4b0e-9b0a-0a0b0a0b0a0b\",\n    \"cursor\": \"eyJjIjogMjAsICJyIjogMjB9\"\n    }\n</pre>"
+      operationId: Get_Products_in_Listing_v3_listings__listing_id__products_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: listing_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Listing Id
+      - name: external_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+      - name: x-use-db-display-store
+        in: header
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: X-Use-Db-Display-Store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductListingRequestV3'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListingResponseV3'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ProductListingResponseV3:
+      properties:
+        displays:
+          items:
+            type: object
+          type: array
+          title: Displays
+          description: The products to be shown on the product listing page.
+        n_hits:
+          type: integer
+          title: N Hits
+          description: Total number of results for this query. Not necessarily exact.
+        sorts:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SortModel-Output'
+            type: array
+          - type: 'null'
+          title: Sorts
+          description: Available methods for sorting the response. Any element from this list can be sent as `sort` in subsequent requests.
+        filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SearchFilter'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Available filters that can be used for filtering in the subsequent request.
+        product_listing_request_id:
+          type: string
+          title: Product Listing Request Id
+        cursor:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Cursor
+          description: Cursor that can be used in the next request to get subsequent results. If this is not set, there are no more results.
+      additionalProperties: false
+      type: object
+      required:
+      - displays
+      - n_hits
+      - product_listing_request_id
+      title: ProductListingResponseV3
+    ProductListingRequestV3:
+      properties:
+        cursor:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Cursor
+          description: Used for cursor-based pagination. Set it to the cursor from the last response. If not set, will return the first results.
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 250
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of results per response.
+        market:
+          type: string
+          title: Market
+        filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SearchFilter'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: List of filters to apply to the results.
+        sort:
+          anyOf:
+          - $ref: '#/components/schemas/SortModel-Input'
+          - type: 'null'
+          description: Specifies the sorting method. By default, the results are ordered by relevance. To find the possible values for this field, query the endpoint and look at the `sorts` field.
+        session_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+        metadata:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Metadata
+          description: Metadata that can be used to modify the behaviour of the search.
+        merchant:
+          type: string
+          title: Merchant
+        locale:
+          type: string
+          title: Locale
+        listing_id:
+          type: string
+          format: uuid
+          title: Listing Id
+      additionalProperties: false
+      type: object
+      required:
+      - market
+      - merchant
+      - locale
+      title: ProductListingRequestV3
+    GetListingResponse:
+      properties:
+        listing_id:
+          type: string
+          format: uuid
+          title: Listing Id
+          description: Depict ID of the listing.
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: ID of the listing in the merchant PIM, CMS or similar.
+        listing_type:
+          $ref: '#/components/schemas/CollectionType'
+        show_in_breadcrumbs:
+          type: boolean
+          title: Show In Breadcrumbs
+          description: Show or hide this listing in navigation breadcrumbs.
+        show_in_quicklinks:
+          type: boolean
+          title: Show In Quicklinks
+          description: Show or hide this listing in quicklinks.
+        image_urls:
+          items:
+            type: string
+          type: array
+          title: Image Urls
+          description: List of image URLs for the listing.
+        title:
+          type: string
+          title: Title
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        ancestors:
+          items:
+            $ref: '#/components/schemas/ProductListing'
+          type: array
+          title: Ancestors
+          description: Ordered list of ancestors of the listing, useful for navigation breadcrumbs. The first element is the root listing.
+        siblings:
+          items:
+            $ref: '#/components/schemas/ProductListing'
+          type: array
+          title: Siblings
+          description: Siblings of the listing, i.e. listings that share the same parent, INCLUDING the listing itself. Sortet by title.
+        children:
+          items:
+            $ref: '#/components/schemas/ProductListing'
+          type: array
+          title: Children
+          description: Children of the listing, i.e. listings that have the listing as their parent. Sorted by title.
+      additionalProperties: false
+      type: object
+      required:
+      - listing_id
+      - listing_type
+      - show_in_breadcrumbs
+      - show_in_quicklinks
+      - image_urls
+      - title
+      - ancestors
+      - siblings
+      - children
+      title: GetListingResponse
+    RangeFilterMeta:
+      properties:
+        group_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Title
+          description: Title of the group, where a group consists of all the filters that share an ID.
+        group_expanded:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Group Expanded
+          description: Whether the filter group should be expanded by default or not.
+        type:
+          const: range
+          title: Type
+        min:
+          type: number
+          title: Min
+          description: The minimum value that can be selected in the range.
+        max:
+          type: number
+          title: Max
+          description: The maximum value that can be selected in the range.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+          description: The unit of the range values.
+        currency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Currency
+          description: The currency of the range values.
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - min
+      - max
+      title: RangeFilterMeta
+    ListListingsResponseItem:
+      properties:
+        listing_id:
+          type: string
+          format: uuid
+          title: Listing Id
+          description: Depict ID of the listing.
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: ID of the listing in the merchant PIM, CMS or similar.
+        listing_type:
+          $ref: '#/components/schemas/CollectionType'
+        show_in_breadcrumbs:
+          type: boolean
+          title: Show In Breadcrumbs
+          description: Show or hide this listing in navigation breadcrumbs.
+        show_in_quicklinks:
+          type: boolean
+          title: Show In Quicklinks
+          description: Show or hide this listing in quicklinks.
+        image_urls:
+          items:
+            type: string
+          type: array
+          title: Image Urls
+          description: List of image URLs for the listing.
+        title:
+          type: string
+          title: Title
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        children:
+          items:
+            $ref: '#/components/schemas/ListListingsResponseItem'
+          type: array
+          title: Children
+      additionalProperties: false
+      type: object
+      required:
+      - listing_id
+      - listing_type
+      - show_in_breadcrumbs
+      - show_in_quicklinks
+      - image_urls
+      - title
+      - children
+      title: ListListingsResponseItem
+    CollectionType:
+      type: string
+      enum:
+      - long_tail_collection
+      - campaign
+      - category
+      - smart_pick
+      - style
+      - brand
+      title: CollectionType
+    ValuesFilterMeta:
+      properties:
+        group_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Title
+          description: Title of the group, where a group consists of all the filters that share an ID.
+        group_expanded:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Group Expanded
+          description: Whether the filter group should be expanded by default or not.
+        type:
+          type: string
+          enum:
+          - radio
+          - checkbox
+          - checkbox-grid
+          - checkbox-color
+          title: Type
+          description: Type of filter.
+        values:
+          items:
+            anyOf:
+            - type: string
+              enum:
+              - 'true'
+              - 'false'
+            - type: number
+            - type: integer
+            - type: string
+            - prefixItems:
+              - type: number
+              - type: number
+              type: array
+              maxItems: 2
+              minItems: 2
+            - prefixItems:
+              - type: integer
+              - type: integer
+              type: array
+              maxItems: 2
+              minItems: 2
+            - prefixItems:
+              - type: integer
+              - type: number
+              type: array
+              maxItems: 2
+              minItems: 2
+            - prefixItems:
+              - type: number
+              - type: integer
+              type: array
+              maxItems: 2
+              minItems: 2
+          type: array
+          title: Values
+          description: Selectable values
+        counts:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Counts
+          description: Counts for values
+        names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Names
+          description: Names for values. This is what should be displayed along with the UI item for the value.
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - values
+      title: ValuesFilterMeta
+    SortModel-Output:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to sort by.
+        order:
+          allOf:
+          - $ref: '#/components/schemas/SortingOrder'
+          description: The order to sort by.
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/SortMeta'
+          - type: 'null'
+          description: 'Metadata about the sort that can be used for rendering. '
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - order
+      title: SortModel
+    SortModel-Input:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to sort by.
+        order:
+          allOf:
+          - $ref: '#/components/schemas/SortingOrder'
+          description: The order to sort by.
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/SortMeta'
+          - type: 'null'
+          description: 'Metadata about the sort that can be used for rendering. '
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - order
+      title: SortModel
+    ProductListing:
+      properties:
+        listing_id:
+          type: string
+          format: uuid
+          title: Listing Id
+          description: Depict ID of the listing.
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: ID of the listing in the merchant PIM, CMS or similar.
+        listing_type:
+          $ref: '#/components/schemas/CollectionType'
+        show_in_breadcrumbs:
+          type: boolean
+          title: Show In Breadcrumbs
+          description: Show or hide this listing in navigation breadcrumbs.
+        show_in_quicklinks:
+          type: boolean
+          title: Show In Quicklinks
+          description: Show or hide this listing in quicklinks.
+        image_urls:
+          items:
+            type: string
+          type: array
+          title: Image Urls
+          description: List of image URLs for the listing.
+        title:
+          type: string
+          title: Title
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+      additionalProperties: false
+      type: object
+      required:
+      - listing_id
+      - listing_type
+      - show_in_breadcrumbs
+      - show_in_quicklinks
+      - image_urls
+      - title
+      title: ProductListing
+      description: Represents a product listing, e.g. a category or a collection.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SearchFilter:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to filter by.
+        op:
+          type: string
+          enum:
+          - eq
+          - neq
+          - in
+          - nin
+          - leq
+          - geq
+          - inrange
+          title: Op
+          description: The operation used for filtering. The filtering should be read as `field op data`, for example `brand in ["Nike", "Adidas"]`.
+        data:
+          anyOf:
+          - type: string
+            enum:
+            - 'true'
+            - 'false'
+          - type: number
+          - type: integer
+          - type: string
+          - prefixItems:
+            - type: number
+            - type: number
+            type: array
+            maxItems: 2
+            minItems: 2
+          - prefixItems:
+            - type: integer
+            - type: integer
+            type: array
+            maxItems: 2
+            minItems: 2
+          - prefixItems:
+            - type: integer
+            - type: number
+            type: array
+            maxItems: 2
+            minItems: 2
+          - prefixItems:
+            - type: number
+            - type: integer
+            type: array
+            maxItems: 2
+            minItems: 2
+          - items:
+              anyOf:
+              - type: string
+                enum:
+                - 'true'
+                - 'false'
+              - type: number
+              - type: integer
+              - type: string
+              - prefixItems:
+                - type: number
+                - type: number
+                type: array
+                maxItems: 2
+                minItems: 2
+              - prefixItems:
+                - type: integer
+                - type: integer
+                type: array
+                maxItems: 2
+                minItems: 2
+              - prefixItems:
+                - type: integer
+                - type: number
+                type: array
+                maxItems: 2
+                minItems: 2
+              - prefixItems:
+                - type: number
+                - type: integer
+                type: array
+                maxItems: 2
+                minItems: 2
+            type: array
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Data
+          description: Data for the filter.
+        meta:
+          anyOf:
+          - oneOf:
+            - $ref: '#/components/schemas/RangeFilterMeta'
+            - $ref: '#/components/schemas/ValuesFilterMeta'
+            - $ref: '#/components/schemas/HierarchicalValuesFilterMeta'
+            discriminator:
+              propertyName: type
+              mapping:
+                checkbox: '#/components/schemas/ValuesFilterMeta'
+                checkbox-color: '#/components/schemas/ValuesFilterMeta'
+                checkbox-grid: '#/components/schemas/ValuesFilterMeta'
+                checkbox-hierarchical: '#/components/schemas/HierarchicalValuesFilterMeta'
+                radio: '#/components/schemas/ValuesFilterMeta'
+                range: '#/components/schemas/RangeFilterMeta'
+          - type: 'null'
+          title: Meta
+          description: Metadata about the filter that can be used for rendering. For example, this could contain the possible values to filter by and their counts in the results.
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: ID of the filter. If multiple filters share the same ID, they should be grouped together in the UI.
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - op
+      title: SearchFilter
+    HierarchicalValuesFilterMeta:
+      properties:
+        group_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Title
+          description: Title of the group, where a group consists of all the filters that share an ID.
+        group_expanded:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Group Expanded
+          description: Whether the filter group should be expanded by default or not.
+        type:
+          const: checkbox-hierarchical
+          title: Type
+        values:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+          title: Values
+          description: Selectable hierarchical values
+        counts:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Counts
+          description: Counts for values
+        names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Names
+          description: Names for hierarchical values, this is what you should display in the UI (not values)
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - values
+      title: HierarchicalValuesFilterMeta
+    SortMeta:
+      properties:
+        title:
+          type: string
+          title: Title
+        values:
+          items:
+            $ref: '#/components/schemas/SortingOrder'
+          type: array
+          title: Values
+          description: Selectable values
+        names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Names
+          description: Names for orders (this is what you should display in the UI, not values)
+      additionalProperties: false
+      type: object
+      required:
+      - title
+      title: SortMeta
+    SortingOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: SortingOrder
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

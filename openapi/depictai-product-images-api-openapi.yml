@@ -1,0 +1,212 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Product Images API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Product Images
+paths:
+  /api/v1/merchants/{merchant_id}/products/{main_product_id}/images:
+    put:
+      tags:
+      - Product Images
+      summary: Update Product Media Urls Endpoint
+      operationId: update_product_media_urls_endpoint_api_v1_merchants__merchant_id__products__main_product_id__images_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductMediaRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProductMediaResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchants/{merchant_id}/collections/{collection_id}/products/{main_product_id}/images:
+    put:
+      tags:
+      - Product Images
+      summary: Update Collection Product Images Endpoint
+      operationId: update_collection_product_images_endpoint_api_v1_merchants__merchant_id__collections__collection_id__products__main_product_id__images_put
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Collection Id
+      - name: main_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Main Product Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCollectionProductImagesRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCollectionProductImagesResult'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UpdateCollectionProductImagesResult:
+      properties:
+        main_product_id:
+          type: string
+          title: Main Product Id
+        collection_id:
+          type: string
+          title: Collection Id
+        product_ids:
+          items:
+            type: string
+          type: array
+          title: Product Ids
+      type: object
+      required:
+      - main_product_id
+      - collection_id
+      - product_ids
+      title: UpdateCollectionProductImagesResult
+    UpdateCollectionProductImagesRequest:
+      properties:
+        main_image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Main Image Url
+        hover_image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hover Image Url
+        video:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Video
+      type: object
+      title: UpdateCollectionProductImagesRequest
+    UpdateProductMediaRequest:
+      properties:
+        main_image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Main Image Url
+        hover_image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hover Image Url
+      type: object
+      title: UpdateProductMediaRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UpdateProductMediaResult:
+      properties:
+        main_product_id:
+          type: string
+          title: Main Product Id
+        product_ids:
+          items:
+            type: string
+          type: array
+          title: Product Ids
+      type: object
+      required:
+      - main_product_id
+      - product_ids
+      title: UpdateProductMediaResult
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

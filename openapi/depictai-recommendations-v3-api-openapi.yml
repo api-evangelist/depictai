@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Recommendations (v3) API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Recommendations (v3)
+paths:
+  /v3/recommend/products:
+    post:
+      tags:
+      - Recommendations (v3)
+      summary: Recommendations
+      operationId: Recommendations_v3_recommend_products_post
+      security:
+      - APIKeyQuery: []
+      - APIKeyHeader: []
+      - APIKeyCookie: []
+      parameters:
+      - name: referer
+        in: header
+        required: false
+        schema:
+          type: string
+          title: Referer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendRequestV3'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponseV3'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    RecommendResponseV3:
+      properties:
+        displays:
+          items:
+            $ref: '#/components/schemas/APIDisplay'
+          type: array
+          title: Displays
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      additionalProperties: false
+      type: object
+      required:
+      - displays
+      title: RecommendResponseV3
+    RecommendRequestV3:
+      properties:
+        merchant:
+          type: string
+          title: Merchant
+          description: Identifier associated with the API integration
+        market:
+          type: string
+          title: Market
+          description: Market identifier
+        locale:
+          type: string
+          title: Locale
+          description: Locale identifier
+        type:
+          type: string
+          title: Type
+          description: Type of the recommendation, e.g. `cross_sell`
+        product_ids:
+          items:
+            type: string
+          type: array
+          title: Product Ids
+          description: Zero, one, or multiple product identifiers (depending on the id)
+          default: []
+        limit:
+          anyOf:
+          - type: integer
+            maximum: 128
+            minimum: 1
+          - type: 'null'
+          title: Limit
+          description: Maximum number of recommendations returned.
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+          description: Session identifier
+      additionalProperties: false
+      type: object
+      required:
+      - merchant
+      - market
+      - locale
+      - type
+      title: RecommendRequestV3
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    APIDisplay:
+      properties:
+        variant_index:
+          type: integer
+          title: Variant Index
+        variant_displays:
+          items:
+            type: object
+          type: array
+          title: Variant Displays
+        variant_skus:
+          items:
+            type: string
+          type: array
+          title: Variant Skus
+        variant_product_ids:
+          items:
+            type: string
+          type: array
+          title: Variant Product Ids
+      type: object
+      required:
+      - variant_index
+      - variant_displays
+      - variant_skus
+      - variant_product_ids
+      title: APIDisplay
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

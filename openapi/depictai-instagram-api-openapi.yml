@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Instagram API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Instagram
+paths:
+  /instagram/{merchant_id}/account/connect:
+    post:
+      summary: Save Instagram Exchanged Code
+      operationId: save_instagram_exchanged_code_instagram__merchant_id__account_connect_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: encrypted_user_token
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Base64 string containing public key encrypted short lived user token obtained from facebook auth
+          title: Encrypted User Token
+      - name: redirect_uri
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Redirect uri used in oauth flow
+          title: Redirect Uri
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Instagram
+  /instagram/{merchant_id}/account/disconnect:
+    post:
+      summary: Instagram Account Disconnect
+      operationId: instagram_account_disconnect_instagram__merchant_id__account_disconnect_post
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Instagram
+  /instagram/{merchant_id}/account:
+    get:
+      summary: Get Account
+      operationId: get_account_instagram__merchant_id__account_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/InstagramAccount'
+                - type: 'null'
+                title: Response Get Account Instagram  Merchant Id  Account Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Instagram
+  /instagram/{merchant_id}/media:
+    get:
+      summary: Get Instagram Media
+      operationId: get_instagram_media_instagram__merchant_id__media_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: next_page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Media'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Instagram
+components:
+  schemas:
+    FacebookPostMediaType:
+      type: string
+      enum:
+      - IMAGE
+      - VIDEO
+      - CAROUSEL_ALBUM
+      title: FacebookPostMediaType
+    MediaItem:
+      properties:
+        media_url:
+          type: string
+          title: Media Url
+        media_type:
+          $ref: '#/components/schemas/FacebookPostMediaType'
+        id:
+          type: string
+          title: Id
+        caption:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caption
+        permalink:
+          type: string
+          title: Permalink
+        like_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Like Count
+        username:
+          type: string
+          title: Username
+        comments_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Comments Count
+        children:
+          anyOf:
+          - $ref: '#/components/schemas/ChildrenData'
+          - type: 'null'
+      type: object
+      required:
+      - media_url
+      - media_type
+      - id
+      - permalink
+      - username
+      title: MediaItem
+    ChildMediaItem:
+      properties:
+        media_url:
+          type: string
+          title: Media Url
+        media_type:
+          $ref: '#/components/schemas/FacebookMediaType'
+        thumbnail_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Thumbnail Url
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - media_url
+      - media_type
+      - id
+      title: ChildMediaItem
+    FacebookMediaType:
+      type: string
+      enum:
+      - IMAGE
+      - VIDEO
+      title: FacebookMediaType
+    ChildrenData:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ChildMediaItem'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ChildrenData
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    InstagramAccount:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        profile_picture_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Profile Picture Url
+      type: object
+      required:
+      - id
+      - name
+      title: InstagramAccount
+    Cursors:
+      properties:
+        before:
+          type: string
+          title: Before
+        after:
+          type: string
+          title: After
+      type: object
+      required:
+      - before
+      - after
+      title: Cursors
+    Media:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MediaItem'
+          type: array
+          title: Data
+        paging:
+          anyOf:
+          - $ref: '#/components/schemas/Paging'
+          - type: 'null'
+      type: object
+      required:
+      - data
+      title: Media
+    Paging:
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+      type: object
+      required:
+      - cursors
+      title: Paging
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token

@@ -1,0 +1,412 @@
+openapi: 3.1.0
+info:
+  title: Depict Lite Ab Test Analytics API
+  version: 1.0.0
+  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+servers:
+- url: /api/lite
+tags:
+- name: Analytics
+paths:
+  /api/v1/merchants/{merchant_id}/analytics/overview:
+    get:
+      tags:
+      - Analytics
+      summary: Get Analytics Overview Endpoint
+      description: 'Merchant-wide analytics for the hub page: catalog-wide totals (same
+
+        aggregate as per-collection metrics), top / declining collections with true
+
+        page-level PLP traffic, and a pinned-vs-auto health rollup across
+
+        collections. Last 30 days vs the previous 30.'
+      operationId: get_analytics_overview_endpoint_api_v1_merchants__merchant_id__analytics_overview_get
+      security:
+      - Auth0: []
+      parameters:
+      - name: merchant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Merchant Id
+      - name: locale
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantAnalyticsOverview'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CollectionAutoLift:
+      properties:
+        score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Score
+        pinned_ctr:
+          type: number
+          title: Pinned Ctr
+          default: 0
+        auto_ctr:
+          type: number
+          title: Auto Ctr
+          default: 0
+        delta_pts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Delta Pts
+      type: object
+      title: CollectionAutoLift
+      description: 'Derived "Auto Lift" score: how the click-through rate of auto-sorted
+
+        (non-pinned) products compares to the merchant''s manually pinned products.
+
+
+        ``score`` is normalised to 0-100 where ``50`` means auto and pinned perform
+
+        equally, ``100`` means auto CTR is >= 2x pinned CTR, and ``0`` means auto
+
+        products get no clicks. Computed as ``clamp(50 * auto_ctr / pinned_ctr, 0,
+
+        100)``. It is ``None`` when the collection has no pinned products or no
+
+        auto (non-pinned) products, so there is nothing to compare. ``pinned_ctr``
+
+        and ``auto_ctr`` are percentages (0-100); ``delta_pts`` is
+
+        ``auto_ctr - pinned_ctr`` in percentage points.'
+    CollectionMetricsSummary:
+      properties:
+        period:
+          $ref: '#/components/schemas/CollectionMetricsPeriod'
+        total_revenue:
+          $ref: '#/components/schemas/CollectionRevenueMetric'
+        total_views:
+          $ref: '#/components/schemas/CollectionMetricValue'
+        total_clicks:
+          $ref: '#/components/schemas/CollectionMetricValue'
+        avg_ctr:
+          $ref: '#/components/schemas/CollectionRateMetric'
+        units_sold:
+          $ref: '#/components/schemas/CollectionMetricValue'
+        avg_str:
+          $ref: '#/components/schemas/CollectionRateMetric'
+        add_to_carts:
+          allOf:
+          - $ref: '#/components/schemas/CollectionMetricValue'
+          default:
+            value: 0
+        dead_stock:
+          allOf:
+          - $ref: '#/components/schemas/CollectionMetricValue'
+          default:
+            value: 0
+        avg_stock_coverage_days:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Avg Stock Coverage Days
+        rpm:
+          allOf:
+          - $ref: '#/components/schemas/CollectionRevenueMetric'
+          default:
+            value: 0
+            currency: ''
+        velocity:
+          allOf:
+          - $ref: '#/components/schemas/CollectionMetricValue'
+          default:
+            value: 0
+        auto_lift:
+          allOf:
+          - $ref: '#/components/schemas/CollectionAutoLift'
+          default:
+            pinned_ctr: 0
+            auto_ctr: 0
+        top_product:
+          anyOf:
+          - $ref: '#/components/schemas/CollectionTopProduct'
+          - type: 'null'
+      type: object
+      required:
+      - period
+      - total_revenue
+      - total_views
+      - total_clicks
+      - avg_ctr
+      - units_sold
+      - avg_str
+      title: CollectionMetricsSummary
+    CollectionTopProduct:
+      properties:
+        main_product_id:
+          type: string
+          title: Main Product Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+      type: object
+      required:
+      - main_product_id
+      title: CollectionTopProduct
+      description: 'The highest-revenue product in a collection, for the overview table''s
+
+        "Top Product" column. ``image_url`` is the product''s first image (or None).'
+    CollectionRateMetric:
+      properties:
+        value:
+          type: number
+          title: Value
+          default: 0
+        delta_pts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Delta Pts
+      type: object
+      title: CollectionRateMetric
+    CollectionRevenueMetric:
+      properties:
+        value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Value
+          default: 0
+        currency:
+          type: string
+          title: Currency
+          default: ''
+        delta_pct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Delta Pct
+      type: object
+      title: CollectionRevenueMetric
+    CollectionMetricValue:
+      properties:
+        value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Value
+          default: 0
+        delta_pct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Delta Pct
+      type: object
+      title: CollectionMetricValue
+    MerchantAnalyticsOverview:
+      properties:
+        totals:
+          $ref: '#/components/schemas/CollectionMetricsSummary'
+        top_collections:
+          items:
+            $ref: '#/components/schemas/OverviewCollection'
+          type: array
+          title: Top Collections
+          default: []
+        declining_collections:
+          items:
+            $ref: '#/components/schemas/OverviewCollection'
+          type: array
+          title: Declining Collections
+          default: []
+        pinned_vs_auto:
+          allOf:
+          - $ref: '#/components/schemas/PinnedVsAutoRollup'
+          default:
+            healthy: 0
+            warning: 0
+            critical: 0
+            no_pins: 0
+        collections_considered:
+          type: integer
+          title: Collections Considered
+          default: 0
+      type: object
+      required:
+      - totals
+      title: MerchantAnalyticsOverview
+      description: 'Merchant-wide analytics for the hub page.
+
+
+        ``totals`` reuses the collection summary aggregate over the entire catalog
+
+        (every product with metrics, pinned split empty — ``auto_lift`` is
+
+        meaningless there and should be ignored). ``collections_considered`` is how
+
+        many collections the rollups cover (capped at ``_MAX_COLLECTIONS``).'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OverviewCollection:
+      properties:
+        collection_id:
+          type: string
+          format: uuid
+          title: Collection Id
+        title:
+          type: string
+          title: Title
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+        revenue_delta_pct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue Delta Pct
+        views:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Views
+        views_delta_pct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Views Delta Pct
+        avg_ctr:
+          type: number
+          title: Avg Ctr
+          default: 0
+        unique_views:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unique Views
+        distinct_devices:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Distinct Devices
+      type: object
+      required:
+      - collection_id
+      - title
+      title: OverviewCollection
+      description: 'One collection row for the hub''s top/declining lists. ``unique_views``
+
+        and ``distinct_devices`` are true page-level numbers from the PLP summary
+
+        pipe (not member-product sums); ``None`` when the pipe had no row.'
+    CollectionMetricsPeriod:
+      properties:
+        start:
+          type: string
+          format: date
+          title: Start
+        end:
+          type: string
+          format: date
+          title: End
+      type: object
+      required:
+      - start
+      - end
+      title: CollectionMetricsPeriod
+    PinnedVsAutoRollup:
+      properties:
+        healthy:
+          type: integer
+          title: Healthy
+          default: 0
+        warning:
+          type: integer
+          title: Warning
+          default: 0
+        critical:
+          type: integer
+          title: Critical
+          default: 0
+        no_pins:
+          type: integer
+          title: No Pins
+          default: 0
+      type: object
+      title: PinnedVsAutoRollup
+      description: 'How many collections fall into each pinned-vs-auto health bucket (same
+
+        thresholds as the collections table''s status column). ``no_pins`` counts
+
+        collections with nothing pinned (or no data), where there is nothing to
+
+        compare.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            openid: OpenID Connect
+            profile: User profile
+            email: User email
+          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+          tokenUrl: https://depict.eu.auth0.com/oauth/token
+      x-tokenName: id_token
