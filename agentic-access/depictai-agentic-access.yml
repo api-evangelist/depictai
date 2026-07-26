@@ -1,0 +1,1953 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/depictai-lite-openapi.json, openapi/depictai-portal-openapi.json, openapi/depictai-storefront-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 146
+  by_action_class:
+    acting: 79
+    connected: 67
+  by_consequence:
+    write: 78
+    read: 67
+    physical: 1
+  human_in_the_loop_required: 0
+operations:
+- path: /vitals
+  method: post
+  operationId: vitals_vitals_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /multi-store/stores/{merchant_id}
+  method: get
+  operationId: get_stores_multi_store_stores__merchant_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /multi-store/connect-store/{merchant_id}
+  method: post
+  operationId: connect_multi_store_multi_store_connect_store__merchant_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /multi-store/disconnect/{merchant_id}
+  method: post
+  operationId: disconnect_store_from_group_multi_store_disconnect__merchant_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /multi-store/collection-mappings/{group_id}
+  method: get
+  operationId: get_collection_mappings_multi_store_collection_mappings__group_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /multi-store/collection-mappings/{group_id}
+  method: post
+  operationId: update_collection_mappings_multi_store_collection_mappings__group_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /multi-store/replication-data/{collection_id}
+  method: get
+  operationId: get_collection_replication_data_multi_store_replication_data__collection_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /multi-store/collection-replication
+  method: post
+  operationId: update_collection_replication_multi_store_collection_replication_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /multi-store/create-collection-mappings/{merchant_id}
+  method: post
+  operationId: create_collection_mappings_multi_store_create_collection_mappings__merchant_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /merchant-create/
+  method: post
+  operationId: create_merchant_merchant_create__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /merchants/
+  method: get
+  operationId: read_authorized_merchants_merchants__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /merchants/{merchant_id}
+  method: get
+  operationId: get_merchant_merchants__merchant_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /merchants/{merchant_id}/column-settings
+  method: put
+  operationId: update_column_settings_merchants__merchant_id__column_settings_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /merchants/{merchant_id}/variant_group_by_name
+  method: put
+  operationId: update_variant_group_by_name_merchants__merchant_id__variant_group_by_name_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /merchants/{merchant_id}/ingestion-status
+  method: get
+  operationId: get_shopify_ingestion_status_merchants__merchant_id__ingestion_status_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /merchants/{merchant_id}/storefront-password-protected
+  method: get
+  operationId: get_storefront_password_protected_merchants__merchant_id__storefront_password_protected_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections
+  method: get
+  operationId: list_collections_collections_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/award-status
+  method: get
+  operationId: get_award_status_collections_award_status_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/award-status
+  method: put
+  operationId: update_award_status_collections_award_status_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/nbr-of-active-collections
+  method: get
+  operationId: get_nbr_of_active_collections_collections_nbr_of_active_collections_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/data-sorted-by
+  method: post
+  operationId: get_data_sorted_collections_collections_data_sorted_by_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/activation
+  method: put
+  operationId: set_activation_status_collections_activation_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}
+  method: get
+  operationId: get_collection_collections__collection_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/{collection_id}
+  method: put
+  operationId: update_collection_collections__collection_id__put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/products
+  method: post
+  operationId: get_collection_products_collections__collection_id__products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/shopify/shopify-ordering
+  method: post
+  operationId: get_db_shopify_ordering_collections__collection_id__shopify_shopify_ordering_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/initial-products
+  method: get
+  operationId: get_initial_collection_products_collections__collection_id__initial_products_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/{collection_id}/product-clicks
+  method: get
+  operationId: get_collection_product_clicks_collections__collection_id__product_clicks_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/{collection_id}/product-orders
+  method: get
+  operationId: get_collection_product_orders_collections__collection_id__product_orders_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/{collection_id}/revert
+  method: post
+  operationId: revert_collection_collections__collection_id__revert_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/preview-url
+  method: post
+  operationId: get_collection_preview_url_collections__collection_id__preview_url_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/versions
+  method: get
+  operationId: get_collection_versions_collections__collection_id__versions_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /collections/{collection_id}/update_version
+  method: put
+  operationId: update_collection_version_collections__collection_id__update_version_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/delete_version/{version}
+  method: delete
+  operationId: delete_collection_version_collections__collection_id__delete_version__version__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /collections/{collection_id}/publish_version/{version}
+  method: put
+  operationId: publish_collection_version_collections__collection_id__publish_version__version__put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boost-bury
+  method: get
+  operationId: get_rules_boost_bury_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boost-bury/tags
+  method: get
+  operationId: get_available_tags_boost_bury_tags_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boost-bury/rules
+  method: put
+  operationId: update_rules_boost_bury_rules_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /dashboard/stats
+  method: post
+  operationId: get_stats_dashboard_stats_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /dashboard/changelog
+  method: get
+  operationId: get_changelog_dashboard_changelog_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /settings/subscription/basic
+  method: post
+  operationId: create_subscription_basic_settings_subscription_basic_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/subscription/essentials
+  method: post
+  operationId: create_subscription_essentials_settings_subscription_essentials_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/subscription/pro
+  method: post
+  operationId: create_subscription_pro_settings_subscription_pro_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/subscription
+  method: delete
+  operationId: cancel_subscription_settings_subscription_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/subscription/status
+  method: get
+  operationId: subscription_status_settings_subscription_status_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /settings/track/{merchant_id}/install
+  method: post
+  operationId: track_install_settings_track__merchant_id__install_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/{merchant_id}/wizard-complete
+  method: post
+  operationId: mark_wizard_as_complete_settings__merchant_id__wizard_complete_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/track/insight-widget-seen
+  method: post
+  operationId: insight_widget_seen_settings_track_insight_widget_seen_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/dynamic-status
+  method: get
+  operationId: get_dynamic_status_settings_dynamic_status_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /settings/dynamic-status
+  method: put
+  operationId: update_dynamic_status_settings_dynamic_status_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /settings/sync-data
+  method: post
+  operationId: trigger_sync_settings_sync_data_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /instagram/{merchant_id}/account/connect
+  method: post
+  operationId: save_instagram_exchanged_code_instagram__merchant_id__account_connect_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /instagram/{merchant_id}/account/disconnect
+  method: post
+  operationId: instagram_account_disconnect_instagram__merchant_id__account_disconnect_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /instagram/{merchant_id}/account
+  method: get
+  operationId: get_account_instagram__merchant_id__account_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /instagram/{merchant_id}/media
+  method: get
+  operationId: get_instagram_media_instagram__merchant_id__media_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /shopify/app-url/{merchant_id}
+  method: get
+  operationId: get_app_url_shopify_app_url__merchant_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /shopify/storefront_api_credentials
+  method: get
+  operationId: get_storefront_api_credentials_shopify_storefront_api_credentials_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /shopify/proxy/{merchant_id}/admin-api/graphql.json
+  method: post
+  operationId: shopify_admin_api_shopify_proxy__merchant_id__admin_api_graphql_json_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /shopify-collection-template/{merchant_id}/{collection_id}/templates
+  method: get
+  operationId: get_collection_templates_shopify_collection_template__merchant_id___collection_id__templates_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /shopify-collection-template/active/{collection_id}
+  method: get
+  operationId: get_active_collection_template_shopify_collection_template_active__collection_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /shopify-collection-template/{collection_id}/activate
+  method: post
+  operationId: activate_collection_template_shopify_collection_template__collection_id__activate_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /shopify-collection-template/{merchant_id}/columns-settings
+  method: put
+  operationId: update_columns_settings_shopify_collection_template__merchant_id__columns_settings_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /onboarding/themes
+  method: get
+  operationId: get_themes_onboarding_themes_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /onboarding/{merchant_id}/themes/main
+  method: get
+  operationId: get_main_theme_onboarding__merchant_id__themes_main_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /onboarding/{merchant_id}/onboardings
+  method: get
+  operationId: get_onboarding_bundles_onboarding__merchant_id__onboardings_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /media/{merchant_id}/upload
+  method: post
+  operationId: upload_media__merchant_id__upload_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /media/{merchant_id}/upload_media_from_url
+  method: post
+  operationId: upload_media_from_url_media__merchant_id__upload_media_from_url_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /brand-features/{collection_id}
+  method: put
+  operationId: update_brand_features__collection_id__put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /brand-features/content-block-clicks/{collection_id}
+  method: get
+  operationId: get_content_block_clicks_brand_features_content_block_clicks__collection_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /brand-features/metaobject/{metaobject_id}
+  method: put
+  operationId: update_metaobject_brand_features_metaobject__metaobject_id__put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /published-collections/
+  method: get
+  operationId: get_published_collections_published_collections__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /published-collections/{collection_id}
+  method: post
+  operationId: create_published_collection_published_collections__collection_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /published-collections/like
+  method: put
+  operationId: update_likes_published_collection_published_collections_like_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /arm
+  method: post
+  operationId: track_arm_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /arm/launch
+  method: post
+  operationId: get_user_info_arm_launch_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /translations/{merchant_id}/translate
+  method: get
+  operationId: translate_query_translations__merchant_id__translate_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ab-test/{collection_id}/metrics
+  method: get
+  operationId: get_metrics_ab_test__collection_id__metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ab-test/generate_conclusion
+  method: put
+  operationId: generate_conclusion_ab_test_generate_conclusion_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /product-funnel-metrics/metrics
+  method: get
+  operationId: get_product_funnel_metrics_product_funnel_metrics_metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /users/me
+  method: get
+  operationId: read_users_me_users_me_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants
+  method: get
+  operationId: list_merchants_endpoint_api_v1_merchants_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}
+  method: get
+  operationId: get_merchant_endpoint_api_v1_merchants__merchant_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}/images
+  method: put
+  operationId: update_product_media_urls_endpoint_api_v1_merchants__merchant_id__products__main_product_id__images_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/products/{main_product_id}/images
+  method: put
+  operationId: update_collection_product_images_endpoint_api_v1_merchants__merchant_id__collections__collection_id__products__main_product_id__images_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/basic
+  method: get
+  operationId: get_product_basic_metrics_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_basic_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/overview/chart
+  method: get
+  operationId: get_product_overview_chart_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_overview_chart_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/weekly
+  method: get
+  operationId: get_product_weekly_stats_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_weekly_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/toplist
+  method: get
+  operationId: get_product_toplist_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_toplist_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products
+  method: post
+  operationId: list_products_post_endpoint_api_v1_merchants__merchant_id__products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/products/metrics
+  method: post
+  operationId: get_products_metrics_endpoint_api_v1_merchants__merchant_id__products_metrics_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/products/dead-stock
+  method: get
+  operationId: get_dead_stock_products_endpoint_api_v1_merchants__merchant_id__products_dead_stock_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/filters
+  method: post
+  operationId: list_product_filters_endpoint_api_v1_merchants__merchant_id__products_filters_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/products/visibility
+  method: get
+  operationId: get_product_visibility_endpoint_api_v1_merchants__merchant_id__products_visibility_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/products/visibility
+  method: patch
+  operationId: patch_product_visibility_endpoint_api_v1_merchants__merchant_id__products_visibility_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/products/{main_product_id}
+  method: get
+  operationId: get_product_endpoint_api_v1_merchants__merchant_id__products__main_product_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/analytics/overview
+  method: get
+  operationId: get_analytics_overview_endpoint_api_v1_merchants__merchant_id__analytics_overview_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections
+  method: get
+  operationId: list_collections_endpoint_api_v1_merchants__merchant_id__collections_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/favourites
+  method: get
+  operationId: list_collection_favourites_endpoint_api_v1_merchants__merchant_id__collections_favourites_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/favourite
+  method: put
+  operationId: add_collection_favourite_endpoint_api_v1_merchants__merchant_id__collections__collection_id__favourite_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/favourite
+  method: delete
+  operationId: remove_collection_favourite_endpoint_api_v1_merchants__merchant_id__collections__collection_id__favourite_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}
+  method: get
+  operationId: get_collection_endpoint_api_v1_merchants__merchant_id__collections__collection_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}
+  method: patch
+  operationId: save_collection_endpoint_api_v1_merchants__merchant_id__collections__collection_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/curation
+  method: get
+  operationId: get_collection_curation_endpoint_api_v1_merchants__merchant_id__collections__collection_id__curation_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/metrics
+  method: get
+  operationId: get_collection_metrics_endpoint_api_v1_merchants__merchant_id__collections__collection_id__metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/analytics
+  method: get
+  operationId: get_collection_analytics_endpoint_api_v1_merchants__merchant_id__collections__collection_id__analytics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/merchants/{merchant_id}/collections/{collection_id}/products
+  method: post
+  operationId: list_collection_products_endpoint_api_v1_merchants__merchant_id__collections__collection_id__products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchants/{merchant_id}/search/metrics/queries
+  method: get
+  operationId: get_search_query_stats_endpoint_api_v1_merchants__merchant_id__search_metrics_queries_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/settings/{merchant_id}/auto-hide
+  method: get
+  operationId: get_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/settings/{merchant_id}/auto-hide
+  method: put
+  operationId: update_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/settings/{merchant_id}/auto-hide/exclude-products
+  method: put
+  operationId: update_auto_hide_exclude_products_endpoint_api_v1_settings__merchant_id__auto_hide_exclude_products_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/listings
+  method: get
+  operationId: Get_Listings_v3_listings_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/listings/external_id/{external_id}
+  method: get
+  operationId: Get_Listing_via_External_ID_v3_listings_external_id__external_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/listings/{listing_id}
+  method: get
+  operationId: Get_Listing_v3_listings__listing_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/listings/external_id/{external_id}/products
+  method: post
+  operationId: Get_Products_in_Listing__via_external_ID_v3_listings_external_id__external_id__products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/listings/{listing_id}/products
+  method: post
+  operationId: Get_Products_in_Listing_v3_listings__listing_id__products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/search/results
+  method: post
+  operationId: Get_results_v3_search_results_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/search/suggestions
+  method: get
+  operationId: Get_suggestions_v3_search_suggestions_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/search/related
+  method: post
+  operationId: Get_related_recommendations_v3_search_related_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/recommend/products
+  method: post
+  operationId: Recommendations_v3_recommend_products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/get-displays
+  method: post
+  operationId: get_displays_v3_get_displays_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/markets
+  method: get
+  operationId: get_markets_v3_markets_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/locales
+  method: get
+  operationId: get_locales_v3_locales_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/product-listing
+  method: post
+  operationId: Get_Products_v2_product_listing_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/search/results
+  method: post
+  operationId: Get_results_v2_search_results_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/search/suggestions
+  method: get
+  operationId: Get_suggestions_v2_search_suggestions_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/search/related
+  method: post
+  operationId: Get_related_recommendations_v2_search_related_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/search/content
+  method: get
+  operationId: Search_through_text_content_v2_search_content_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/recommend/products/general
+  method: post
+  operationId: Recommend_for_User_v2_recommend_products_general_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/recommend/products/product
+  method: post
+  operationId: Recommend_for_Product_and_User_v2_recommend_products_product_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/recommend/products/category
+  method: post
+  operationId: Recommend_for_Category_and_User_v2_recommend_products_category_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/recommend/products/products
+  method: post
+  operationId: Recommend_for_Products_and_User_v2_recommend_products_products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /create-events
+  method: post
+  operationId: create_events_create_events_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/track
+  method: post
+  operationId: track_v2_v2_track_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/create-events
+  method: post
+  operationId: create_events_v2_v2_create_events_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/product_ids
+  method: get
+  operationId: list_product_ids_catalog_v0_product_ids_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/category_ids
+  method: get
+  operationId: list_category_ids_catalog_v0_category_ids_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/products
+  method: get
+  operationId: get_products_catalog_v0_products_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/products
+  method: post
+  operationId: upsert_products_catalog_v0_products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/products
+  method: delete
+  operationId: delete_products_catalog_v0_products_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/categories
+  method: get
+  operationId: get_categories_catalog_v0_categories_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/categories
+  method: post
+  operationId: upsert_categories_catalog_v0_categories_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/categories
+  method: delete
+  operationId: delete_categories_catalog_v0_categories_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/product_attribute_config
+  method: get
+  operationId: get_product_attribute_config_catalog_v0_product_attribute_config_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/product_attribute_config
+  method: post
+  operationId: set_product_attribute_config_catalog_v0_product_attribute_config_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalog/v0/category_attribute_config
+  method: get
+  operationId: get_category_attribute_config_catalog_v0_category_attribute_config_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalog/v0/category_attribute_config
+  method: post
+  operationId: set_category_attribute_config_catalog_v0_category_attribute_config_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

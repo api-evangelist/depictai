@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.depict.ai/reference/search-sdk/search-react-sdk
+summary: >-
+  Depict ships prebuilt, embeddable storefront UI components (search modal,
+  product listing pages, category pages, and recommendation surfaces) as the
+  "Depict UI" library in both React and vanilla JavaScript flavours, plus Shopify
+  theme app blocks/embeds. Merchants own the frontend; the UI library renders and
+  wires the Storefront API results.
+families:
+  - name: Depict UI (React)
+    kind: react-components
+    loader: "@depict-ai/react-ui"
+    surfaces: [search modal, search page, product listing pages, category pages, recommendation grids]
+    docs: https://docs.depict.ai/reference/search-sdk/search-react-sdk
+  - name: Depict UI (JavaScript)
+    kind: js-components
+    loader: "@depict-ai/js-ui"
+    surfaces: [search modal, product listing pages, recommendation grids]
+    docs: https://docs.depict.ai/reference/search-listing-apis/search-overview
+  - name: Depict UI (base)
+    kind: ui-core
+    loader: "@depict-ai/ui"
+    surfaces: [shared UI + translations underpinning the React and JS flavours]
+  - name: Shopify theme blocks and app embeds
+    kind: shopify-blocks
+    surfaces: [Collection Page block, Recommendation block, Search Page block, Search modal embed]
+    docs: https://docs.depict.ai/shopify-guide/blocks/introduction
+  - name: Depict Performance Client (DPC)
+    kind: tracking-client
+    surfaces: [client-side behavioural tracking that feeds the recommendation and listing models]
+    docs: https://docs.depict.ai/reference/performance-client/introduction-to-depict-performance-client

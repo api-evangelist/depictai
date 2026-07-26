@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-storefront-openapi.json, openapi/depictai-portal-openapi.json,
+  openapi/depictai-lite-openapi.json
+format: fastapi-validation
+envelope:
+  media_type: application/json
+  shape: '{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }'
+note: Depict APIs are FastAPI-based; client errors surface as HTTP 422 Unprocessable
+  Entity with a detail[] validation array. No application/problem+json (RFC 9457)
+  is used.
+problems:
+- status: 400
+  count: 1
+  title: Returned when the update is not possible.
+  example_operation: openapi/depictai-lite-openapi.json#update_brand_features__collection_id__put
+- status: 404
+  count: 29
+  title: Not found
+  example_operation: openapi/depictai-portal-openapi.json#list_merchants_endpoint_api_v1_merchants_get
+- status: 422
+  count: 139
+  title: Validation Error
+  example_operation: openapi/depictai-storefront-openapi.json#Get_Listings_v3_listings_get

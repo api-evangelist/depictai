@@ -1,0 +1,51 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-storefront-openapi.json, openapi/depictai-portal-openapi.json, openapi/depictai-lite-openapi.json
+authentication:
+  storefront:
+    style: api-key
+    schemes: [X-API-KEY header, api_key query param, X-API-KEY cookie, HTTP bearer]
+    ref: authentication/depictai-authentication.yml
+  portal_and_lite:
+    style: oauth2-oidc
+    provider: Auth0 (depict.eu.auth0.com)
+    flow: authorizationCode
+    scopes: [openid, profile, email]
+    ref: scopes/depictai-scopes.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header or parameter is documented or present in any
+    OpenAPI. Storefront read/recommendation operations are naturally idempotent;
+    no client-supplied idempotency contract is offered.
+pagination:
+  storefront:
+    style: limit-based
+    params: [limit]
+  portal:
+    style: cursor
+    params: [cursor, limit]
+  lite:
+    style: offset-and-page
+    params: [offset, limit, page, page_size, next_page]
+  notes: Pagination style varies by API surface; no single provider-wide standard.
+tenancy:
+  params: [merchant, tenant, market, locale]
+  notes: >-
+    Storefront requests are scoped by merchant/tenant plus market and locale;
+    Portal/Lite operations are scoped by a merchant_id path parameter.
+request_tracing:
+  request_id_header: null
+  notes: No documented request-id/trace header convention found.
+versioning:
+  style: uri-path
+  ref: lifecycle/depictai-lifecycle.yml
+error_envelope:
+  format: fastapi-validation
+  problem_json: false
+  shape: '{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }'
+  primary_status: 422
+  ref: errors/depictai-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  notes: No rate-limit response headers documented at capture time.

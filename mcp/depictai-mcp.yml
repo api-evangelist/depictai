@@ -1,0 +1,191 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+note: No official hosted/remote Depict MCP server was found. Candidate tool list derived
+  from the public Storefront API (search, recommendations, listings) — the agent-facing
+  surface most useful as MCP tools.
+server:
+  name: depict-storefront
+  transport: http
+  url: null
+tools:
+- name: Get_Listings_v3_listings_get
+  description: Get Listings
+  method: GET
+  path: /v3/listings
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Listings_v3_listings_get
+- name: Get_Listing_via_External_ID_v3_listings_external_id__external_id__get
+  description: Get Listing Via External Id
+  method: GET
+  path: /v3/listings/external_id/{external_id}
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Listing_via_External_ID_v3_listings_external_id__external_id__get
+- name: Get_Listing_v3_listings__listing_id__get
+  description: Get Listing
+  method: GET
+  path: /v3/listings/{listing_id}
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Listing_v3_listings__listing_id__get
+- name: Get_Products_in_Listing__via_external_ID_v3_listings_external_id__external_id__products_post
+  description: Get Products In Listing, Via External Id
+  method: POST
+  path: /v3/listings/external_id/{external_id}/products
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Products_in_Listing__via_external_ID_v3_listings_external_id__external_id__products_post
+- name: Get_Products_in_Listing_v3_listings__listing_id__products_post
+  description: Get Products In Listing
+  method: POST
+  path: /v3/listings/{listing_id}/products
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Products_in_Listing_v3_listings__listing_id__products_post
+- name: Get_results_v3_search_results_post
+  description: Get Results
+  method: POST
+  path: /v3/search/results
+  source_operation: openapi/depictai-storefront-openapi.json#Get_results_v3_search_results_post
+- name: Get_suggestions_v3_search_suggestions_get
+  description: Get Suggestions
+  method: GET
+  path: /v3/search/suggestions
+  source_operation: openapi/depictai-storefront-openapi.json#Get_suggestions_v3_search_suggestions_get
+- name: Get_related_recommendations_v3_search_related_post
+  description: Get Related Recommendations
+  method: POST
+  path: /v3/search/related
+  source_operation: openapi/depictai-storefront-openapi.json#Get_related_recommendations_v3_search_related_post
+- name: Recommendations_v3_recommend_products_post
+  description: Recommendations
+  method: POST
+  path: /v3/recommend/products
+  source_operation: openapi/depictai-storefront-openapi.json#Recommendations_v3_recommend_products_post
+- name: get_displays_v3_get_displays_post
+  description: Get Displays
+  method: POST
+  path: /v3/get-displays
+  source_operation: openapi/depictai-storefront-openapi.json#get_displays_v3_get_displays_post
+- name: get_markets_v3_markets_get
+  description: Get Markets
+  method: GET
+  path: /v3/markets
+  source_operation: openapi/depictai-storefront-openapi.json#get_markets_v3_markets_get
+- name: get_locales_v3_locales_get
+  description: Get Locales
+  method: GET
+  path: /v3/locales
+  source_operation: openapi/depictai-storefront-openapi.json#get_locales_v3_locales_get
+- name: Get_Products_v2_product_listing_post
+  description: Get Products
+  method: POST
+  path: /v2/product-listing
+  source_operation: openapi/depictai-storefront-openapi.json#Get_Products_v2_product_listing_post
+- name: Get_results_v2_search_results_post
+  description: Get Results
+  method: POST
+  path: /v2/search/results
+  source_operation: openapi/depictai-storefront-openapi.json#Get_results_v2_search_results_post
+- name: Get_suggestions_v2_search_suggestions_get
+  description: Get Suggestions
+  method: GET
+  path: /v2/search/suggestions
+  source_operation: openapi/depictai-storefront-openapi.json#Get_suggestions_v2_search_suggestions_get
+- name: Get_related_recommendations_v2_search_related_post
+  description: Get Related Recommendations
+  method: POST
+  path: /v2/search/related
+  source_operation: openapi/depictai-storefront-openapi.json#Get_related_recommendations_v2_search_related_post
+- name: Search_through_text_content_v2_search_content_get
+  description: Search Through Text Content
+  method: GET
+  path: /v2/search/content
+  source_operation: openapi/depictai-storefront-openapi.json#Search_through_text_content_v2_search_content_get
+- name: Recommend_for_User_v2_recommend_products_general_post
+  description: Recommend For User
+  method: POST
+  path: /v2/recommend/products/general
+  source_operation: openapi/depictai-storefront-openapi.json#Recommend_for_User_v2_recommend_products_general_post
+- name: Recommend_for_Product_and_User_v2_recommend_products_product_post
+  description: Recommend For Product And User
+  method: POST
+  path: /v2/recommend/products/product
+  source_operation: openapi/depictai-storefront-openapi.json#Recommend_for_Product_and_User_v2_recommend_products_product_post
+- name: Recommend_for_Category_and_User_v2_recommend_products_category_post
+  description: Recommend For Category And User
+  method: POST
+  path: /v2/recommend/products/category
+  source_operation: openapi/depictai-storefront-openapi.json#Recommend_for_Category_and_User_v2_recommend_products_category_post
+- name: Recommend_for_Products_and_User_v2_recommend_products_products_post
+  description: Recommend For Products And User
+  method: POST
+  path: /v2/recommend/products/products
+  source_operation: openapi/depictai-storefront-openapi.json#Recommend_for_Products_and_User_v2_recommend_products_products_post
+- name: create_events_create_events_post
+  description: Create Events
+  method: POST
+  path: /create-events
+  source_operation: openapi/depictai-storefront-openapi.json#create_events_create_events_post
+- name: track_v2_v2_track_post
+  description: Track V2
+  method: POST
+  path: /v2/track
+  source_operation: openapi/depictai-storefront-openapi.json#track_v2_v2_track_post
+- name: create_events_v2_v2_create_events_post
+  description: Create Events V2
+  method: POST
+  path: /v2/create-events
+  source_operation: openapi/depictai-storefront-openapi.json#create_events_v2_v2_create_events_post
+- name: list_product_ids_catalog_v0_product_ids_get
+  description: List Product Ids
+  method: GET
+  path: /catalog/v0/product_ids
+  source_operation: openapi/depictai-storefront-openapi.json#list_product_ids_catalog_v0_product_ids_get
+- name: list_category_ids_catalog_v0_category_ids_get
+  description: List Category Ids
+  method: GET
+  path: /catalog/v0/category_ids
+  source_operation: openapi/depictai-storefront-openapi.json#list_category_ids_catalog_v0_category_ids_get
+- name: get_products_catalog_v0_products_get
+  description: Get Products
+  method: GET
+  path: /catalog/v0/products
+  source_operation: openapi/depictai-storefront-openapi.json#get_products_catalog_v0_products_get
+- name: upsert_products_catalog_v0_products_post
+  description: Upsert Products
+  method: POST
+  path: /catalog/v0/products
+  source_operation: openapi/depictai-storefront-openapi.json#upsert_products_catalog_v0_products_post
+- name: delete_products_catalog_v0_products_delete
+  description: Delete Products
+  method: DELETE
+  path: /catalog/v0/products
+  source_operation: openapi/depictai-storefront-openapi.json#delete_products_catalog_v0_products_delete
+- name: get_categories_catalog_v0_categories_get
+  description: Get Categories
+  method: GET
+  path: /catalog/v0/categories
+  source_operation: openapi/depictai-storefront-openapi.json#get_categories_catalog_v0_categories_get
+- name: upsert_categories_catalog_v0_categories_post
+  description: Upsert Categories
+  method: POST
+  path: /catalog/v0/categories
+  source_operation: openapi/depictai-storefront-openapi.json#upsert_categories_catalog_v0_categories_post
+- name: delete_categories_catalog_v0_categories_delete
+  description: Delete Categories
+  method: DELETE
+  path: /catalog/v0/categories
+  source_operation: openapi/depictai-storefront-openapi.json#delete_categories_catalog_v0_categories_delete
+- name: get_product_attribute_config_catalog_v0_product_attribute_config_get
+  description: Get Product Attribute Config
+  method: GET
+  path: /catalog/v0/product_attribute_config
+  source_operation: openapi/depictai-storefront-openapi.json#get_product_attribute_config_catalog_v0_product_attribute_config_get
+- name: set_product_attribute_config_catalog_v0_product_attribute_config_post
+  description: Set Product Attribute Config
+  method: POST
+  path: /catalog/v0/product_attribute_config
+  source_operation: openapi/depictai-storefront-openapi.json#set_product_attribute_config_catalog_v0_product_attribute_config_post
+- name: get_category_attribute_config_catalog_v0_category_attribute_config_get
+  description: Get Category Attribute Config
+  method: GET
+  path: /catalog/v0/category_attribute_config
+  source_operation: openapi/depictai-storefront-openapi.json#get_category_attribute_config_catalog_v0_category_attribute_config_get
+- name: set_category_attribute_config_catalog_v0_category_attribute_config_post
+  description: Set Category Attribute Config
+  method: POST
+  path: /catalog/v0/category_attribute_config
+  source_operation: openapi/depictai-storefront-openapi.json#set_category_attribute_config_catalog_v0_category_attribute_config_post

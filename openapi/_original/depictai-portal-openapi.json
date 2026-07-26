@@ -1,0 +1,7332 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Depict Portal API",
+    "version": "1.0.0",
+    "description": "REST API behind the Depict merchant portal: merchants, products, collections, curation, metrics, analytics and search insights. All endpoints require an Auth0-issued bearer token."
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/api/v1/merchants": {
+      "get": {
+        "tags": [
+          "Merchants"
+        ],
+        "summary": "List Merchants Endpoint",
+        "operationId": "list_merchants_endpoint_api_v1_merchants_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "lite_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Lite Only"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListMerchantsResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}": {
+      "get": {
+        "tags": [
+          "Merchants"
+        ],
+        "summary": "Get Merchant Endpoint",
+        "operationId": "get_merchant_endpoint_api_v1_merchants__merchant_id__get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMerchantResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}/images": {
+      "put": {
+        "tags": [
+          "Product Images"
+        ],
+        "summary": "Update Product Media Urls Endpoint",
+        "operationId": "update_product_media_urls_endpoint_api_v1_merchants__merchant_id__products__main_product_id__images_put",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductMediaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateProductMediaResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/products/{main_product_id}/images": {
+      "put": {
+        "tags": [
+          "Product Images"
+        ],
+        "summary": "Update Collection Product Images Endpoint",
+        "operationId": "update_collection_product_images_endpoint_api_v1_merchants__merchant_id__collections__collection_id__products__main_product_id__images_put",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionProductImagesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCollectionProductImagesResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/basic": {
+      "get": {
+        "tags": [
+          "Product Metrics"
+        ],
+        "summary": "Get Product Basic Metrics Endpoint",
+        "operationId": "get_product_basic_metrics_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_basic_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "from_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From Date"
+            }
+          },
+          {
+            "name": "to_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "To Date"
+            }
+          },
+          {
+            "name": "market_group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductBasicMetricsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/overview/chart": {
+      "get": {
+        "tags": [
+          "Product Metrics"
+        ],
+        "summary": "Get Product Overview Chart Endpoint",
+        "operationId": "get_product_overview_chart_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_overview_chart_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "market_group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductOverviewChartResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/weekly": {
+      "get": {
+        "tags": [
+          "Product Metrics"
+        ],
+        "summary": "Get Product Weekly Stats Endpoint",
+        "operationId": "get_product_weekly_stats_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_weekly_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "market_group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductWeeklyStatsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}/metrics/toplist": {
+      "get": {
+        "tags": [
+          "Product Metrics"
+        ],
+        "summary": "Get Product Toplist Endpoint",
+        "operationId": "get_product_toplist_endpoint_api_v1_merchants__merchant_id__products__main_product_id__metrics_toplist_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          },
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "market_group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductToplistResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List Products Post Endpoint",
+        "operationId": "list_products_post_endpoint_api_v1_merchants__merchant_id__products_post",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ListProductsRequest"
+                  }
+                ],
+                "default": {
+                  "limit": 50,
+                  "sort_by": "revenue_desc",
+                  "include_metrics": false,
+                  "shopper_facing_only": false
+                },
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicListProductsResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/metrics": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Products Metrics Endpoint",
+        "description": "Per-product metrics for an explicit set of products.\n\nLets the collection grid paint immediately (products are fetched without\nmetrics) and then overlay the numbers. The expensive whole-catalog fetch is\nshared via the cached, single-flighted ``fetch_collection_metrics``, so on a\nwarm cache this endpoint is just an in-memory slice keyed by the requested\nids. Missing ids resolve to zeroed metrics, mirroring the inline\n``include_metrics`` path.",
+        "operationId": "get_products_metrics_endpoint_api_v1_merchants__merchant_id__products_metrics_post",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ProductMetricsRequest"
+                  }
+                ],
+                "default": {
+                  "main_product_ids": []
+                },
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductMetricsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/dead-stock": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Dead Stock Products Endpoint",
+        "description": "Merchant-wide dead stock: products with stock on hand but zero sales in\nthe metrics period (the same definition as\n``CollectionMetricsSummary.dead_stock``, which counts these per collection).\nBacked by the cached whole-catalog ``fetch_collection_metrics``, so on a\nwarm cache this is an in-memory filter. Items are sorted by inventory\n(worst offenders first) and capped at ``DEAD_STOCK_MAX_ITEMS``; ``total``\nis the uncapped count. Products no longer in the catalog are dropped.",
+        "operationId": "get_dead_stock_products_endpoint_api_v1_merchants__merchant_id__products_dead_stock_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "market_group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Id"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeadStockResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/filters": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List Product Filters Endpoint",
+        "operationId": "list_product_filters_endpoint_api_v1_merchants__merchant_id__products_filters_post",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ProductFiltersRequest"
+                  }
+                ],
+                "default": {
+                  "shopper_facing_only": false
+                },
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFiltersResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/visibility": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product Visibility Endpoint",
+        "operationId": "get_product_visibility_endpoint_api_v1_merchants__merchant_id__products_visibility_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "main_product_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 100,
+              "title": "Main Product Ids"
+            }
+          },
+          {
+            "name": "market_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Ids"
+            }
+          },
+          {
+            "name": "market_group_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Ids"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductVisibilityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Patch Product Visibility Endpoint",
+        "operationId": "patch_product_visibility_endpoint_api_v1_merchants__merchant_id__products_visibility_patch",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductVisibilityPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductVisibilityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/products/{main_product_id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product Endpoint",
+        "operationId": "get_product_endpoint_api_v1_merchants__merchant_id__products__main_product_id__get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "main_product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Main Product Id"
+            }
+          },
+          {
+            "name": "locale_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProductResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/analytics/overview": {
+      "get": {
+        "tags": [
+          "Analytics"
+        ],
+        "summary": "Get Analytics Overview Endpoint",
+        "description": "Merchant-wide analytics for the hub page: catalog-wide totals (same\naggregate as per-collection metrics), top / declining collections with true\npage-level PLP traffic, and a pinned-vs-auto health rollup across\ncollections. Last 30 days vs the previous 30.",
+        "operationId": "get_analytics_overview_endpoint_api_v1_merchants__merchant_id__analytics_overview_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantAnalyticsOverview"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "List Collections Endpoint",
+        "operationId": "list_collections_endpoint_api_v1_merchants__merchant_id__collections_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CollectionType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection Type"
+            }
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Parent Id"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/CollectionListSortBy"
+                }
+              ],
+              "default": "updated_at_desc",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "include_metrics",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Metrics"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionListResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/favourites": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "List Collection Favourites Endpoint",
+        "operationId": "list_collection_favourites_endpoint_api_v1_merchants__merchant_id__collections_favourites_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "include_metrics",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Metrics"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionFavouritesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/favourite": {
+      "put": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Add Collection Favourite Endpoint",
+        "operationId": "add_collection_favourite_endpoint_api_v1_merchants__merchant_id__collections__collection_id__favourite_put",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Remove Collection Favourite Endpoint",
+        "operationId": "remove_collection_favourite_endpoint_api_v1_merchants__merchant_id__collections__collection_id__favourite_delete",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Get Collection Endpoint",
+        "operationId": "get_collection_endpoint_api_v1_merchants__merchant_id__collections__collection_id__get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          },
+          {
+            "name": "market_group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Save Collection Endpoint",
+        "operationId": "save_collection_endpoint_api_v1_merchants__merchant_id__collections__collection_id__patch",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionSaveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/curation": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Get Collection Curation Endpoint",
+        "operationId": "get_collection_curation_endpoint_api_v1_merchants__merchant_id__collections__collection_id__curation_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          },
+          {
+            "name": "include_auto_hidden",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Include Auto Hidden"
+            }
+          },
+          {
+            "name": "include_metrics",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Metrics"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          },
+          {
+            "name": "market_group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionCurationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/metrics": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Get Collection Metrics Endpoint",
+        "operationId": "get_collection_metrics_endpoint_api_v1_merchants__merchant_id__collections__collection_id__metrics_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          },
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Timestamp"
+            }
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Timestamp"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          },
+          {
+            "name": "market_group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionMetricsSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/analytics": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Get Collection Analytics Endpoint",
+        "operationId": "get_collection_analytics_endpoint_api_v1_merchants__merchant_id__collections__collection_id__analytics_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          },
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Timestamp"
+            }
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Timestamp"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          },
+          {
+            "name": "market_group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market Group Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionAnalyticsDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/collections/{collection_id}/products": {
+      "post": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "List Collection Products Endpoint",
+        "operationId": "list_collection_products_endpoint_api_v1_merchants__merchant_id__collections__collection_id__products_post",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "collection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Collection Id"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Locale"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CollectionProductsRequest"
+                  }
+                ],
+                "default": {
+                  "mode": "auto",
+                  "limit": 25,
+                  "include_metrics": false,
+                  "included_main_product_ids": [],
+                  "excluded_main_product_ids": []
+                },
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionProductsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchants/{merchant_id}/search/metrics/queries": {
+      "get": {
+        "tags": [
+          "Search Metrics"
+        ],
+        "summary": "Get Search Query Stats Endpoint",
+        "operationId": "get_search_query_stats_endpoint_api_v1_merchants__merchant_id__search_metrics_queries_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          },
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Timestamp"
+            }
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Timestamp"
+            }
+          },
+          {
+            "name": "max_queries_per_market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Max Queries Per Market"
+            }
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Market"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchQueryStatsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settings/{merchant_id}/auto-hide": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Get Auto Hide Settings Endpoint",
+        "operationId": "get_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_get",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAutoHideSettingsResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update Auto Hide Settings Endpoint",
+        "operationId": "update_auto_hide_settings_endpoint_api_v1_settings__merchant_id__auto_hide_put",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAutoHideSettingsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAutoHideSettingsResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settings/{merchant_id}/auto-hide/exclude-products": {
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update Auto Hide Exclude Products Endpoint",
+        "operationId": "update_auto_hide_exclude_products_endpoint_api_v1_settings__merchant_id__auto_hide_exclude_products_put",
+        "security": [
+          {
+            "Auth0": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "merchant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Merchant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExcludeProductsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExcludeProductsResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalyticsAttentionProduct": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku"
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue"
+          },
+          "units_sold": {
+            "type": "integer",
+            "title": "Units Sold",
+            "default": 0
+          },
+          "ctr": {
+            "type": "number",
+            "title": "Ctr",
+            "default": 0
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "low_ctr",
+              "no_sales",
+              "low_revenue"
+            ],
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "rank",
+          "reason"
+        ],
+        "title": "AnalyticsAttentionProduct",
+        "description": "A worst-performing product plus why it was flagged. ``no_sales`` means it\nhad stock but sold nothing; ``low_ctr`` means its CTR is in the bottom\nquartile of the collection; ``low_revenue`` is the fallback for otherwise\nweak revenue."
+      },
+      "AnalyticsInventoryBreakdown": {
+        "properties": {
+          "hidden": {
+            "type": "integer",
+            "title": "Hidden",
+            "default": 0
+          },
+          "low_stock": {
+            "type": "integer",
+            "title": "Low Stock",
+            "default": 0
+          },
+          "ok": {
+            "type": "integer",
+            "title": "Ok",
+            "default": 0
+          },
+          "at_risk": {
+            "type": "integer",
+            "title": "At Risk",
+            "default": 0
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "avg_stock_coverage_days": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Stock Coverage Days"
+          },
+          "variants_in_stock": {
+            "type": "integer",
+            "title": "Variants In Stock",
+            "default": 0
+          },
+          "variants_total": {
+            "type": "integer",
+            "title": "Variants Total",
+            "default": 0
+          },
+          "variant_availability_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variant Availability Pct"
+          }
+        },
+        "type": "object",
+        "title": "AnalyticsInventoryBreakdown",
+        "description": "Inventory health for the in-scope products.\n\n``hidden`` is the count of manually-hidden products. ``low_stock`` counts\nvisible products with ``0 < inventory <= LOW_STOCK_UNITS``; ``ok`` counts\nvisible products with ``inventory > LOW_STOCK_UNITS``. Fully out-of-stock\nvisible products (``inventory == 0``) are counted in ``total`` but not in\n``ok``/``low_stock``. ``total`` is the number of in-scope products\n(visible + hidden). ``at_risk`` is ``hidden + low_stock``.\n``avg_stock_coverage_days`` is ``total_inventory / (units_sold / period_days)``\nand ``None`` when nothing sold in the period.\n\n``variant_availability_pct`` (0-100) is in-stock variants ÷ total variants\nacross the in-scope products' size/colour variants (``variants_in_stock`` /\n``variants_total`` are the raw sums). ``None`` when the merchant has no\nvariant-level inventory data."
+      },
+      "AnalyticsPinnedVsAutoItem": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "pinned_ctr": {
+            "type": "number",
+            "title": "Pinned Ctr",
+            "default": 0
+          },
+          "auto_ctr": {
+            "type": "number",
+            "title": "Auto Ctr",
+            "default": 0
+          },
+          "delta_pts": {
+            "type": "number",
+            "title": "Delta Pts",
+            "default": 0
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "better_auto",
+              "better_pinned",
+              "no_data"
+            ],
+            "title": "Verdict"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "verdict"
+        ],
+        "title": "AnalyticsPinnedVsAutoItem",
+        "description": "Per-pinned-product comparison against the collection's auto-cohort CTR.\n\n``pinned_ctr`` is the product's own CTR; ``auto_ctr`` is the aggregate CTR of\nall non-pinned products (a documented approximation of the counterfactual\n\"if this had been auto-sorted\"). ``delta_pts`` is ``auto_ctr - pinned_ctr``.\n``verdict`` is ``better_auto`` when auto beats pinned by >0.5pts,\n``better_pinned`` when pinned beats auto by >0.5pts, else ``no_data`` (neutral\nband or the product got no views). CTRs are percentages (0-100)."
+      },
+      "AnalyticsPositionBand": {
+        "properties": {
+          "band": {
+            "type": "string",
+            "enum": [
+              "hero",
+              "mid",
+              "tail",
+              "bottom"
+            ],
+            "title": "Band"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "avg_ctr": {
+            "type": "number",
+            "title": "Avg Ctr",
+            "default": 0
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 0
+          },
+          "product_count": {
+            "type": "integer",
+            "title": "Product Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "band",
+          "label"
+        ],
+        "title": "AnalyticsPositionBand",
+        "description": "Aggregate click-through performance for a contiguous band of positions in\nthe collection's sort order (pinned first, then auto).\n\nBands are fixed by 1-based position: ``hero`` = positions 1-3, ``mid`` = 4-8,\n``tail`` = 9-12, ``bottom`` = 13+. ``avg_ctr`` is a percentage (0-100),\n``clicks / views * 100`` aggregated over the in-band products that have\nmetrics. ``clicks`` is the total clicks in the band. ``product_count`` is the\nnumber of products present in the ordered scope within the band (regardless\nof whether they have metrics). All four bands are always returned, even when\nempty."
+      },
+      "AnalyticsProductRef": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku"
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue"
+          },
+          "units_sold": {
+            "type": "integer",
+            "title": "Units Sold",
+            "default": 0
+          },
+          "ctr": {
+            "type": "number",
+            "title": "Ctr",
+            "default": 0
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "rank"
+        ],
+        "title": "AnalyticsProductRef",
+        "description": "A single product row for the analytics drawer's product lists.\n\n``ctr`` is a percentage (0-100), computed as ``clicks / views * 100`` to\nmatch the rest of the collection-metrics module. ``revenue`` is ``None`` when\nthe product's revenue is unknown (multi-currency without FX); ``sku`` is\nalways ``None`` for now because a per-main-product SKU is not available at\nthis aggregation layer (products group multiple variants). ``rank`` is\n1-based within the list it belongs to. ``position`` is the product's 1-based\nindex in the collection's sort order (pinned first, then auto); it is\n``None`` when the product is not part of that ordered scope."
+      },
+      "AnalyticsTierStr": {
+        "properties": {
+          "tier": {
+            "type": "integer",
+            "title": "Tier"
+          },
+          "str_value": {
+            "type": "number",
+            "title": "Str Value",
+            "default": 0
+          },
+          "product_count": {
+            "type": "integer",
+            "title": "Product Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "tier"
+        ],
+        "title": "AnalyticsTierStr",
+        "description": "Sell-through for one of three contiguous tiers of the sorted collection\n(tier 1 = top of sort). ``str_value`` is a percentage (0-100)."
+      },
+      "BestsellerMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bestseller"
+            ],
+            "const": "bestseller",
+            "title": "Type",
+            "default": "bestseller"
+          },
+          "meta_data": {
+            "type": "number",
+            "title": "Meta Data"
+          },
+          "n_days": {
+            "type": "integer",
+            "title": "N Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meta_data",
+          "n_days"
+        ],
+        "title": "BestsellerMetadata"
+      },
+      "ChartDataPoint": {
+        "properties": {
+          "week": {
+            "type": "string",
+            "title": "Week"
+          },
+          "views": {
+            "type": "integer",
+            "title": "Views",
+            "default": 0
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 0
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "week"
+        ],
+        "title": "ChartDataPoint"
+      },
+      "ChunkType": {
+        "type": "string",
+        "enum": [
+          "similar",
+          "complementary"
+        ],
+        "title": "ChunkType"
+      },
+      "CollectionAnalyticsDetail": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Collection Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "period": {
+            "$ref": "#/components/schemas/CollectionMetricsPeriod"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/CollectionMetricsSummary"
+          },
+          "scroll_depth": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scroll Depth"
+          },
+          "inventory": {
+            "$ref": "#/components/schemas/AnalyticsInventoryBreakdown"
+          },
+          "top_products": {
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsProductRef"
+            },
+            "type": "array",
+            "title": "Top Products",
+            "default": []
+          },
+          "needs_attention": {
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsAttentionProduct"
+            },
+            "type": "array",
+            "title": "Needs Attention",
+            "default": []
+          },
+          "pinned_vs_auto": {
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsPinnedVsAutoItem"
+            },
+            "type": "array",
+            "title": "Pinned Vs Auto",
+            "default": []
+          },
+          "sell_through_by_tier": {
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsTierStr"
+            },
+            "type": "array",
+            "title": "Sell Through By Tier",
+            "default": []
+          },
+          "position_performance": {
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsPositionBand"
+            },
+            "type": "array",
+            "title": "Position Performance",
+            "default": []
+          },
+          "total_products": {
+            "type": "integer",
+            "title": "Total Products",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id",
+          "title",
+          "period",
+          "summary",
+          "inventory"
+        ],
+        "title": "CollectionAnalyticsDetail",
+        "description": "Rich payload for the Collection Analytics drawer. ``scroll_depth`` is\nalways ``None`` for now -- there is no scroll tracking, documented as a data\ngap. ``summary`` reuses the same aggregate as the ``/metrics`` endpoint."
+      },
+      "CollectionAutoLift": {
+        "properties": {
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "pinned_ctr": {
+            "type": "number",
+            "title": "Pinned Ctr",
+            "default": 0
+          },
+          "auto_ctr": {
+            "type": "number",
+            "title": "Auto Ctr",
+            "default": 0
+          },
+          "delta_pts": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta Pts"
+          }
+        },
+        "type": "object",
+        "title": "CollectionAutoLift",
+        "description": "Derived \"Auto Lift\" score: how the click-through rate of auto-sorted\n(non-pinned) products compares to the merchant's manually pinned products.\n\n``score`` is normalised to 0-100 where ``50`` means auto and pinned perform\nequally, ``100`` means auto CTR is >= 2x pinned CTR, and ``0`` means auto\nproducts get no clicks. Computed as ``clamp(50 * auto_ctr / pinned_ctr, 0,\n100)``. It is ``None`` when the collection has no pinned products or no\nauto (non-pinned) products, so there is nothing to compare. ``pinned_ctr``\nand ``auto_ctr`` are percentages (0-100); ``delta_pts`` is\n``auto_ctr - pinned_ctr`` in percentage points."
+      },
+      "CollectionChild": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Collection Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "collection_type": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "appear_in_quicklinks": {
+            "type": "boolean",
+            "title": "Appear In Quicklinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id",
+          "title",
+          "collection_type",
+          "appear_in_quicklinks"
+        ],
+        "title": "CollectionChild"
+      },
+      "CollectionCurationOverrides": {
+        "properties": {
+          "market_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Market Groups",
+            "default": []
+          },
+          "markets": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Markets",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "CollectionCurationOverrides"
+      },
+      "CollectionCurationResponse": {
+        "properties": {
+          "pinned_products": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionProduct"
+            },
+            "type": "array",
+            "title": "Pinned Products"
+          },
+          "hidden_products": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionProduct"
+            },
+            "type": "array",
+            "title": "Hidden Products"
+          },
+          "overrides": {
+            "$ref": "#/components/schemas/CollectionCurationOverrides"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pinned_products",
+          "hidden_products",
+          "overrides"
+        ],
+        "title": "CollectionCurationResponse"
+      },
+      "CollectionDetail": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Collection Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "collection_type": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "externally_owned": {
+            "type": "boolean",
+            "title": "Externally Owned"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "localized_titles": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Localized Titles",
+            "default": {}
+          },
+          "uri": {
+            "type": "string",
+            "title": "Uri"
+          },
+          "n_main_products": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N Main Products"
+          },
+          "manual_product_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual Product Count"
+          },
+          "image_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Image Urls",
+            "default": []
+          },
+          "cover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Image Url"
+          },
+          "content_blocks": {
+            "items": {
+              "$ref": "#/components/schemas/ContentBlock"
+            },
+            "type": "array",
+            "title": "Content Blocks",
+            "default": []
+          },
+          "chunk_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChunkType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ranking_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionRankingType"
+              }
+            ],
+            "default": "top"
+          },
+          "show_in_filter": {
+            "type": "boolean",
+            "title": "Show In Filter",
+            "default": true
+          },
+          "show_in_search_suggestions": {
+            "type": "boolean",
+            "title": "Show In Search Suggestions",
+            "default": false
+          },
+          "appear_in_quicklinks": {
+            "type": "boolean",
+            "title": "Appear In Quicklinks",
+            "default": true
+          },
+          "display_breadcrumb": {
+            "type": "boolean",
+            "title": "Display Breadcrumb",
+            "default": true
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionChild"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/CollectionPermissions"
+          },
+          "market_context": {
+            "$ref": "#/components/schemas/CollectionMarketContext"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id",
+          "collection_type",
+          "externally_owned",
+          "title",
+          "uri",
+          "permissions",
+          "market_context"
+        ],
+        "title": "CollectionDetail"
+      },
+      "CollectionFavouritesResponse": {
+        "properties": {
+          "collections": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionSummary"
+            },
+            "type": "array",
+            "title": "Collections"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collections"
+        ],
+        "title": "CollectionFavouritesResponse"
+      },
+      "CollectionListResponse": {
+        "properties": {
+          "collections": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionSummary"
+            },
+            "type": "array",
+            "title": "Collections"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "collections"
+        ],
+        "title": "CollectionListResponse"
+      },
+      "CollectionListSortBy": {
+        "type": "string",
+        "enum": [
+          "updated_at_desc",
+          "updated_at_asc",
+          "title_asc",
+          "title_desc",
+          "product_count_desc",
+          "product_count_asc"
+        ],
+        "title": "CollectionListSortBy"
+      },
+      "CollectionMarketContext": {
+        "properties": {
+          "market_group_id": {
+            "type": "string",
+            "title": "Market Group Id"
+          },
+          "market_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Id"
+          },
+          "resolved_market": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolved Market"
+          }
+        },
+        "type": "object",
+        "required": [
+          "market_group_id"
+        ],
+        "title": "CollectionMarketContext"
+      },
+      "CollectionMetricValue": {
+        "properties": {
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value",
+            "default": 0
+          },
+          "delta_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta Pct"
+          }
+        },
+        "type": "object",
+        "title": "CollectionMetricValue"
+      },
+      "CollectionMetricsPeriod": {
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date",
+            "title": "Start"
+          },
+          "end": {
+            "type": "string",
+            "format": "date",
+            "title": "End"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "CollectionMetricsPeriod"
+      },
+      "CollectionMetricsSummary": {
+        "properties": {
+          "period": {
+            "$ref": "#/components/schemas/CollectionMetricsPeriod"
+          },
+          "total_revenue": {
+            "$ref": "#/components/schemas/CollectionRevenueMetric"
+          },
+          "total_views": {
+            "$ref": "#/components/schemas/CollectionMetricValue"
+          },
+          "total_clicks": {
+            "$ref": "#/components/schemas/CollectionMetricValue"
+          },
+          "avg_ctr": {
+            "$ref": "#/components/schemas/CollectionRateMetric"
+          },
+          "units_sold": {
+            "$ref": "#/components/schemas/CollectionMetricValue"
+          },
+          "avg_str": {
+            "$ref": "#/components/schemas/CollectionRateMetric"
+          },
+          "add_to_carts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionMetricValue"
+              }
+            ],
+            "default": {
+              "value": 0
+            }
+          },
+          "dead_stock": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionMetricValue"
+              }
+            ],
+            "default": {
+              "value": 0
+            }
+          },
+          "avg_stock_coverage_days": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Stock Coverage Days"
+          },
+          "rpm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionRevenueMetric"
+              }
+            ],
+            "default": {
+              "value": 0,
+              "currency": ""
+            }
+          },
+          "velocity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionMetricValue"
+              }
+            ],
+            "default": {
+              "value": 0
+            }
+          },
+          "auto_lift": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionAutoLift"
+              }
+            ],
+            "default": {
+              "pinned_ctr": 0,
+              "auto_ctr": 0
+            }
+          },
+          "top_product": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CollectionTopProduct"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "period",
+          "total_revenue",
+          "total_views",
+          "total_clicks",
+          "avg_ctr",
+          "units_sold",
+          "avg_str"
+        ],
+        "title": "CollectionMetricsSummary"
+      },
+      "CollectionPermissions": {
+        "properties": {
+          "can_edit_metadata": {
+            "type": "boolean",
+            "title": "Can Edit Metadata"
+          },
+          "can_edit_visibility": {
+            "type": "boolean",
+            "title": "Can Edit Visibility"
+          },
+          "can_update_products": {
+            "type": "boolean",
+            "title": "Can Update Products"
+          },
+          "can_pin_products": {
+            "type": "boolean",
+            "title": "Can Pin Products"
+          },
+          "can_hide_products": {
+            "type": "boolean",
+            "title": "Can Hide Products"
+          },
+          "can_edit_images": {
+            "type": "boolean",
+            "title": "Can Edit Images"
+          },
+          "can_edit_content": {
+            "type": "boolean",
+            "title": "Can Edit Content"
+          },
+          "can_delete": {
+            "type": "boolean",
+            "title": "Can Delete"
+          }
+        },
+        "type": "object",
+        "required": [
+          "can_edit_metadata",
+          "can_edit_visibility",
+          "can_update_products",
+          "can_pin_products",
+          "can_hide_products",
+          "can_edit_images",
+          "can_edit_content",
+          "can_delete"
+        ],
+        "title": "CollectionPermissions"
+      },
+      "CollectionPosition": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "title": "Collection Id"
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 0
+          },
+          "position": {
+            "type": "integer",
+            "title": "Position",
+            "default": 0
+          },
+          "total_products": {
+            "type": "integer",
+            "title": "Total Products",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id"
+        ],
+        "title": "CollectionPosition"
+      },
+      "CollectionProduct": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "main_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Main Image Url"
+          },
+          "hover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hover Image Url"
+          },
+          "metadata": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/OnSaleMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LowStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/OutOfStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/NewInMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/InactiveMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitedAvailabilityMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/BestsellerMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/TrendingMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/SlowMoverMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/StarProductMetadata"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "bestseller": "#/components/schemas/BestsellerMetadata",
+                  "inactive": "#/components/schemas/InactiveMetadata",
+                  "limited_availability": "#/components/schemas/LimitedAvailabilityMetadata",
+                  "low_stock": "#/components/schemas/LowStockMetadata",
+                  "new_in": "#/components/schemas/NewInMetadata",
+                  "on_sale": "#/components/schemas/OnSaleMetadata",
+                  "out_of_stock": "#/components/schemas/OutOfStockMetadata",
+                  "slow_mover": "#/components/schemas/SlowMoverMetadata",
+                  "star_product": "#/components/schemas/StarProductMetadata",
+                  "trending": "#/components/schemas/TrendingMetadata"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Metadata",
+            "default": []
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_auto_hidden": {
+            "type": "boolean",
+            "title": "Is Auto Hidden",
+            "default": false
+          },
+          "collection_state": {
+            "type": "string",
+            "enum": [
+              "pinned",
+              "auto",
+              "hidden"
+            ],
+            "title": "Collection State"
+          },
+          "sort_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sort Index"
+          },
+          "hidden_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "manual",
+                  "auto_oos"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hidden Type"
+          },
+          "configured_video": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShopifyVideo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hidden_in_markets": {
+            "items": {
+              "$ref": "#/components/schemas/HiddenVisibilityLocation"
+            },
+            "type": "array",
+            "title": "Hidden In Markets",
+            "default": []
+          },
+          "hidden_in_market_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Hidden In Market Groups",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "collection_state"
+        ],
+        "title": "CollectionProduct"
+      },
+      "CollectionProductMode": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "search",
+          "preview"
+        ],
+        "title": "CollectionProductMode"
+      },
+      "CollectionProductsRequest": {
+        "properties": {
+          "locale_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale Id"
+          },
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "market": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market"
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionProductMode"
+              }
+            ],
+            "default": "auto"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search"
+          },
+          "sort_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sort By"
+          },
+          "ranking_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CollectionRankingType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cursor"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "default": 25
+          },
+          "include_metrics": {
+            "type": "boolean",
+            "title": "Include Metrics",
+            "default": false
+          },
+          "included_main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 2000,
+            "title": "Included Main Product Ids"
+          },
+          "excluded_main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 2000,
+            "title": "Excluded Main Product Ids"
+          }
+        },
+        "type": "object",
+        "title": "CollectionProductsRequest"
+      },
+      "CollectionProductsResponse": {
+        "properties": {
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "sort_options": {
+            "items": {
+              "$ref": "#/components/schemas/SortOptionItem"
+            },
+            "type": "array",
+            "title": "Sort Options",
+            "default": []
+          },
+          "stats": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductListingStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "products"
+        ],
+        "title": "CollectionProductsResponse"
+      },
+      "CollectionRankingType": {
+        "type": "string",
+        "enum": [
+          "top",
+          "similar",
+          "complementary"
+        ],
+        "title": "CollectionRankingType"
+      },
+      "CollectionRateMetric": {
+        "properties": {
+          "value": {
+            "type": "number",
+            "title": "Value",
+            "default": 0
+          },
+          "delta_pts": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta Pts"
+          }
+        },
+        "type": "object",
+        "title": "CollectionRateMetric"
+      },
+      "CollectionRevenueMetric": {
+        "properties": {
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value",
+            "default": 0
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "default": ""
+          },
+          "delta_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta Pct"
+          }
+        },
+        "type": "object",
+        "title": "CollectionRevenueMetric"
+      },
+      "CollectionSaveRequest": {
+        "properties": {
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "market_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Id"
+          },
+          "localized_titles": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Localized Titles"
+          },
+          "uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uri"
+          },
+          "show_in_filter": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Show In Filter"
+          },
+          "show_in_search_suggestions": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Show In Search Suggestions"
+          },
+          "appear_in_quicklinks": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appear In Quicklinks"
+          },
+          "display_breadcrumb": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Breadcrumb"
+          },
+          "pinned_main_product_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned Main Product Ids"
+          },
+          "hidden_main_product_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hidden Main Product Ids"
+          },
+          "added_main_product_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Added Main Product Ids"
+          },
+          "removed_main_product_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Removed Main Product Ids"
+          },
+          "pinned_collection_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned Collection Ids"
+          },
+          "content_blocks": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ContentBlock"
+                },
+                "type": "array",
+                "maxItems": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Blocks"
+          },
+          "cover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Image Url"
+          },
+          "ranking_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CollectionRankingType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "added_filter_rules": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "$ref": "#/components/schemas/PortalSearchFilter"
+                  },
+                  "type": "array"
+                },
+                "type": "array",
+                "maxItems": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Added Filter Rules"
+          }
+        },
+        "type": "object",
+        "title": "CollectionSaveRequest"
+      },
+      "CollectionSummary": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Collection Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "collection_type": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "externally_owned": {
+            "type": "boolean",
+            "title": "Externally Owned"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "uri": {
+            "type": "string",
+            "title": "Uri"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At"
+          },
+          "n_main_products": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N Main Products"
+          },
+          "manual_product_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual Product Count"
+          },
+          "image_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Image Urls",
+            "default": []
+          },
+          "cover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Image Url"
+          },
+          "chunk_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChunkType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CollectionMetricsSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id",
+          "collection_type",
+          "externally_owned",
+          "title",
+          "uri",
+          "updated_at"
+        ],
+        "title": "CollectionSummary"
+      },
+      "CollectionTopProduct": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id"
+        ],
+        "title": "CollectionTopProduct",
+        "description": "The highest-revenue product in a collection, for the overview table's\n\"Top Product\" column. ``image_url`` is the product's first image (or None)."
+      },
+      "CollectionType": {
+        "type": "string",
+        "enum": [
+          "long_tail_collection",
+          "campaign",
+          "category",
+          "smart_pick",
+          "style",
+          "brand",
+          "look"
+        ],
+        "title": "CollectionType"
+      },
+      "ContentBlock": {
+        "properties": {
+          "span_columns": {
+            "type": "integer",
+            "title": "Span Columns"
+          },
+          "span_rows": {
+            "type": "integer",
+            "title": "Span Rows"
+          },
+          "position": {
+            "$ref": "#/components/schemas/ContentPosition"
+          },
+          "row": {
+            "type": "integer",
+            "title": "Row"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ImageContent"
+              },
+              {
+                "$ref": "#/components/schemas/VideoContent"
+              }
+            ],
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "span_columns",
+          "span_rows",
+          "position",
+          "row",
+          "content"
+        ],
+        "title": "ContentBlock"
+      },
+      "ContentPosition": {
+        "type": "string",
+        "enum": [
+          "left",
+          "right",
+          "center"
+        ],
+        "title": "ContentPosition"
+      },
+      "DeadStockItem": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "inventory": {
+            "type": "integer",
+            "title": "Inventory"
+          },
+          "views": {
+            "type": "integer",
+            "title": "Views"
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks"
+          },
+          "ctr": {
+            "type": "number",
+            "title": "Ctr"
+          },
+          "prev_sold": {
+            "type": "integer",
+            "title": "Prev Sold"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "inventory",
+          "views",
+          "clicks",
+          "ctr",
+          "prev_sold"
+        ],
+        "title": "DeadStockItem"
+      },
+      "DeadStockResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DeadStockItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "low_stock_units": {
+            "type": "integer",
+            "title": "Low Stock Units"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "low_stock_units"
+        ],
+        "title": "DeadStockResponse"
+      },
+      "DynamicAvailableFilter": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "checkbox",
+              "radio",
+              "checkbox-grid",
+              "checkbox-color",
+              "range",
+              "hierarchical"
+            ],
+            "title": "Type"
+          },
+          "op": {
+            "type": "string",
+            "title": "Op"
+          },
+          "position_priority": {
+            "type": "integer",
+            "title": "Position Priority"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FilterValueOption"
+                },
+                "type": "array"
+              },
+              {
+                "$ref": "#/components/schemas/RangeFilterBounds"
+              }
+            ],
+            "title": "Options"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "field",
+          "type",
+          "op",
+          "position_priority",
+          "options"
+        ],
+        "title": "DynamicAvailableFilter"
+      },
+      "DynamicListProductsResult": {
+        "properties": {
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/ListedProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "sort_options": {
+            "items": {
+              "$ref": "#/components/schemas/SortOptionItem"
+            },
+            "type": "array",
+            "title": "Sort Options"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/ProductListingStats"
+          }
+        },
+        "type": "object",
+        "required": [
+          "products",
+          "sort_options",
+          "stats"
+        ],
+        "title": "DynamicListProductsResult"
+      },
+      "FilterValueOption": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "swatch": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Swatch"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/FilterValueOption"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "selected": {
+            "type": "boolean",
+            "title": "Selected",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "label",
+          "count"
+        ],
+        "title": "FilterValueOption"
+      },
+      "GenericFilterValue": {
+        "properties": {
+          "values": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Values"
+          },
+          "paths": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paths"
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "or",
+              "and"
+            ],
+            "title": "Operator",
+            "default": "or"
+          },
+          "min_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Value"
+          },
+          "max_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Value"
+          }
+        },
+        "type": "object",
+        "title": "GenericFilterValue"
+      },
+      "GetAutoHideSettingsResult": {
+        "properties": {
+          "auto_hide_oos": {
+            "type": "boolean",
+            "title": "Auto Hide Oos"
+          },
+          "exclude_main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Exclude Main Product Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "auto_hide_oos",
+          "exclude_main_product_ids"
+        ],
+        "title": "GetAutoHideSettingsResult"
+      },
+      "GetMerchantResult": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "default_market_id": {
+            "type": "string",
+            "title": "Default Market Id"
+          },
+          "default_locale_id": {
+            "type": "string",
+            "title": "Default Locale Id"
+          },
+          "base_currency": {
+            "type": "string",
+            "title": "Base Currency"
+          },
+          "has_completed_onboarding": {
+            "type": "boolean",
+            "title": "Has Completed Onboarding"
+          },
+          "markets": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Markets"
+          },
+          "locale_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Locale Ids"
+          },
+          "product_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MerchantProductStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "can_edit_plp_rules": {
+            "type": "boolean",
+            "title": "Can Edit Plp Rules",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "display_name",
+          "default_market_id",
+          "default_locale_id",
+          "base_currency",
+          "has_completed_onboarding",
+          "markets",
+          "locale_ids"
+        ],
+        "title": "GetMerchantResult"
+      },
+      "GetProductResult": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "color_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color Name"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "main_image_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Main Image Url"
+          },
+          "hover_image_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Hover Image Url"
+          },
+          "image_urls": {
+            "items": {
+              "type": "string",
+              "maxLength": 2083,
+              "minLength": 1,
+              "format": "uri"
+            },
+            "type": "array",
+            "title": "Image Urls"
+          },
+          "metadata": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/OnSaleMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LowStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/OutOfStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/NewInMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/InactiveMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitedAvailabilityMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/BestsellerMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/TrendingMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/SlowMoverMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/StarProductMetadata"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "bestseller": "#/components/schemas/BestsellerMetadata",
+                  "inactive": "#/components/schemas/InactiveMetadata",
+                  "limited_availability": "#/components/schemas/LimitedAvailabilityMetadata",
+                  "low_stock": "#/components/schemas/LowStockMetadata",
+                  "new_in": "#/components/schemas/NewInMetadata",
+                  "on_sale": "#/components/schemas/OnSaleMetadata",
+                  "out_of_stock": "#/components/schemas/OutOfStockMetadata",
+                  "slow_mover": "#/components/schemas/SlowMoverMetadata",
+                  "star_product": "#/components/schemas/StarProductMetadata",
+                  "trending": "#/components/schemas/TrendingMetadata"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Metadata"
+          },
+          "collections": {
+            "items": {
+              "$ref": "#/components/schemas/app__usecase__get_product__Collection"
+            },
+            "type": "array",
+            "title": "Collections"
+          },
+          "variants": {
+            "items": {
+              "$ref": "#/components/schemas/Variant"
+            },
+            "type": "array",
+            "title": "Variants"
+          },
+          "inventories": {
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            },
+            "type": "array",
+            "title": "Inventories"
+          },
+          "price_lists": {
+            "items": {
+              "$ref": "#/components/schemas/PriceListItem"
+            },
+            "type": "array",
+            "title": "Price Lists"
+          },
+          "hidden_in_markets": {
+            "items": {
+              "$ref": "#/components/schemas/HiddenVisibilityLocation"
+            },
+            "type": "array",
+            "title": "Hidden In Markets",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "title",
+          "description",
+          "color_name",
+          "size",
+          "main_image_url",
+          "hover_image_url",
+          "image_urls",
+          "metadata",
+          "collections",
+          "variants",
+          "inventories",
+          "price_lists"
+        ],
+        "title": "GetProductResult"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HiddenVisibilityLocation": {
+        "properties": {
+          "market_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Id"
+          },
+          "market_group_id": {
+            "type": "string",
+            "title": "Market Group Id"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope"
+          }
+        },
+        "type": "object",
+        "required": [
+          "market_group_id",
+          "source"
+        ],
+        "title": "HiddenVisibilityLocation"
+      },
+      "ImageContent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image"
+            ],
+            "const": "image",
+            "title": "Type",
+            "default": "image"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "link"
+        ],
+        "title": "ImageContent"
+      },
+      "InactiveMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inactive"
+            ],
+            "const": "inactive",
+            "title": "Type",
+            "default": "inactive"
+          }
+        },
+        "type": "object",
+        "title": "InactiveMetadata"
+      },
+      "InventoryItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "sizes": {
+            "items": {
+              "$ref": "#/components/schemas/InventorySize"
+            },
+            "type": "array",
+            "title": "Sizes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "sizes"
+        ],
+        "title": "InventoryItem"
+      },
+      "InventorySize": {
+        "properties": {
+          "size": {
+            "type": "string",
+            "title": "Size"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "size",
+          "quantity"
+        ],
+        "title": "InventorySize"
+      },
+      "LimitedAvailabilityMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "limited_availability"
+            ],
+            "const": "limited_availability",
+            "title": "Type",
+            "default": "limited_availability"
+          },
+          "hidden_market_count": {
+            "type": "integer",
+            "title": "Hidden Market Count"
+          },
+          "total_market_count": {
+            "type": "integer",
+            "title": "Total Market Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hidden_market_count",
+          "total_market_count"
+        ],
+        "title": "LimitedAvailabilityMetadata"
+      },
+      "ListMerchantsResult": {
+        "properties": {
+          "merchants": {
+            "items": {
+              "$ref": "#/components/schemas/app__usecase__list_merchants__Merchant"
+            },
+            "type": "array",
+            "title": "Merchants",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "ListMerchantsResult"
+      },
+      "ListProductsRequest": {
+        "properties": {
+          "locale_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale Id"
+          },
+          "market": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market"
+          },
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "default": 50
+          },
+          "cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cursor"
+          },
+          "sort_by": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortOption"
+              }
+            ],
+            "default": "revenue_desc"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search"
+          },
+          "filters": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/GenericFilterValue"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Filters"
+          },
+          "include_metrics": {
+            "type": "boolean",
+            "title": "Include Metrics",
+            "default": false
+          },
+          "shopper_facing_only": {
+            "type": "boolean",
+            "title": "Shopper Facing Only",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ListProductsRequest"
+      },
+      "ListedProduct": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "main_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Main Image Url"
+          },
+          "hover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hover Image Url"
+          },
+          "metadata": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/OnSaleMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LowStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/OutOfStockMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/NewInMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/InactiveMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitedAvailabilityMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/BestsellerMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/TrendingMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/SlowMoverMetadata"
+                },
+                {
+                  "$ref": "#/components/schemas/StarProductMetadata"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "bestseller": "#/components/schemas/BestsellerMetadata",
+                  "inactive": "#/components/schemas/InactiveMetadata",
+                  "limited_availability": "#/components/schemas/LimitedAvailabilityMetadata",
+                  "low_stock": "#/components/schemas/LowStockMetadata",
+                  "new_in": "#/components/schemas/NewInMetadata",
+                  "on_sale": "#/components/schemas/OnSaleMetadata",
+                  "out_of_stock": "#/components/schemas/OutOfStockMetadata",
+                  "slow_mover": "#/components/schemas/SlowMoverMetadata",
+                  "star_product": "#/components/schemas/StarProductMetadata",
+                  "trending": "#/components/schemas/TrendingMetadata"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Metadata"
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_auto_hidden": {
+            "type": "boolean",
+            "title": "Is Auto Hidden",
+            "default": false
+          },
+          "hidden_in_market_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Hidden In Market Groups",
+            "default": []
+          },
+          "hidden_in_markets": {
+            "items": {
+              "$ref": "#/components/schemas/HiddenVisibilityLocation"
+            },
+            "type": "array",
+            "title": "Hidden In Markets",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "title",
+          "main_image_url",
+          "hover_image_url",
+          "metadata"
+        ],
+        "title": "ListedProduct"
+      },
+      "LowStockMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "low_stock"
+            ],
+            "const": "low_stock",
+            "title": "Type",
+            "default": "low_stock"
+          },
+          "sizes_in_stock": {
+            "type": "integer",
+            "title": "Sizes In Stock"
+          },
+          "sizes_total": {
+            "type": "integer",
+            "title": "Sizes Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sizes_in_stock",
+          "sizes_total"
+        ],
+        "title": "LowStockMetadata"
+      },
+      "MarketSearchQueries": {
+        "properties": {
+          "market": {
+            "type": "string",
+            "title": "Market"
+          },
+          "locale": {
+            "type": "string",
+            "title": "Locale"
+          },
+          "top_queries": {
+            "items": {
+              "$ref": "#/components/schemas/SearchQuery"
+            },
+            "type": "array",
+            "title": "Top Queries"
+          },
+          "top_no_result_queries": {
+            "items": {
+              "$ref": "#/components/schemas/SearchQuery"
+            },
+            "type": "array",
+            "title": "Top No Result Queries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "market",
+          "locale",
+          "top_queries",
+          "top_no_result_queries"
+        ],
+        "title": "MarketSearchQueries"
+      },
+      "MerchantAnalyticsOverview": {
+        "properties": {
+          "totals": {
+            "$ref": "#/components/schemas/CollectionMetricsSummary"
+          },
+          "top_collections": {
+            "items": {
+              "$ref": "#/components/schemas/OverviewCollection"
+            },
+            "type": "array",
+            "title": "Top Collections",
+            "default": []
+          },
+          "declining_collections": {
+            "items": {
+              "$ref": "#/components/schemas/OverviewCollection"
+            },
+            "type": "array",
+            "title": "Declining Collections",
+            "default": []
+          },
+          "pinned_vs_auto": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PinnedVsAutoRollup"
+              }
+            ],
+            "default": {
+              "healthy": 0,
+              "warning": 0,
+              "critical": 0,
+              "no_pins": 0
+            }
+          },
+          "collections_considered": {
+            "type": "integer",
+            "title": "Collections Considered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "totals"
+        ],
+        "title": "MerchantAnalyticsOverview",
+        "description": "Merchant-wide analytics for the hub page.\n\n``totals`` reuses the collection summary aggregate over the entire catalog\n(every product with metrics, pinned split empty — ``auto_lift`` is\nmeaningless there and should be ignored). ``collections_considered`` is how\nmany collections the rollups cover (capped at ``_MAX_COLLECTIONS``)."
+      },
+      "MerchantProductStatus": {
+        "properties": {
+          "recommendations_state": {
+            "type": "string",
+            "title": "Recommendations State",
+            "default": "inactive"
+          },
+          "search_state": {
+            "type": "string",
+            "title": "Search State",
+            "default": "inactive"
+          },
+          "plp_state": {
+            "type": "string",
+            "title": "Plp State",
+            "default": "inactive"
+          }
+        },
+        "type": "object",
+        "title": "MerchantProductStatus"
+      },
+      "NewInMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "new_in"
+            ],
+            "const": "new_in",
+            "title": "Type",
+            "default": "new_in"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "title": "NewInMetadata"
+      },
+      "OnSaleMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "on_sale"
+            ],
+            "const": "on_sale",
+            "title": "Type",
+            "default": "on_sale"
+          },
+          "min_percentage": {
+            "type": "integer",
+            "title": "Min Percentage"
+          },
+          "max_percentage": {
+            "type": "integer",
+            "title": "Max Percentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min_percentage",
+          "max_percentage"
+        ],
+        "title": "OnSaleMetadata"
+      },
+      "OutOfStockMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "out_of_stock"
+            ],
+            "const": "out_of_stock",
+            "title": "Type",
+            "default": "out_of_stock"
+          }
+        },
+        "type": "object",
+        "title": "OutOfStockMetadata"
+      },
+      "OverviewCollection": {
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Collection Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue"
+          },
+          "revenue_delta_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue Delta Pct"
+          },
+          "views": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Views"
+          },
+          "views_delta_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Views Delta Pct"
+          },
+          "avg_ctr": {
+            "type": "number",
+            "title": "Avg Ctr",
+            "default": 0
+          },
+          "unique_views": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unique Views"
+          },
+          "distinct_devices": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distinct Devices"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_id",
+          "title"
+        ],
+        "title": "OverviewCollection",
+        "description": "One collection row for the hub's top/declining lists. ``unique_views``\nand ``distinct_devices`` are true page-level numbers from the PLP summary\npipe (not member-product sums); ``None`` when the pipe had no row."
+      },
+      "PinnedVsAutoRollup": {
+        "properties": {
+          "healthy": {
+            "type": "integer",
+            "title": "Healthy",
+            "default": 0
+          },
+          "warning": {
+            "type": "integer",
+            "title": "Warning",
+            "default": 0
+          },
+          "critical": {
+            "type": "integer",
+            "title": "Critical",
+            "default": 0
+          },
+          "no_pins": {
+            "type": "integer",
+            "title": "No Pins",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PinnedVsAutoRollup",
+        "description": "How many collections fall into each pinned-vs-auto health bucket (same\nthresholds as the collections table's status column). ``no_pins`` counts\ncollections with nothing pinned (or no data), where there is nothing to\ncompare."
+      },
+      "PortalSearchFilter": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "op": {
+            "type": "string",
+            "enum": [
+              "eq",
+              "neq",
+              "in",
+              "nin",
+              "leq",
+              "geq",
+              "inrange"
+            ],
+            "title": "Op"
+          },
+          "data": {
+            "title": "Data"
+          },
+          "meta": {
+            "title": "Meta"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "op"
+        ],
+        "title": "PortalSearchFilter"
+      },
+      "PriceListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "original_price": {
+            "type": "number",
+            "title": "Original Price"
+          },
+          "sale_price": {
+            "type": "number",
+            "title": "Sale Price"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "original_price",
+          "sale_price",
+          "currency"
+        ],
+        "title": "PriceListItem"
+      },
+      "ProductBasicMetricsResponse": {
+        "properties": {
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "default": ""
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 0
+          },
+          "prev_clicks": {
+            "type": "integer",
+            "title": "Prev Clicks",
+            "default": 0
+          },
+          "views": {
+            "type": "integer",
+            "title": "Views",
+            "default": 0
+          },
+          "prev_views": {
+            "type": "integer",
+            "title": "Prev Views",
+            "default": 0
+          },
+          "sold": {
+            "type": "integer",
+            "title": "Sold",
+            "default": 0
+          },
+          "prev_sold": {
+            "type": "integer",
+            "title": "Prev Sold",
+            "default": 0
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue",
+            "default": 0
+          },
+          "prev_revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prev Revenue",
+            "default": 0
+          },
+          "add_to_carts": {
+            "type": "integer",
+            "title": "Add To Carts",
+            "default": 0
+          },
+          "prev_add_to_carts": {
+            "type": "integer",
+            "title": "Prev Add To Carts",
+            "default": 0
+          },
+          "inventory": {
+            "type": "integer",
+            "title": "Inventory",
+            "default": 0
+          },
+          "ctr": {
+            "type": "number",
+            "title": "Ctr",
+            "default": 0
+          },
+          "prev_ctr": {
+            "type": "number",
+            "title": "Prev Ctr",
+            "default": 0
+          },
+          "add_to_cart_rate": {
+            "type": "number",
+            "title": "Add To Cart Rate",
+            "default": 0
+          },
+          "prev_add_to_cart_rate": {
+            "type": "number",
+            "title": "Prev Add To Cart Rate",
+            "default": 0
+          },
+          "str": {
+            "type": "number",
+            "title": "Str",
+            "default": 0
+          },
+          "prev_str": {
+            "type": "number",
+            "title": "Prev Str",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ProductBasicMetricsResponse"
+      },
+      "ProductFiltersRequest": {
+        "properties": {
+          "locale_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale Id"
+          },
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "filters": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/GenericFilterValue"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Filters"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search"
+          },
+          "shopper_facing_only": {
+            "type": "boolean",
+            "title": "Shopper Facing Only",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ProductFiltersRequest"
+      },
+      "ProductFiltersResponse": {
+        "properties": {
+          "available_filters": {
+            "items": {
+              "$ref": "#/components/schemas/DynamicAvailableFilter"
+            },
+            "type": "array",
+            "title": "Available Filters",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "ProductFiltersResponse"
+      },
+      "ProductListingStats": {
+        "properties": {
+          "all_products": {
+            "type": "integer",
+            "title": "All Products"
+          },
+          "all_out_of_stock": {
+            "type": "integer",
+            "title": "All Out Of Stock"
+          },
+          "all_low_stock": {
+            "type": "integer",
+            "title": "All Low Stock"
+          },
+          "total_products": {
+            "type": "integer",
+            "title": "Total Products"
+          },
+          "out_of_stock": {
+            "type": "integer",
+            "title": "Out Of Stock"
+          },
+          "low_stock": {
+            "type": "integer",
+            "title": "Low Stock"
+          },
+          "on_sale": {
+            "type": "integer",
+            "title": "On Sale"
+          },
+          "new_in": {
+            "type": "integer",
+            "title": "New In"
+          },
+          "inactive": {
+            "type": "integer",
+            "title": "Inactive"
+          },
+          "bestseller": {
+            "type": "integer",
+            "title": "Bestseller"
+          },
+          "trending": {
+            "type": "integer",
+            "title": "Trending"
+          },
+          "slow_mover": {
+            "type": "integer",
+            "title": "Slow Mover"
+          },
+          "star_product": {
+            "type": "integer",
+            "title": "Star Product"
+          }
+        },
+        "type": "object",
+        "required": [
+          "all_products",
+          "all_out_of_stock",
+          "all_low_stock",
+          "total_products",
+          "out_of_stock",
+          "low_stock",
+          "on_sale",
+          "new_in",
+          "inactive",
+          "bestseller",
+          "trending",
+          "slow_mover",
+          "star_product"
+        ],
+        "title": "ProductListingStats"
+      },
+      "ProductMetrics": {
+        "properties": {
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 0
+          },
+          "prev_clicks": {
+            "type": "integer",
+            "title": "Prev Clicks",
+            "default": 0
+          },
+          "views": {
+            "type": "integer",
+            "title": "Views",
+            "default": 0
+          },
+          "prev_views": {
+            "type": "integer",
+            "title": "Prev Views",
+            "default": 0
+          },
+          "sold": {
+            "type": "integer",
+            "title": "Sold",
+            "default": 0
+          },
+          "prev_sold": {
+            "type": "integer",
+            "title": "Prev Sold",
+            "default": 0
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue",
+            "default": 0
+          },
+          "prev_revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prev Revenue",
+            "default": 0
+          },
+          "revenue_currency": {
+            "type": "string",
+            "title": "Revenue Currency",
+            "default": ""
+          },
+          "inventory": {
+            "type": "integer",
+            "title": "Inventory",
+            "default": 0
+          },
+          "click_through_rate": {
+            "type": "number",
+            "title": "Click Through Rate",
+            "default": 0
+          },
+          "prev_click_through_rate": {
+            "type": "number",
+            "title": "Prev Click Through Rate",
+            "default": 0
+          },
+          "sell_through_rate": {
+            "type": "number",
+            "title": "Sell Through Rate",
+            "default": 0
+          },
+          "prev_sell_through_rate": {
+            "type": "number",
+            "title": "Prev Sell Through Rate",
+            "default": 0
+          },
+          "add_to_carts": {
+            "type": "integer",
+            "title": "Add To Carts",
+            "default": 0
+          },
+          "prev_add_to_carts": {
+            "type": "integer",
+            "title": "Prev Add To Carts",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ProductMetrics"
+      },
+      "ProductMetricsRequest": {
+        "properties": {
+          "main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 2000,
+            "title": "Main Product Ids"
+          },
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "market": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market"
+          }
+        },
+        "type": "object",
+        "title": "ProductMetricsRequest"
+      },
+      "ProductMetricsResponse": {
+        "properties": {
+          "metrics": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProductMetrics"
+            },
+            "type": "object",
+            "title": "Metrics"
+          },
+          "revenue_currency": {
+            "type": "string",
+            "title": "Revenue Currency",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "metrics"
+        ],
+        "title": "ProductMetricsResponse"
+      },
+      "ProductOverviewChartResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ChartDataPoint"
+            },
+            "type": "array",
+            "title": "Data",
+            "default": []
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ProductOverviewChartResponse"
+      },
+      "ProductToplistResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionPosition"
+            },
+            "type": "array",
+            "title": "Data",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "ProductToplistResponse"
+      },
+      "ProductVisibilityPatchRequest": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "market",
+              "market_group",
+              "global_market_group"
+            ],
+            "title": "Scope",
+            "default": "market_group"
+          },
+          "market_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 256,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Id"
+          },
+          "market_group_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 256,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Group Id"
+          },
+          "updates": {
+            "items": {
+              "$ref": "#/components/schemas/ProductVisibilityUpdateRequest"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Updates"
+          }
+        },
+        "type": "object",
+        "required": [
+          "updates"
+        ],
+        "title": "ProductVisibilityPatchRequest"
+      },
+      "ProductVisibilityResponse": {
+        "properties": {
+          "visibility": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ProductVisibilitySurfaceState"
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Visibility"
+          }
+        },
+        "type": "object",
+        "required": [
+          "visibility"
+        ],
+        "title": "ProductVisibilityResponse"
+      },
+      "ProductVisibilitySurfaceState": {
+        "properties": {
+          "visible": {
+            "type": "boolean",
+            "title": "Visible"
+          },
+          "hidden": {
+            "type": "boolean",
+            "title": "Hidden"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "resolved_market_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolved Market Group Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "visible",
+          "hidden"
+        ],
+        "title": "ProductVisibilitySurfaceState"
+      },
+      "ProductVisibilityUpdateRequest": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Main Product Id"
+          },
+          "plp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "hidden_explicit",
+                  "visible_explicit",
+                  "inherit"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plp"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "hidden_explicit",
+                  "visible_explicit",
+                  "inherit"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search"
+          },
+          "recs": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "hidden_explicit",
+                  "visible_explicit",
+                  "inherit"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recs"
+          },
+          "expected_updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id"
+        ],
+        "title": "ProductVisibilityUpdateRequest"
+      },
+      "ProductWeeklyStatsResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/WeeklyDailyDataPoint"
+            },
+            "type": "array",
+            "title": "Data",
+            "default": []
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ProductWeeklyStatsResponse"
+      },
+      "RangeFilterBounds": {
+        "properties": {
+          "min_value": {
+            "type": "number",
+            "title": "Min Value"
+          },
+          "max_value": {
+            "type": "number",
+            "title": "Max Value"
+          },
+          "selected_min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Min"
+          },
+          "selected_max": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Max"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min_value",
+          "max_value"
+        ],
+        "title": "RangeFilterBounds"
+      },
+      "SearchQuery": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "locale": {
+            "type": "string",
+            "title": "Locale"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "count",
+          "locale"
+        ],
+        "title": "SearchQuery"
+      },
+      "SearchQueryStatsResponse": {
+        "properties": {
+          "markets": {
+            "items": {
+              "$ref": "#/components/schemas/MarketSearchQueries"
+            },
+            "type": "array",
+            "title": "Markets"
+          },
+          "prev_markets": {
+            "items": {
+              "$ref": "#/components/schemas/MarketSearchQueries"
+            },
+            "type": "array",
+            "title": "Prev Markets"
+          }
+        },
+        "type": "object",
+        "required": [
+          "markets",
+          "prev_markets"
+        ],
+        "title": "SearchQueryStatsResponse"
+      },
+      "ShopifyVideo": {
+        "properties": {
+          "video_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Video Urls"
+          },
+          "preview_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Image Url"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "video_urls",
+          "preview_image_url"
+        ],
+        "title": "ShopifyVideo"
+      },
+      "SlowMoverMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "slow_mover"
+            ],
+            "const": "slow_mover",
+            "title": "Type",
+            "default": "slow_mover"
+          },
+          "meta_data": {
+            "type": "number",
+            "title": "Meta Data"
+          },
+          "n_days": {
+            "type": "integer",
+            "title": "N Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meta_data",
+          "n_days"
+        ],
+        "title": "SlowMoverMetadata"
+      },
+      "SortOption": {
+        "type": "string",
+        "enum": [
+          "relevance",
+          "created_at_asc",
+          "created_at_desc",
+          "sale_price_asc",
+          "sale_price_desc",
+          "title_asc",
+          "title_desc",
+          "clicks_asc",
+          "clicks_desc",
+          "views_asc",
+          "views_desc",
+          "sold_asc",
+          "sold_desc",
+          "revenue_asc",
+          "revenue_desc",
+          "ctr_asc",
+          "ctr_desc",
+          "str_asc",
+          "str_desc",
+          "inventory_asc",
+          "inventory_desc"
+        ],
+        "title": "SortOption"
+      },
+      "SortOptionItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "selected": {
+            "type": "boolean",
+            "title": "Selected"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "selected"
+        ],
+        "title": "SortOptionItem"
+      },
+      "StarProductMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "star_product"
+            ],
+            "const": "star_product",
+            "title": "Type",
+            "default": "star_product"
+          },
+          "meta_data": {
+            "type": "number",
+            "title": "Meta Data"
+          },
+          "n_days": {
+            "type": "integer",
+            "title": "N Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meta_data",
+          "n_days"
+        ],
+        "title": "StarProductMetadata"
+      },
+      "TrendingMetadata": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "trending"
+            ],
+            "const": "trending",
+            "title": "Type",
+            "default": "trending"
+          },
+          "meta_data": {
+            "type": "number",
+            "title": "Meta Data"
+          },
+          "n_days": {
+            "type": "integer",
+            "title": "N Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meta_data",
+          "n_days"
+        ],
+        "title": "TrendingMetadata"
+      },
+      "UpdateAutoHideSettingsRequest": {
+        "properties": {
+          "auto_hide_oos": {
+            "type": "boolean",
+            "title": "Auto Hide Oos"
+          }
+        },
+        "type": "object",
+        "required": [
+          "auto_hide_oos"
+        ],
+        "title": "UpdateAutoHideSettingsRequest"
+      },
+      "UpdateAutoHideSettingsResult": {
+        "properties": {
+          "auto_hide_oos": {
+            "type": "boolean",
+            "title": "Auto Hide Oos"
+          },
+          "exclude_main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Exclude Main Product Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "auto_hide_oos",
+          "exclude_main_product_ids"
+        ],
+        "title": "UpdateAutoHideSettingsResult"
+      },
+      "UpdateCollectionProductImagesRequest": {
+        "properties": {
+          "main_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Main Image Url"
+          },
+          "hover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hover Image Url"
+          },
+          "video": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Video"
+          }
+        },
+        "type": "object",
+        "title": "UpdateCollectionProductImagesRequest"
+      },
+      "UpdateCollectionProductImagesResult": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "collection_id": {
+            "type": "string",
+            "title": "Collection Id"
+          },
+          "product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Product Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "collection_id",
+          "product_ids"
+        ],
+        "title": "UpdateCollectionProductImagesResult"
+      },
+      "UpdateExcludeProductsRequest": {
+        "properties": {
+          "main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Main Product Ids"
+          },
+          "exclude": {
+            "type": "boolean",
+            "title": "Exclude"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_ids",
+          "exclude"
+        ],
+        "title": "UpdateExcludeProductsRequest"
+      },
+      "UpdateExcludeProductsResult": {
+        "properties": {
+          "exclude_main_product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Exclude Main Product Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exclude_main_product_ids"
+        ],
+        "title": "UpdateExcludeProductsResult"
+      },
+      "UpdateProductMediaRequest": {
+        "properties": {
+          "main_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Main Image Url"
+          },
+          "hover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hover Image Url"
+          }
+        },
+        "type": "object",
+        "title": "UpdateProductMediaRequest"
+      },
+      "UpdateProductMediaResult": {
+        "properties": {
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "product_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Product Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_product_id",
+          "product_ids"
+        ],
+        "title": "UpdateProductMediaResult"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Variant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "main_product_id": {
+            "type": "string",
+            "title": "Main Product Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "color_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color Name"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "main_product_id",
+          "name",
+          "color_name",
+          "image_url"
+        ],
+        "title": "Variant"
+      },
+      "VideoContent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "video"
+            ],
+            "const": "video",
+            "title": "Type",
+            "default": "video"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "link"
+        ],
+        "title": "VideoContent"
+      },
+      "WeeklyDailyDataPoint": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "add_to_carts": {
+            "type": "integer",
+            "title": "Add To Carts",
+            "default": 0
+          },
+          "orders": {
+            "type": "integer",
+            "title": "Orders",
+            "default": 0
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revenue",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "date"
+        ],
+        "title": "WeeklyDailyDataPoint"
+      },
+      "app__usecase__get_product__Collection": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "filter": {
+            "type": "string",
+            "title": "Filter"
+          },
+          "exist": {
+            "type": "boolean",
+            "title": "Exist"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/app__usecase__get_product__Collection"
+            },
+            "type": "array",
+            "title": "Children"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "filter",
+          "exist",
+          "children"
+        ],
+        "title": "Collection"
+      },
+      "app__usecase__list_merchants__MarketGroup": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "display_name"
+        ],
+        "title": "MarketGroup"
+      },
+      "app__usecase__list_merchants__Merchant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "default_market_id": {
+            "type": "string",
+            "title": "Default Market Id"
+          },
+          "default_locale_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Locale Id"
+          },
+          "market_groups": {
+            "items": {
+              "$ref": "#/components/schemas/app__usecase__list_merchants__MarketGroup"
+            },
+            "type": "array",
+            "title": "Market Groups",
+            "default": []
+          },
+          "product_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MerchantProductStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "can_edit_plp_rules": {
+            "type": "boolean",
+            "title": "Can Edit Plp Rules",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "display_name",
+          "default_market_id",
+          "default_locale_id"
+        ],
+        "title": "Merchant"
+      }
+    },
+    "securitySchemes": {
+      "Auth0": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "scopes": {
+              "openid": "OpenID Connect",
+              "profile": "User profile",
+              "email": "User email"
+            },
+            "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+            "tokenUrl": "https://depict.eu.auth0.com/oauth/token"
+          }
+        },
+        "x-tokenName": "id_token"
+      }
+    }
+  }
+}

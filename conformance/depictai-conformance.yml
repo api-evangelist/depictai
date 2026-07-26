@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-storefront-openapi.json, openapi/depictai-portal-openapi.json, openapi/depictai-lite-openapi.json
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: All three specs (portal, storefront, lite) declare openapi 3.1.0.
+  - id: oauth2
+    conforms: true
+    evidence: Portal and Lite APIs declare an oauth2 authorizationCode security scheme (Auth0).
+  - id: oidc
+    conforms: true
+    evidence: Auth0 scheme carries openid/profile/email scopes; issuer serves /.well-known/openid-configuration.
+  - id: api-key-auth
+    conforms: true
+    evidence: Storefront API declares X-API-KEY header/cookie, api_key query, and HTTP bearer schemes.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses use FastAPI validation envelopes (422 with detail[]), not application/problem+json.
+  - id: json-api
+    conforms: false
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+  - id: odata
+    conforms: false

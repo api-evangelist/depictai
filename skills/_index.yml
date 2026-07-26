@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/depictai-storefront-openapi.json
+skills:
+  - file: depictai-storefront-search.md
+    name: Depict storefront search
+    api: openapi/depictai-storefront-openapi.json
+    operations: [get_markets_v3_markets_get, get_locales_v3_locales_get, Get_suggestions_v3_search_suggestions_get, Get_results_v3_search_results_post, Get_related_recommendations_v3_search_related_post]
+  - file: depictai-product-recommendations.md
+    name: Depict product recommendations
+    api: openapi/depictai-storefront-openapi.json
+    operations: [get_markets_v3_markets_get, get_locales_v3_locales_get, Recommendations_v3_recommend_products_post]
+  - file: depictai-product-listing-pages.md
+    name: Depict product listing pages
+    api: openapi/depictai-storefront-openapi.json
+    operations: [Get_Listings_v3_listings_get, Get_Listing_v3_listings__listing_id__get, Get_Products_in_Listing_v3_listings__listing_id__products_post]

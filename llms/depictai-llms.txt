@@ -1,0 +1,226 @@
+# Depict Documentation
+
+## Docs
+
+- [Data Ingestion](https://docs.depict.ai/api-guide/data-ingestion.md): A reminder of the data ingestion process
+- [Integrating with the Depict API](https://docs.depict.ai/api-guide/introduction.md)
+- [Recommendations](https://docs.depict.ai/api-guide/recommendations/api.md)
+- [Add to cart tracking](https://docs.depict.ai/api-guide/tracking/add-to-cart.md): You need to track both the add-to-cart button on your product page and, if applicable, on your product cards
+- [Tracking - Completed](https://docs.depict.ai/api-guide/tracking/completed.md)
+- [Importing DPC](https://docs.depict.ai/api-guide/tracking/importing.md): Import DPC so that your code has access to it.
+- [Initialising DPC](https://docs.depict.ai/api-guide/tracking/initialising.md): Here we'll finally execute the imported code.
+- [Installing DPC](https://docs.depict.ai/api-guide/tracking/installation.md): We need to make sure you have DPC installed before we can use it.
+- [Introduction](https://docs.depict.ai/api-guide/tracking/introduction.md): A guide to setting up tracking for your Depict API integration
+- [Product Card Tracking](https://docs.depict.ai/api-guide/tracking/product-cards.md): How to make sure DPC tracks your product cards correctly
+- [Product Page Tracking](https://docs.depict.ai/api-guide/tracking/product-pages.md): How to make sure DPC tracks your Product Details Page (PDP) views correctly.
+- [Purchase tracking](https://docs.depict.ai/api-guide/tracking/purchases.md): To calculate revenue figures, you need to track purchases. This is done with the `purchase` event.
+- [Activate Collection Template](https://docs.depict.ai/api-reference/activate-collection-template.md)
+- [Get Analytics Overview Endpoint](https://docs.depict.ai/api-reference/analytics/get-analytics-overview-endpoint.md): Merchant-wide analytics for the hub page: catalog-wide totals (same aggregate as per-collection metrics), top / declining collections with true page-level PLP traffic, and a pinned-vs-auto health rollup across collections. Last 30 days vs the previous 30.
+- [Cancel Subscription](https://docs.depict.ai/api-reference/cancel-subscription.md)
+- [Delete Categories](https://docs.depict.ai/api-reference/catalog-push-api-v0/delete-categories.md)
+- [Delete Products](https://docs.depict.ai/api-reference/catalog-push-api-v0/delete-products.md)
+- [Get Categories](https://docs.depict.ai/api-reference/catalog-push-api-v0/get-categories.md)
+- [Get Category Attribute Config](https://docs.depict.ai/api-reference/catalog-push-api-v0/get-category-attribute-config.md)
+- [Get Product Attribute Config](https://docs.depict.ai/api-reference/catalog-push-api-v0/get-product-attribute-config.md)
+- [Get Products](https://docs.depict.ai/api-reference/catalog-push-api-v0/get-products.md)
+- [List Category Ids](https://docs.depict.ai/api-reference/catalog-push-api-v0/list-category-ids.md)
+- [List Product Ids](https://docs.depict.ai/api-reference/catalog-push-api-v0/list-product-ids.md)
+- [Set Category Attribute Config](https://docs.depict.ai/api-reference/catalog-push-api-v0/set-category-attribute-config.md)
+- [Set Product Attribute Config](https://docs.depict.ai/api-reference/catalog-push-api-v0/set-product-attribute-config.md)
+- [Upsert Categories](https://docs.depict.ai/api-reference/catalog-push-api-v0/upsert-categories.md)
+- [Upsert Products](https://docs.depict.ai/api-reference/catalog-push-api-v0/upsert-products.md)
+- [Add Collection Favourite Endpoint](https://docs.depict.ai/api-reference/collections/add-collection-favourite-endpoint.md)
+- [Get Collection Analytics Endpoint](https://docs.depict.ai/api-reference/collections/get-collection-analytics-endpoint.md)
+- [Get Collection Curation Endpoint](https://docs.depict.ai/api-reference/collections/get-collection-curation-endpoint.md)
+- [Get Collection Endpoint](https://docs.depict.ai/api-reference/collections/get-collection-endpoint.md)
+- [Get Collection Metrics Endpoint](https://docs.depict.ai/api-reference/collections/get-collection-metrics-endpoint.md)
+- [List Collection Favourites Endpoint](https://docs.depict.ai/api-reference/collections/list-collection-favourites-endpoint.md)
+- [List Collection Products Endpoint](https://docs.depict.ai/api-reference/collections/list-collection-products-endpoint.md)
+- [List Collections Endpoint](https://docs.depict.ai/api-reference/collections/list-collections-endpoint.md)
+- [Remove Collection Favourite Endpoint](https://docs.depict.ai/api-reference/collections/remove-collection-favourite-endpoint.md)
+- [Save Collection Endpoint](https://docs.depict.ai/api-reference/collections/save-collection-endpoint.md)
+- [Create Published Collection](https://docs.depict.ai/api-reference/create-published-collection.md)
+- [Create Subscription Basic](https://docs.depict.ai/api-reference/create-subscription-basic.md)
+- [Create Subscription Essentials](https://docs.depict.ai/api-reference/create-subscription-essentials.md)
+- [Create Subscription Pro](https://docs.depict.ai/api-reference/create-subscription-pro.md)
+- [Delete Collection Version](https://docs.depict.ai/api-reference/delete-collection-version.md)
+- [Create Events](https://docs.depict.ai/api-reference/events-v2/create-events.md): There are 5 types of events: - page_view - click - add_to_cart - purchase - element_visible
+- [Create Events V2](https://docs.depict.ai/api-reference/events-v2/create-events-v2.md)
+- [Track V2](https://docs.depict.ai/api-reference/events-v2/track-v2.md)
+- [Generate Conclusion](https://docs.depict.ai/api-reference/generate-conclusion.md)
+- [Get Account](https://docs.depict.ai/api-reference/get-account.md)
+- [Get Active Collection Template](https://docs.depict.ai/api-reference/get-active-collection-template.md)
+- [Get App Url](https://docs.depict.ai/api-reference/get-app-url.md)
+- [Get Available Tags](https://docs.depict.ai/api-reference/get-available-tags.md)
+- [Get Award Status](https://docs.depict.ai/api-reference/get-award-status.md): Get the award status configuration for the merchant.
+- [Get Changelog](https://docs.depict.ai/api-reference/get-changelog.md)
+- [Get Collection](https://docs.depict.ai/api-reference/get-collection.md)
+- [Get Collection Preview Url](https://docs.depict.ai/api-reference/get-collection-preview-url.md)
+- [Get Collection Product Clicks](https://docs.depict.ai/api-reference/get-collection-product-clicks.md)
+- [Get Collection Product Orders](https://docs.depict.ai/api-reference/get-collection-product-orders.md)
+- [Get Collection Products](https://docs.depict.ai/api-reference/get-collection-products.md): Returns all products in a collection, sorted according to the given sort order, the collections pinned products, and either the collection's boost bury rules or the specified rules.
+- [Get Collection Templates](https://docs.depict.ai/api-reference/get-collection-templates.md): Returns a list of all collection template suffixes for the main theme of the merchant
+- [Get Collection Versions](https://docs.depict.ai/api-reference/get-collection-versions.md)
+- [Get Content Block Clicks](https://docs.depict.ai/api-reference/get-content-block-clicks.md)
+- [Get Data Sorted Collections](https://docs.depict.ai/api-reference/get-data-sorted-collections.md)
+- [Get Db Shopify Ordering](https://docs.depict.ai/api-reference/get-db-shopify-ordering.md): Returns all products in a collection, sorted according to exactly what is currently pushed to Shopify.
+- [Get Dynamic Status](https://docs.depict.ai/api-reference/get-dynamic-status.md)
+- [Get Initial Collection Products](https://docs.depict.ai/api-reference/get-initial-collection-products.md): Returns all products in a collection, sorted according to what should be initially displayed in the Collection view. IE if the collection is completely untouched, without a Depict version, the current Shopify order. Or if there is at least one Depict version, sorted according to the currently saved…
+- [Get Instagram Media](https://docs.depict.ai/api-reference/get-instagram-media.md)
+- [Get Main Theme](https://docs.depict.ai/api-reference/get-main-theme.md)
+- [Get Metrics](https://docs.depict.ai/api-reference/get-metrics.md)
+- [Get Nbr Of Active Collections](https://docs.depict.ai/api-reference/get-nbr-of-active-collections.md)
+- [Get Onboarding Bundles](https://docs.depict.ai/api-reference/get-onboarding-bundles.md)
+- [Get Product Funnel Metrics](https://docs.depict.ai/api-reference/get-product-funnel-metrics.md): Get product funnel metrics for a given merchant and date range. Returns metrics including clicks, add to carts, orders, and various rates.
+- [Get Published Collections](https://docs.depict.ai/api-reference/get-published-collections.md)
+- [Get Rules](https://docs.depict.ai/api-reference/get-rules.md)
+- [Get Stats](https://docs.depict.ai/api-reference/get-stats.md)
+- [Get Storefront Api Credentials](https://docs.depict.ai/api-reference/get-storefront-api-credentials.md)
+- [Get Themes](https://docs.depict.ai/api-reference/get-themes.md)
+- [API Overview](https://docs.depict.ai/api-reference/headless/overview.md): The APIs behind Depict for headless merchants: the Portal API used by the merchant portal, and the Storefront API that serves search, listings and recommendations to your shop.
+- [Insight Widget Seen](https://docs.depict.ai/api-reference/insight-widget-seen.md)
+- [Instagram Account Disconnect](https://docs.depict.ai/api-reference/instagram-account-disconnect.md)
+- [List Collections](https://docs.depict.ai/api-reference/list-collections.md)
+- [Get Products](https://docs.depict.ai/api-reference/listing-v2/get-products.md)
+- [Get Listing](https://docs.depict.ai/api-reference/listing-v3/get-listing.md): Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID, or "external" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.
+- [Get Listing Via External Id](https://docs.depict.ai/api-reference/listing-v3/get-listing-via-external-id.md): Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID, or "external" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.
+- [Get Listings](https://docs.depict.ai/api-reference/listing-v3/get-listings.md): Returns the full listing hierarchy. Useful for navigation menus, listing selection dialogs, etc. Can optionally be filtered to only show listings of certain types.
+- [Get Products In Listing](https://docs.depict.ai/api-reference/listing-v3/get-products-in-listing.md): Returns products in a listing, optionally filtered. Used for product listing pages.
+- [Get Products In Listing, Via External Id](https://docs.depict.ai/api-reference/listing-v3/get-products-in-listing-via-external-id.md): Returns products in a listing, optionally filtered. Used for product listing pages.
+- [API Overview](https://docs.depict.ai/api-reference/lite/overview.md): The Depict Lite API: the REST API behind the Depict Lite Shopify app.
+- [Mark Wizard As Complete](https://docs.depict.ai/api-reference/mark-wizard-as-complete.md)
+- [Create Merchant](https://docs.depict.ai/api-reference/merchant-create/create-merchant.md)
+- [Get Merchant](https://docs.depict.ai/api-reference/merchant/get-merchant.md)
+- [Get Shopify Ingestion Status](https://docs.depict.ai/api-reference/merchant/get-shopify-ingestion-status.md)
+- [Get Storefront Password Protected](https://docs.depict.ai/api-reference/merchant/get-storefront-password-protected.md)
+- [Read Authorized Merchants](https://docs.depict.ai/api-reference/merchant/read-authorized-merchants.md)
+- [Update Column Settings](https://docs.depict.ai/api-reference/merchant/update-column-settings.md)
+- [Update Variant Group By Name](https://docs.depict.ai/api-reference/merchant/update-variant-group-by-name.md)
+- [Get Merchant Endpoint](https://docs.depict.ai/api-reference/merchants/get-merchant-endpoint.md)
+- [List Merchants Endpoint](https://docs.depict.ai/api-reference/merchants/list-merchants-endpoint.md)
+- [Connect Multi Store](https://docs.depict.ai/api-reference/multi-store/connect-multi-store.md)
+- [Create Collection Mappings](https://docs.depict.ai/api-reference/multi-store/create-collection-mappings.md)
+- [Disconnect Store From Group](https://docs.depict.ai/api-reference/multi-store/disconnect-store-from-group.md)
+- [Get Collection Mappings](https://docs.depict.ai/api-reference/multi-store/get-collection-mappings.md)
+- [Get Collection Replication Data](https://docs.depict.ai/api-reference/multi-store/get-collection-replication-data.md)
+- [Get Stores](https://docs.depict.ai/api-reference/multi-store/get-stores.md)
+- [Update Collection Mappings](https://docs.depict.ai/api-reference/multi-store/update-collection-mappings.md)
+- [Update Collection Replication](https://docs.depict.ai/api-reference/multi-store/update-collection-replication.md)
+- [Get Displays](https://docs.depict.ai/api-reference/other-v3/get-displays.md)
+- [Get Locales](https://docs.depict.ai/api-reference/other-v3/get-locales.md)
+- [Get Markets](https://docs.depict.ai/api-reference/other-v3/get-markets.md)
+- [Update Collection Product Images Endpoint](https://docs.depict.ai/api-reference/product-images/update-collection-product-images-endpoint.md)
+- [Update Product Media Urls Endpoint](https://docs.depict.ai/api-reference/product-images/update-product-media-urls-endpoint.md)
+- [Get Product Basic Metrics Endpoint](https://docs.depict.ai/api-reference/product-metrics/get-product-basic-metrics-endpoint.md)
+- [Get Product Overview Chart Endpoint](https://docs.depict.ai/api-reference/product-metrics/get-product-overview-chart-endpoint.md)
+- [Get Product Toplist Endpoint](https://docs.depict.ai/api-reference/product-metrics/get-product-toplist-endpoint.md)
+- [Get Product Weekly Stats Endpoint](https://docs.depict.ai/api-reference/product-metrics/get-product-weekly-stats-endpoint.md)
+- [Get Dead Stock Products Endpoint](https://docs.depict.ai/api-reference/products/get-dead-stock-products-endpoint.md): Merchant-wide dead stock: products with stock on hand but zero sales in the metrics period (the same definition as ``CollectionMetricsSummary.dead_stock``, which counts these per collection). Backed by the cached whole-catalog ``fetch_collection_metrics``, so on a warm cache this is an in-memory fil…
+- [Get Product Endpoint](https://docs.depict.ai/api-reference/products/get-product-endpoint.md)
+- [Get Product Visibility Endpoint](https://docs.depict.ai/api-reference/products/get-product-visibility-endpoint.md)
+- [Get Products Metrics Endpoint](https://docs.depict.ai/api-reference/products/get-products-metrics-endpoint.md): Per-product metrics for an explicit set of products.
+- [List Product Filters Endpoint](https://docs.depict.ai/api-reference/products/list-product-filters-endpoint.md)
+- [List Products Post Endpoint](https://docs.depict.ai/api-reference/products/list-products-post-endpoint.md)
+- [Patch Product Visibility Endpoint](https://docs.depict.ai/api-reference/products/patch-product-visibility-endpoint.md)
+- [Publish Collection Version](https://docs.depict.ai/api-reference/publish-collection-version.md)
+- [Read Users Me](https://docs.depict.ai/api-reference/read-users-me.md)
+- [Recommend For Category And User](https://docs.depict.ai/api-reference/recommendations-v2/recommend-for-category-and-user.md): Returns an object with an array of recommendation displays.
+- [Recommend For Product And User](https://docs.depict.ai/api-reference/recommendations-v2/recommend-for-product-and-user.md): Returns an object with an array of recommendation displays.
+- [Recommend For Products And User](https://docs.depict.ai/api-reference/recommendations-v2/recommend-for-products-and-user.md): Returns an object with an array of recommendation displays.
+- [Recommend For User](https://docs.depict.ai/api-reference/recommendations-v2/recommend-for-user.md): Returns an object with an array of recommendation displays.
+- [Recommendations](https://docs.depict.ai/api-reference/recommendations-v3/recommendations.md)
+- [Revert Collection](https://docs.depict.ai/api-reference/revert-collection.md)
+- [Save Instagram Exchanged Code](https://docs.depict.ai/api-reference/save-instagram-exchanged-code.md)
+- [Get Search Query Stats Endpoint](https://docs.depict.ai/api-reference/search-metrics/get-search-query-stats-endpoint.md)
+- [Get Related Recommendations](https://docs.depict.ai/api-reference/search-v2/get-related-recommendations.md): Returns recommendations for products related to the search query. Note that this endpoint takes the same request body as the `/v2/search/results` endpoint, excluding the pagination parameters. It should be called once the user has exhausted the search results for their query and the recommended prod…
+- [Get Results](https://docs.depict.ai/api-reference/search-v2/get-results.md): Used to get search results that match the given query. Has support for filtering and sorting.
+- [Get Suggestions](https://docs.depict.ai/api-reference/search-v2/get-suggestions.md): Returns suggestions for a given query. Call this while the user is typing to help the user find what they're looking for. The suggestions are of two types: - suggestions for search queries that are related to the current query - suggestions for categories that are related to the current query
+- [Search Through Text Content](https://docs.depict.ai/api-reference/search-v2/search-through-text-content.md): (EXPERIMENTAL) Search through text content. The indexed text content is configurable.
+- [Get Related Recommendations](https://docs.depict.ai/api-reference/search-v3/get-related-recommendations.md): Returns recommendations for products related to the search query. Note that this endpoint takes the same request body as the `/v3/search/results` endpoint, excluding the pagination parameters. It should be called once the user has exhausted the search results for their query and the recommended prod…
+- [Get Results](https://docs.depict.ai/api-reference/search-v3/get-results.md): Returns products and content that matches a given query, optionally filtered. This is the main search endpoint.
+- [Get Suggestions](https://docs.depict.ai/api-reference/search-v3/get-suggestions.md): Returns suggestions for a given query. Call this while the user is typing to help the user find what they're looking for. The suggestions are of two types: - suggestions for search queries that are related to the current query - suggestions for listings that are related to the current query
+- [Set Activation Status](https://docs.depict.ai/api-reference/set-activation-status.md)
+- [Get Auto Hide Settings Endpoint](https://docs.depict.ai/api-reference/settings/get-auto-hide-settings-endpoint.md)
+- [Update Auto Hide Exclude Products Endpoint](https://docs.depict.ai/api-reference/settings/update-auto-hide-exclude-products-endpoint.md)
+- [Update Auto Hide Settings Endpoint](https://docs.depict.ai/api-reference/settings/update-auto-hide-settings-endpoint.md)
+- [Shopify Admin Api](https://docs.depict.ai/api-reference/shopify-admin-api.md)
+- [API Overview](https://docs.depict.ai/api-reference/shopify/overview.md): The Storefront API used by the Depict Shopify app to serve search, listings and recommendations.
+- [Subscription Status](https://docs.depict.ai/api-reference/subscription-status.md)
+- [Track Install](https://docs.depict.ai/api-reference/track-install.md)
+- [Get User Info](https://docs.depict.ai/api-reference/tracking/get-user-info.md)
+- [Track](https://docs.depict.ai/api-reference/tracking/track.md)
+- [Translate Query](https://docs.depict.ai/api-reference/translations/translate-query.md)
+- [Trigger Sync](https://docs.depict.ai/api-reference/trigger-sync.md)
+- [Update](https://docs.depict.ai/api-reference/update.md)
+- [Update Award Status](https://docs.depict.ai/api-reference/update-award-status.md): Update the award status configuration for the merchant.
+- [Update Collection](https://docs.depict.ai/api-reference/update-collection.md)
+- [Update Collection Version](https://docs.depict.ai/api-reference/update-collection-version.md)
+- [Update Columns Settings](https://docs.depict.ai/api-reference/update-columns-settings.md)
+- [Update Dynamic Status](https://docs.depict.ai/api-reference/update-dynamic-status.md)
+- [Update Likes Published Collection](https://docs.depict.ai/api-reference/update-likes-published-collection.md)
+- [Update Metaobject](https://docs.depict.ai/api-reference/update-metaobject.md): This endpoint should be used to update already existing metaobjects data.
+- [Update Rules](https://docs.depict.ai/api-reference/update-rules.md)
+- [Upload](https://docs.depict.ai/api-reference/upload.md): Uploads media to shopify and waits until the file is ready in Shopify.
+- [Upload Media From Url](https://docs.depict.ai/api-reference/upload-media-from-url.md): Uploads media to shopify from a URL by first creating a fileobject and then calling the upload_file endpoint
+- [Vitals](https://docs.depict.ai/api-reference/vitals.md)
+- [Changelog](https://docs.depict.ai/changelog/headless.md): New features and improvements in the Depict platform for headless merchants.
+- [Changelog](https://docs.depict.ai/changelog/shopify.md): New features and improvements in the Depict Shopify app.
+- [Changelog](https://docs.depict.ai/changelog/shopify-lite.md): New features and improvements in Depict Lite.
+- [Centra](https://docs.depict.ai/data-ingestion-guide/centra-setup-guide.md): Learn how to import your product data from Centra.
+- [Feed export](https://docs.depict.ai/data-ingestion-guide/feed-setup-guide.md): Learn how to import your product data through a feed export.
+- [Google Analytics](https://docs.depict.ai/data-ingestion-guide/google-analytics-setup-guide.md)
+- [Overview of Data Ingestion](https://docs.depict.ai/data-ingestion-guide/overview-of-data-ingestion.md): Discover different ways to send your data to Depict.
+- [Shopify](https://docs.depict.ai/data-ingestion-guide/shopify-setup-guide.md): Learn how to import your product data from Shopify.
+- [Analytics](https://docs.depict.ai/headless/features/analytics.md): The merchant-wide analytics hub: KPIs, conversion funnel, search insights, inventory risk and collection highlights.
+- [Boost & Bury](https://docs.depict.ai/headless/features/boost-and-bury.md): Push products up or down across your storefront with simple rules.
+- [Collection analytics](https://docs.depict.ai/headless/features/collection-analytics.md): Per-collection performance: KPIs, conversion funnel, inventory risk, pinned-vs-auto health and benchmarking.
+- [Collections](https://docs.depict.ai/headless/features/collections.md): Curate every collection with pinned and auto-sorted products, bulk actions, content blocks and per-market settings.
+- [Products](https://docs.depict.ai/headless/features/products.md): Browse your catalog with performance metrics, manage stock-based visibility and edit product imagery.
+- [Recommendations](https://docs.depict.ai/headless/features/recommendations.md): Review the recommendation surfaces on your storefront and the rules that shape them.
+- [Search](https://docs.depict.ai/headless/features/search.md): Understand what customers search for and steer the results with synonyms and search content.
+- [Settings](https://docs.depict.ai/headless/features/settings.md): Portal preferences and account configuration.
+- [Getting started](https://docs.depict.ai/headless/getting-started.md): From first login to a fully merchandised, measured storefront.
+- [Introduction](https://docs.depict.ai/headless/introduction.md): Depict for headless merchants: AI product discovery — collection merchandising, search and recommendations — served through an API and steered from one portal.
+- [Category feed specification](https://docs.depict.ai/reference/data-ingestion/category-feed-specification.md): Specification for the category feed sent to Depict.
+- [Product feed specification](https://docs.depict.ai/reference/data-ingestion/product-feed-specification.md): Specification for the product feed sent to Depict.
+- [Naming discrepancies](https://docs.depict.ai/reference/glossary/naming-discrepancies.md)
+- [Types of product listing pages](https://docs.depict.ai/reference/glossary/types-of-listing-pages.md)
+- [Example usage with Next.js](https://docs.depict.ai/reference/performance-client/example-usage-with-nextjs.md): Using DPC as a client-side library
+- [Introduction to Depict Performance Client](https://docs.depict.ai/reference/performance-client/introduction-to-depict-performance-client.md): Use our Depict Performance Client SDKs to track and monitor user behavior on your store.
+- [Getting started with Depict Performance Client](https://docs.depict.ai/reference/performance-client/performance-client.md): DPC handles performance tracking to enable the Depict AI to optimize recommendations and product listings.
+- [Product listing pages](https://docs.depict.ai/reference/search-listing-apis/listing-pages.md)
+- [Query Suggestions](https://docs.depict.ai/reference/search-listing-apis/query-suggestions.md)
+- [Search API Overview](https://docs.depict.ai/reference/search-listing-apis/search-overview.md)
+- [Security Policy](https://docs.depict.ai/reference/security.md): Vulnerability reporting, remediation timelines, and security contact information for Depict.
+- [Product card rendering](https://docs.depict.ai/reference/shopify-app/product-card-rendering.md): This page answers more in-depth questions about the product card rendering in the shopify app.
+- [Adding a Collection Page block](https://docs.depict.ai/shopify-guide/blocks/collection-page.md)
+- [Adding Depict blocks to your theme](https://docs.depict.ai/shopify-guide/blocks/introduction.md)
+- [Adding a Recommendation block](https://docs.depict.ai/shopify-guide/blocks/recommendations.md)
+- [Search button settings](https://docs.depict.ai/shopify-guide/blocks/search-button-settings.md): Customize the on-page button that opens the Depict search modal.
+- [Search customization overview](https://docs.depict.ai/shopify-guide/blocks/search-customization-overview.md): Where to find Depict Search customization settings in Shopify, and how they are organized.
+- [Adding a way to open the Search Modal](https://docs.depict.ai/shopify-guide/blocks/search-modal.md)
+- [Layout & behaviour](https://docs.depict.ai/shopify-guide/blocks/search-modal-layout.md): Global layout and behaviour settings for the Depict search modal (app embed: Depict Search layout).
+- [Theming](https://docs.depict.ai/shopify-guide/blocks/search-modal-theming.md): Global visual styling for the Depict search modal (app embed: Depict Search theme).
+- [Adding a Search Page block](https://docs.depict.ai/shopify-guide/blocks/search-page.md)
+- [Compatibility and Browser Support of the Depict Shopify App](https://docs.depict.ai/shopify-guide/compatible-environments.md)
+- [The product card editor](https://docs.depict.ai/shopify-guide/customisation/product-card-editor.md)
+- [The style editor](https://docs.depict.ai/shopify-guide/customisation/style-editor.md)
+- [Introduction](https://docs.depict.ai/shopify-guide/introduction.md): A guide on integrating with Depict and the Depict UI through our shopify app
+- [Complete - Depict App now ready to use](https://docs.depict.ai/shopify-guide/setup/complete.md)
+- [Preparing your theme - <body>](https://docs.depict.ai/shopify-guide/setup/edit-theme-body.md)
+- [Preparing your theme - <head>](https://docs.depict.ai/shopify-guide/setup/edit-theme-head.md)
+- [Installing the app](https://docs.depict.ai/shopify-guide/setup/installation.md)
+- [A/B testing](https://docs.depict.ai/shopify-lite/ab-testing.md): Test collection variants against each other with real statistics.
+- [Boost & Bury](https://docs.depict.ai/shopify-lite/boost-and-bury.md): Rule-based ranking adjustments, globally or per collection.
+- [Collections](https://docs.depict.ai/shopify-lite/collections.md): Activate, sort, pin, version and publish your Shopify collections with Depict Lite.
+- [Dashboard](https://docs.depict.ai/shopify-lite/dashboard.md): Orders, revenue and product news at a glance.
+- [Introduction](https://docs.depict.ai/shopify-lite/introduction.md): Depict Lite merchandises your existing Shopify collections — no theme rebuild, no code.
+- [Multi-store](https://docs.depict.ai/shopify-lite/multi-store.md): Connect several Shopify stores and replicate merchandising between them.
+- [Onboarding](https://docs.depict.ai/shopify-lite/onboarding.md): What happens when you install Depict Lite, and how to get to a working setup.
+
+## OpenAPI Specs
+
+- [portal](https://docs.depict.ai/api-reference/openapi/portal.json)
+- [storefront](https://docs.depict.ai/api-reference/openapi/storefront.json)
+- [lite](https://docs.depict.ai/api-reference/openapi/lite.json)
+- [openapi](https://docs.depict.ai/openapi.json)

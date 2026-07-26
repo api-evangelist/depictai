@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.depict.ai
+versioning:
+  scheme: uri-path
+  current: v3
+  observed: [v1, v2, v3]
+  notes: >-
+    Storefront API operations are versioned in the path (/v3/search, /v3/recommend,
+    /v3/listings) with v2 endpoints retained for compatibility; the Portal API uses
+    /api/v1. No formal written versioning or deprecation policy (Sunset/Deprecation
+    RFC 8594 headers) was found in the docs at capture time.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No dedicated deprecation policy page located; v2 search/listing endpoints coexist with v3.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.depict.ai
+deprecated_operations: []

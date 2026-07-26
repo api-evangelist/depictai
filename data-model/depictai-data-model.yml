@@ -1,0 +1,78 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-storefront-openapi.json, openapi/depictai-portal-openapi.json
+note: >-
+  Entity graph derived from Storefront and Portal OpenAPI schemas and id-reference
+  parameters (merchant/tenant, product_id, category_id, listing_id, market, locale,
+  dsid). Depict is a merchant-scoped product-discovery model: every catalog and
+  merchandising object hangs off a Merchant and is served per Market/Locale.
+entities:
+  - name: Merchant
+    id_fields: [merchant, merchant_id, tenant]
+    description: The store/brand account; the root scoping entity for all data.
+  - name: Product
+    id_fields: [product_id, external_id, dsid]
+    description: A catalog product (with variants, images, pricelist and inventory attributes).
+  - name: Category
+    id_fields: [category_id]
+    description: A product category / grouping used for category recommendations and PLPs.
+  - name: Listing
+    id_fields: [listing_id, external_id]
+    description: A v3 listing node (collection/PLP) with ancestors, siblings and children.
+  - name: Collection
+    id_fields: [collection_id]
+    description: A curated, versionable, publishable merchandising collection (Portal/Lite).
+  - name: Display
+    id_fields: [dsid]
+    description: A recommendation display (a rendered set of recommended products).
+  - name: Market
+    id_fields: [market, market_id]
+    description: A selling market; scopes catalog visibility and pricing.
+  - name: Locale
+    id_fields: [locale, locale_id]
+    description: A language/locale used to localise results.
+relationships:
+  - from: Product
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Category
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Listing
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Collection
+    to: Merchant
+    type: belongs_to
+    via: merchant_id
+  - from: Category
+    to: Product
+    type: has_many
+    via: product_ids
+  - from: Listing
+    to: Product
+    type: has_many
+    via: products
+  - from: Collection
+    to: Product
+    type: has_many
+    via: products
+  - from: Listing
+    to: Listing
+    type: has_many
+    via: children
+  - from: Display
+    to: Product
+    type: has_many
+    via: recommendations
+  - from: Merchant
+    to: Market
+    type: has_many
+    via: markets
+  - from: Merchant
+    to: Locale
+    type: has_many
+    via: locales

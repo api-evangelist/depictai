@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Depict Portal API
+  version: 1.0.0
+extends: openapi/depictai-portal-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-provider: depictai
+    x-api-host: https://api.depict.ai
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/depictai-authentication.yml
+      conventions: conventions/depictai-conventions.yml
+      errors: errors/depictai-problem-types.yml
+      data-model: data-model/depictai-data-model.yml

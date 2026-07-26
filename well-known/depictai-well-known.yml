@@ -1,0 +1,51 @@
+generated: '2026-07-18'
+method: searched
+source: probe of /.well-known/ on Depict hosts
+note: >-
+  No /.well-known/ discovery documents were served on Depict's own hosts
+  (api/docs/depict.ai) at probe time. The OAuth authorization server for the
+  Portal and Lite APIs is the Depict Auth0 tenant, whose OIDC discovery document
+  IS served (200) and is saved verbatim below. Absence on the primary hosts is
+  recorded as valid data. Depict also publishes a Security Policy page (see
+  security/depictai-vulnerability-disclosure.yml).
+hosts:
+  - host: https://depict.eu.auth0.com
+    role: oauth-authorization-server
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: depictai-auth0-openid-configuration.json
+  - host: https://api.depict.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://docs.depict.ai
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://depict.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404

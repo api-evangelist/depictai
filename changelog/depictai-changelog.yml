@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.depict.ai/changelog/headless
+scheme: dated-release-notes
+channels:
+  - name: Headless
+    url: https://docs.depict.ai/changelog/headless
+  - name: Shopify
+    url: https://docs.depict.ai/changelog/shopify
+  - name: Shopify Lite
+    url: https://docs.depict.ai/changelog/shopify-lite
+entries:
+  - channel: Headless
+    label: July 2026
+    title: Analytics hub
+    breaking: false
+    highlights:
+      - Merchant-wide Analytics page aggregating store-wide KPIs (revenue, views, CTR, units sold, add-to-carts, dead-stock risk)
+      - Merchant-wide conversion funnel from impressions to purchases
+      - Search insights (top and zero-result queries per market)
+      - Collection analytics improvements (pinned-vs-auto verdicts, add-to-cart tracking, variant availability, benchmarking, dead stock lists)
+  - channel: Shopify
+    label: July 2026
+    title: New documentation home
+    breaking: false
+    highlights:
+      - Depict Shopify app documentation moved into the restructured docs site with a dedicated product section and API reference

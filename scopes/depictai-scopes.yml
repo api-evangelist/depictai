@@ -1,0 +1,38 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/depictai-lite-openapi.json, openapi/depictai-portal-openapi.json
+schemes:
+- name: Auth0
+  source: openapi/depictai-lite-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+    tokenUrl: https://depict.eu.auth0.com/oauth/token
+- name: Auth0
+  source: openapi/depictai-portal-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
+    tokenUrl: https://depict.eu.auth0.com/oauth/token
+scopes:
+- scope: email
+  description: User email
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/depictai-lite-openapi.json
+  - openapi/depictai-portal-openapi.json
+- scope: openid
+  description: OpenID Connect
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/depictai-lite-openapi.json
+  - openapi/depictai-portal-openapi.json
+- scope: profile
+  description: User profile
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/depictai-lite-openapi.json
+  - openapi/depictai-portal-openapi.json
