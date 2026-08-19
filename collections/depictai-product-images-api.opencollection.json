@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Product Images API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Product Media Urls Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id/images",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Product Media Urls Endpoint"
+        },
+        {
+          "info": {
+            "name": "Update Collection Product Images Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/products/:main_product_id/images",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Collection Product Images Endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

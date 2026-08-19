@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Product Funnel Metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Funnel Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Funnel Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/product-funnel-metrics/metrics",
+            "params": [
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get product funnel metrics for a given merchant and date range.\nReturns metrics including clicks, add to carts, orders, and various rates.\n\nArgs:\n    from_date: Start date for current period metrics\n    to_date: End date for current period metrics\n    merchant_id: Merchant ID to get metrics for\n    offset: Number of records to skip (for pagination)\n    order: Sort order for results (DESC or ASC)\n    order_by: Field to sort by (d_score, clicks, add_to_carts, or orders)\n    page_size: Number of re"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

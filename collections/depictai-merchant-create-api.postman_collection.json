@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "a7dd32e3-097b-4e6f-a0a2-8d85832fe846",
+      "name": "merchant-create",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0fa5c471-f041-499a-82c5-a7893b3939b7",
+          "name": "Create Merchant",
+          "request": {
+            "name": "Create Merchant",
+            "description": {},
+            "url": {
+              "path": [
+                "merchant-create",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "728efa78-a6b9-4bd5-a2e0-cf12b6e107c4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant-create",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"display_name\": \"string\",\n  \"base_currency\": \"AMD\",\n  \"desktop_columns\": 7879,\n  \"mobile_columns\": 8520,\n  \"shopify_domain\": \"string\",\n  \"shopify_app_installed\": true,\n  \"has_run_at_least_one_ingestion\": true,\n  \"multi_store_group_id\": \"15682d05-bfd8-1986-6905-f04b07e6aa7d\",\n  \"multi_store_activation_code\": \"string\",\n  \"variant_group_by_name\": \"string\",\n  \"start_timestamp\": 5824,\n  \"has_completed_onboarding\": false,\n  \"auto_activate_all_collections\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b43dc0b1-1273-4e9f-824e-b6bd0fb14feb",
+    "name": "Depict Lite Ab Test merchant-create API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

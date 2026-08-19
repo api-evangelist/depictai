@@ -1,0 +1,1180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Collections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Collections"
+        },
+        {
+          "info": {
+            "name": "Get Award Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/award-status",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the award status configuration for the merchant."
+        },
+        {
+          "info": {
+            "name": "Update Award Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/collections/award-status",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the award status configuration for the merchant."
+        },
+        {
+          "info": {
+            "name": "Get Nbr Of Active Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/nbr-of-active-collections",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Nbr Of Active Collections"
+        },
+        {
+          "info": {
+            "name": "Get Data Sorted Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/collections/data-sorted-by",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Data Sorted Collections"
+        },
+        {
+          "info": {
+            "name": "Set Activation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/collections/activation",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Set Activation Status"
+        },
+        {
+          "info": {
+            "name": "Get Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/:collection_id",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection"
+        },
+        {
+          "info": {
+            "name": "Update Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/collections/:collection_id",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Collection"
+        },
+        {
+          "info": {
+            "name": "Get Collection Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/collections/:collection_id/products",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns all products in a collection, sorted according to the given sort order,\nthe collections pinned products, and either the collection's boost bury rules or the specified rules."
+        },
+        {
+          "info": {
+            "name": "Get Db Shopify Ordering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/collections/:collection_id/shopify/shopify-ordering",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns all products in a collection, sorted according to exactly what is currently pushed to Shopify."
+        },
+        {
+          "info": {
+            "name": "Get Initial Collection Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/:collection_id/initial-products",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns all products in a collection, sorted according to what should be initially displayed in the Collection view.\nIE if the collection is completely untouched, without a Depict version, the current Shopify order.\nOr if there is at least one Depict version, sorted according to the currently saved main version, without any changes."
+        },
+        {
+          "info": {
+            "name": "Get Collection Product Clicks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/:collection_id/product-clicks",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Product Clicks"
+        },
+        {
+          "info": {
+            "name": "Get Collection Product Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/:collection_id/product-orders",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Product Orders"
+        },
+        {
+          "info": {
+            "name": "Revert Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/collections/:collection_id/revert",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Revert Collection"
+        },
+        {
+          "info": {
+            "name": "Get Collection Preview Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/collections/:collection_id/preview-url",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Preview Url"
+        },
+        {
+          "info": {
+            "name": "Get Collection Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/collections/:collection_id/versions",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Versions"
+        },
+        {
+          "info": {
+            "name": "Update Collection Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/collections/:collection_id/update_version",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Collection Version"
+        },
+        {
+          "info": {
+            "name": "Delete Collection Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/lite/collections/:collection_id/delete_version/:version",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete Collection Version"
+        },
+        {
+          "info": {
+            "name": "Publish Collection Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/collections/:collection_id/publish_version/:version",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Publish Collection Version"
+        },
+        {
+          "info": {
+            "name": "List Collections Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_metrics",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Collections Endpoint"
+        },
+        {
+          "info": {
+            "name": "List Collection Favourites Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/favourites",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_metrics",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Collection Favourites Endpoint"
+        },
+        {
+          "info": {
+            "name": "Add Collection Favourite Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/favourite",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add Collection Favourite Endpoint"
+        },
+        {
+          "info": {
+            "name": "Remove Collection Favourite Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/favourite",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Remove Collection Favourite Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Collection Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Endpoint"
+        },
+        {
+          "info": {
+            "name": "Save Collection Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Save Collection Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Collection Curation Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/curation",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_auto_hidden",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_metrics",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Curation Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Collection Metrics Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/metrics",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Metrics Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Collection Analytics Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/analytics",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Collection Analytics Endpoint"
+        },
+        {
+          "info": {
+            "name": "List Collection Products Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/collections/:collection_id/products",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Collection Products Endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

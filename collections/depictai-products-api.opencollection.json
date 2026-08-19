@@ -1,0 +1,280 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Products API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Products Post Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Products Post Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Products Metrics Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/metrics",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Per-product metrics for an explicit set of products.\n\nLets the collection grid paint immediately (products are fetched without\nmetrics) and then overlay the numbers. The expensive whole-catalog fetch is\nshared via the cached, single-flighted ``fetch_collection_metrics``, so on a\nwarm cache this endpoint is just an in-memory slice keyed by the requested\nids. Missing ids resolve to zeroed metrics, mirroring the inline\n``include_metrics`` path."
+        },
+        {
+          "info": {
+            "name": "Get Dead Stock Products Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/dead-stock",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market_group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Merchant-wide dead stock: products with stock on hand but zero sales in\nthe metrics period (the same definition as\n``CollectionMetricsSummary.dead_stock``, which counts these per collection).\nBacked by the cached whole-catalog ``fetch_collection_metrics``, so on a\nwarm cache this is an in-memory filter. Items are sorted by inventory\n(worst offenders first) and capped at ``DEAD_STOCK_MAX_ITEMS``; ``total``\nis the uncapped count. Products no longer in the catalog are dropped."
+        },
+        {
+          "info": {
+            "name": "List Product Filters Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/filters",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Product Filters Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Product Visibility Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/visibility",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "main_product_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group_ids",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Visibility Endpoint"
+        },
+        {
+          "info": {
+            "name": "Patch Product Visibility Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/visibility",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Patch Product Visibility Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Product Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Product Metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Basic Metrics Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id/metrics/basic",
+            "params": [
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market_group",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Basic Metrics Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Product Overview Chart Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id/metrics/overview/chart",
+            "params": [
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market_group",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Overview Chart Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Product Weekly Stats Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id/metrics/weekly",
+            "params": [
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market_group",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Weekly Stats Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get Product Toplist Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/api/v1/merchants/:merchant_id/products/:main_product_id/metrics/toplist",
+            "params": [
+              {
+                "name": "main_product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "market_group",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Product Toplist Endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

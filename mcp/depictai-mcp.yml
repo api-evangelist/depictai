@@ -1,9 +1,8 @@
 generated: '2026-07-18'
 method: derived
 status: candidate
-note: No official hosted/remote Depict MCP server was found. Candidate tool list derived
-  from the public Storefront API (search, recommendations, listings) — the agent-facing
-  surface most useful as MCP tools.
+note: No official hosted/remote Depict MCP server was found. Candidate tool list derived from the public
+  Storefront API (search, recommendations, listings) — the agent-facing surface most useful as MCP tools.
 server:
   name: depict-storefront
   transport: http
@@ -189,3 +188,9 @@ tools:
   method: POST
   path: /catalog/v0/category_attribute_config
   source_operation: openapi/depictai-storefront-openapi.json#set_category_attribute_config_catalog_v0_category_attribute_config_post
+deployment:
+  mode: none
+  verified: derived
+  tools: 36
+  checked: '2026-08-12'
+  source: catalog MCP census

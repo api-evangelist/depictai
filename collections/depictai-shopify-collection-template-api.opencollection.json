@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Shopify Collection Template API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shopify Collection Template",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Collection Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/shopify-collection-template/:merchant_id/:collection_id/templates",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a list of all collection template suffixes for the main theme of the merchant"
+        },
+        {
+          "info": {
+            "name": "Get Active Collection Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/shopify-collection-template/active/:collection_id",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Active Collection Template"
+        },
+        {
+          "info": {
+            "name": "Activate Collection Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/shopify-collection-template/:collection_id/activate",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template_suffix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "theme_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Activate Collection Template"
+        },
+        {
+          "info": {
+            "name": "Update Columns Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/lite/shopify-collection-template/:merchant_id/columns-settings",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Columns Settings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Recommendations (v2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recommend For User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/recommend/products/general",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard"
+        },
+        {
+          "info": {
+            "name": "Recommend For Product And User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/recommend/products/product",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard"
+        },
+        {
+          "info": {
+            "name": "Recommend For Category And User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/recommend/products/category",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboar"
+        },
+        {
+          "info": {
+            "name": "Recommend For Products And User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/recommend/products/products",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

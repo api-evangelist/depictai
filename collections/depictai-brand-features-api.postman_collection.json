@@ -1,0 +1,756 @@
+{
+  "item": [
+    {
+      "id": "fd0936d4-523e-41e7-a18d-dd266fff50e3",
+      "name": "Brand Features",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c019783-c4b3-47dc-963e-cc7148a07e3f",
+          "name": "Update",
+          "request": {
+            "name": "Update",
+            "description": {},
+            "url": {
+              "path": [
+                "brand-features",
+                ":collection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brand_feature_type\": \"<string>\",\n  \"upsert_metaobjects\": [\n    {\n      \"handle\": \"<string>\",\n      \"index\": \"<integer>\",\n      \"span_rows\": \"<integer>\",\n      \"aspect_ratio\": \"<number>\",\n      \"span_columns\": \"<integer>\",\n      \"content\": {\n        \"gid\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"type\": \"image\",\n        \"alt_text\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"hover_image\": {\n        \"gid\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"type\": \"image\",\n        \"alt_text\": \"<string>\"\n      },\n      \"link\": {\n        \"type\": \"<string>\",\n        \"gid\": \"<string>\",\n        \"handle\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"<string>\",\n        \"vertical_alignment\": \"<string>\",\n        \"background_overlay\": \"<string>\",\n        \"gap\": \"<string>\"\n      }\n    },\n    {\n      \"handle\": \"<string>\",\n      \"index\": \"<integer>\",\n      \"span_rows\": \"<integer>\",\n      \"aspect_ratio\": \"<number>\",\n      \"span_columns\": \"<integer>\",\n      \"content\": {\n        \"gid\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"type\": \"image\",\n        \"alt_text\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"hover_image\": {\n        \"gid\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"type\": \"image\",\n        \"alt_text\": \"<string>\"\n      },\n      \"link\": {\n        \"type\": \"<string>\",\n        \"gid\": \"<string>\",\n        \"handle\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"<string>\",\n        \"vertical_alignment\": \"<string>\",\n        \"background_overlay\": \"<string>\",\n        \"gap\": \"<string>\"\n      }\n    }\n  ],\n  \"delete_metaobjects_by_handle\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bca5603-ad6a-4e27-ace0-393e30d67e3b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_feature_type\": \"ab_test\",\n  \"upsert_metaobjects\": [\n    {\n      \"handle\": \"string\",\n      \"index\": 7402,\n      \"span_rows\": 9950,\n      \"aspect_ratio\": 6606.996798346794,\n      \"span_columns\": 2704,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    },\n    {\n      \"handle\": \"string\",\n      \"index\": 3028,\n      \"span_rows\": 9555,\n      \"aspect_ratio\": 2569.823870707787,\n      \"span_columns\": 6551,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    }\n  ],\n  \"delete_metaobjects_by_handle\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"feature_type\": \"content_block\",\n    \"target_merchant_display_name\": \"string\",\n    \"message\": \"string\",\n    \"product_id\": \"string\"\n  },\n  {\n    \"feature_type\": \"product_duplicate\",\n    \"target_merchant_display_name\": \"string\",\n    \"message\": \"string\",\n    \"product_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c70497a9-502f-4a79-a23e-94019cc8ac73",
+              "name": "Returned when the update is not possible.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_feature_type\": \"ab_test\",\n  \"upsert_metaobjects\": [\n    {\n      \"handle\": \"string\",\n      \"index\": 7402,\n      \"span_rows\": 9950,\n      \"aspect_ratio\": 6606.996798346794,\n      \"span_columns\": 2704,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    },\n    {\n      \"handle\": \"string\",\n      \"index\": 3028,\n      \"span_rows\": 9555,\n      \"aspect_ratio\": 2569.823870707787,\n      \"span_columns\": 6551,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    }\n  ],\n  \"delete_metaobjects_by_handle\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8de5b5f4-5290-4a6c-962e-2fcee21f8443",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_feature_type\": \"ab_test\",\n  \"upsert_metaobjects\": [\n    {\n      \"handle\": \"string\",\n      \"index\": 7402,\n      \"span_rows\": 9950,\n      \"aspect_ratio\": 6606.996798346794,\n      \"span_columns\": 2704,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    },\n    {\n      \"handle\": \"string\",\n      \"index\": 3028,\n      \"span_rows\": 9555,\n      \"aspect_ratio\": 2569.823870707787,\n      \"span_columns\": 6551,\n      \"content\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"id\": \"string\",\n      \"visibility\": \"desktop\",\n      \"hover_image\": {\n        \"gid\": \"string\",\n        \"filename\": \"string\",\n        \"type\": \"image\",\n        \"alt_text\": \"string\"\n      },\n      \"link\": {\n        \"type\": \"page\",\n        \"gid\": \"string\",\n        \"handle\": \"string\",\n        \"url\": \"string\"\n      },\n      \"text\": {\n        \"header\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"body\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"horizontal_alignment\": \"end\",\n        \"vertical_alignment\": \"start\",\n        \"background_overlay\": \"string\",\n        \"gap\": \"string\"\n      }\n    }\n  ],\n  \"delete_metaobjects_by_handle\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "974633bd-2127-49cf-95a8-79e0f248ff8a",
+          "name": "Get Content Block Clicks",
+          "request": {
+            "name": "Get Content Block Clicks",
+            "description": {},
+            "url": {
+              "path": [
+                "brand-features",
+                "content-block-clicks",
+                ":collection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "641f344a-8313-4f61-ae4b-37c72aa3cca2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    "content-block-clicks",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"content_block_id\": 5541,\n    \"handle\": \"string\",\n    \"nbr_clicks\": 9661\n  },\n  {\n    \"content_block_id\": 9547,\n    \"handle\": \"string\",\n    \"nbr_clicks\": 2041\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2494c6e0-6062-4863-b32b-5088997c04b0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    "content-block-clicks",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdda0ebb-20a2-4d0c-b260-676057d81baa",
+          "name": "Update Metaobject",
+          "request": {
+            "name": "Update Metaobject",
+            "description": {
+              "content": "This endpoint should be used to update already existing metaobjects data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brand-features",
+                "metaobject",
+                ":metaobject_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metaobject_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handle\": \"<string>\",\n  \"start_date\": \"<string>\",\n  \"end_date\": \"<string>\",\n  \"experiment_name\": \"<string>\",\n  \"notify_email\": \"<string>\",\n  \"id\": \"<string>\",\n  \"generated_conclusion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ce7b49f-bec8-46e3-8c08-b1f20085b70c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    "metaobject",
+                    ":metaobject_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metaobject_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"handle\": \"<string>\",\n  \"start_date\": \"<string>\",\n  \"end_date\": \"<string>\",\n  \"experiment_name\": \"<string>\",\n  \"notify_email\": \"<string>\",\n  \"id\": \"<string>\",\n  \"generated_conclusion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83b52df2-d920-4bb0-907d-f60a648d004c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brand-features",
+                    "metaobject",
+                    ":metaobject_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metaobject_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"handle\": \"<string>\",\n  \"start_date\": \"<string>\",\n  \"end_date\": \"<string>\",\n  \"experiment_name\": \"<string>\",\n  \"notify_email\": \"<string>\",\n  \"id\": \"<string>\",\n  \"generated_conclusion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4bb7c313-b8f7-417c-b304-3427993f54a3",
+    "name": "Depict Lite Ab Test Brand Features API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

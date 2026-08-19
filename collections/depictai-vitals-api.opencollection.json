@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Vitals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vitals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vitals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/vitals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Vitals"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

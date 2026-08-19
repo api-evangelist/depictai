@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Listing (v3) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Listing (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v3/listings",
+            "params": [
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the full listing hierarchy. Useful for navigation menus, listing selection dialogs, etc.\nCan optionally be filtered to only show listings of certain types.\n\nExample response:\n<pre>\n[\n    {\n        \"listing_id\": \"f346c448-4cf1-4373-9156-49e222cd6db0\",\n        \"listing_type\": \"smart_pick\",\n        \"show_in_breadcrumbs\": false,\n        \"show_in_quicklinks\": false,\n        \"title\": \"Trending\",\n        \"children\": []\n    },\n    {\n        \"listing_id\": \"2efca23d-f077-4477-8830-cc7143c49173\",\n "
+        },
+        {
+          "info": {
+            "name": "Get Listing Via External Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v3/listings/external_id/:external_id",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID,\nor \"external\" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.\n\nUseful for showing breadcrumbs and other navigation elements while showing a product listing page.\n\nExample response:\n<pre>\n{\n    \"listing_id\": \"06b234cf-ce21-4252-90e6-db47246b1d98\",\n    \"external_id\": \"1011\",\n    \"listing_type\": \"category\",\n   "
+        },
+        {
+          "info": {
+            "name": "Get Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v3/listings/:listing_id",
+            "params": [
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single listing, including its ancestors, siblings and children. Listings can be queried by either their Depict ID,\nor \"external\" ID, which is the ID used by the merchant's system (ie Shopify, Centra, WooCommerce, etc) to refer to the listing.\n\nUseful for showing breadcrumbs and other navigation elements while showing a product listing page.\n\nExample response:\n<pre>\n{\n    \"listing_id\": \"06b234cf-ce21-4252-90e6-db47246b1d98\",\n    \"external_id\": \"1011\",\n    \"listing_type\": \"category\",\n   "
+        },
+        {
+          "info": {
+            "name": "Get Products In Listing, Via External Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v3/listings/external_id/:external_id/products",
+            "headers": [
+              {
+                "name": "x-use-db-display-store",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns products in a listing, optionally filtered. Used for product listing pages.\n\nExample response:\n<pre>\n{\n    \"displays\": [\n        {\n        \"variant_index\": 1,\n        \"variant_displays\": [\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1500-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\""
+        },
+        {
+          "info": {
+            "name": "Get Products In Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v3/listings/:listing_id/products",
+            "headers": [
+              {
+                "name": "x-use-db-display-store",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns products in a listing, optionally filtered. Used for product listing pages.\n\nExample response:\n<pre>\n{\n    \"displays\": [\n        {\n        \"variant_index\": 1,\n        \"variant_displays\": [\n            {\n            \"in_stock\": true,\n            \"original_price\": 1999,\n            \"sale_price\": 1999,\n            \"title\": \"Short Sleeve Polo Shirt\",\n            \"size\": \"210\",\n            \"product_id\": \"1500-10-210\",\n            \"image_urls\": [\n                \"https://example.cdn.com/1.jpg\""
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

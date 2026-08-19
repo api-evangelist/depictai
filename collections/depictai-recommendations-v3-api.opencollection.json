@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Recommendations (v3) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v3/recommend/products",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recommendations"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

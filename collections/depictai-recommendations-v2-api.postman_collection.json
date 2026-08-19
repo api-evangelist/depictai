@@ -1,0 +1,672 @@
+{
+  "item": [
+    {
+      "id": "57872c5a-d19d-4768-91c5-9cb6729911ed",
+      "name": "Recommendations (v2)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6709a115-f143-4e5f-97ad-7b9b612a7eee",
+          "name": "Recommend For User",
+          "request": {
+            "name": "Recommend For User",
+            "description": {
+              "content": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recommend",
+                "products",
+                "general"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "referer",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6dda532-c43f-416f-ae58-935d3439804d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "general"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displays\": [],\n  \"error\": \"string\",\n  \"variant\": 5129,\n  \"experiment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1029988-d11b-4732-9ce2-9df98ee1ceac",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "general"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46465bab-6f65-4ad2-9c97-a25f59571e3d",
+          "name": "Recommend For Product And User",
+          "request": {
+            "name": "Recommend For Product And User",
+            "description": {
+              "content": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recommend",
+                "products",
+                "product"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "referer",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a46816f-b163-430c-a2ce-aac7437de91a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displays\": [],\n  \"error\": \"string\",\n  \"variant\": 5129,\n  \"experiment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38116506-e3c3-4d07-b814-a1442d6d48e9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "632710e0-f16d-4408-84b6-bc617424bd72",
+          "name": "Recommend For Category And User",
+          "request": {
+            "name": "Recommend For Category And User",
+            "description": {
+              "content": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8804-8b7105a9c8a5\"\n    }]\n}\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recommend",
+                "products",
+                "category"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "referer",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0465b0d7-06c9-4d7a-b908-97f851ff04f8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "category"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displays\": [],\n  \"error\": \"string\",\n  \"variant\": 5129,\n  \"experiment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "755ab08f-28f4-49d1-a763-797ab1b7c0bc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "category"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb4980fc-c92f-4067-9ad5-7627021fe3a0",
+          "name": "Recommend For Products And User",
+          "request": {
+            "name": "Recommend For Products And User",
+            "description": {
+              "content": "Returns an object with an array of recommendation displays.\n\nEach display will contain a recommendation_id (which is also present as a URL parameter in `display.page_url`).\nThe recommendation_id should be sent to the `create-events` endpoint if the user interacts with the recommendation.\nThis is typically achieved by storing the recommendation as a data attribute on the HTML element containing the recommendation.\n\nExample response:\n<pre>\n{\n    \"displays\": [{\n        \"title\": \"Mechanical Keyboard\",\n        \"price\": \"100.00\",\n        \"image_url\": \"https://my_store.com/awesome_mechanical_keyboard.jpeg\",\n        \"page_url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n        \"product_id\": \"awesome_mechanical_keyboard\",\n        \"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"\n    }]\n}\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recommend",
+                "products",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "referer",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07a947d0-ec87-4a7c-8d50-15885f4c9b64",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displays\": [],\n  \"error\": \"string\",\n  \"variant\": 5129,\n  \"experiment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26118d45-0f6e-4bbf-8771-3018794623d0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recommend",
+                    "products",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"type\": \"<string>\",\n  \"product_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locale\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"document_referrer\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74deca8e-d687-4162-a819-72a8afc89b58",
+    "name": "Depict Lite Ab Test Recommendations (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

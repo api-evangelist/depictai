@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Search (v2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/search/results",
+            "headers": [
+              {
+                "name": "x-use-db-display-store",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to get search results that match the given query. Has support for filtering and\nsorting.\n\nExample response:\n<pre>\n{\n   \"n_hits\": 1,\n   \"displays\": [\n     {\n         \"product_id\": \"foobar\",\n         \"title\": \"Foobar\"\n     }\n   ],\n   \"sorts\": [\n     {\n       \"field\": \"_relevance\",\n       \"order\": \"desc\",\n       \"meta\": {\n         \"title\": \"Relevance\",\n         \"values\": [\n           \"desc\"\n         ],\n         \"names\": [\n           \"Relevance\"\n         ]\n       }\n     },\n     {\n       \"field\""
+        },
+        {
+          "info": {
+            "name": "Get Suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v2/search/suggestions",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dsid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns suggestions for a given query. Call this while the user is typing to help\nthe user find what they're looking for. The suggestions are of two types:\n- suggestions for search queries that are related to the current query\n- suggestions for categories that are related to the current query\n\nExample response:\n<pre>\n{\n  \"suggestions_request_id\": \"c6fa5efd-1bde-43a8-9ac4-434605f53024\",\n  \"suggestions\": [\n    {\n      \"type\": \"query\",\n      \"title\": \"red hat\",\n      \"suggestions_result_id\": \"60c54"
+        },
+        {
+          "info": {
+            "name": "Get Related Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/search/related",
+            "headers": [
+              {
+                "name": "x-use-db-display-store",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns recommendations for products related to the search query. Note that this\nendpoint takes the same request body as the `/v2/search/results` endpoint, excluding\nthe pagination parameters. It should be called once the user has exhausted the\nsearch results for their query and the recommended products are typically shown\nbelow the search results."
+        },
+        {
+          "info": {
+            "name": "Search Through Text Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v2/search/content",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dsid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "(EXPERIMENTAL) Search through text content. The indexed text content is configurable.\n\nExample response:\nWIP\n</pre>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

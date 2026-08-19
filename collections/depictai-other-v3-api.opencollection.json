@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Other (v3) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Other (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Displays",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v3/get-displays",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Displays"
+        },
+        {
+          "info": {
+            "name": "Get Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v3/markets",
+            "params": [
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Markets"
+        },
+        {
+          "info": {
+            "name": "Get Locales",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/v3/locales",
+            "params": [
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Locales"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

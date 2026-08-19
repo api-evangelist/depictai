@@ -1,0 +1,758 @@
+{
+  "item": [
+    {
+      "id": "017f0914-cb4c-4ed0-9ab1-6aa30e7c55bb",
+      "name": "Search (v2)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "078decc4-4bd4-4bc5-b3d8-bf7f6252ec6d",
+          "name": "Get Results",
+          "request": {
+            "name": "Get Results",
+            "description": {
+              "content": "Used to get search results that match the given query. Has support for filtering and\nsorting.\n\nExample response:\n<pre>\n{\n   \"n_hits\": 1,\n   \"displays\": [\n     {\n         \"product_id\": \"foobar\",\n         \"title\": \"Foobar\"\n     }\n   ],\n   \"sorts\": [\n     {\n       \"field\": \"_relevance\",\n       \"order\": \"desc\",\n       \"meta\": {\n         \"title\": \"Relevance\",\n         \"values\": [\n           \"desc\"\n         ],\n         \"names\": [\n           \"Relevance\"\n         ]\n       }\n     },\n     {\n       \"field\": \"title\",\n       \"order\": \"asc\",\n       \"meta\": {\n         \"title\": \"Title\",\n         \"values\": [\n           \"asc\",\n           \"desc\"\n         ],\n         \"names\": [\n           \"A-Z\",\n           \"Z-A\"\n         ]\n       }\n     }\n   ],\n   \"filters\": [\n     {\n       \"field\": \"sale_price\",\n       \"op\": \"inrange\",\n       \"data\": [\n         0,\n         2500\n       ],\n       \"meta\": {\n         \"group_title\": \"Price\",\n         \"type\": \"range\",\n         \"min\": 0,\n         \"max\": 2500,\n         \"currency\": \"EUR\"\n       },\n       \"id\": \"price0\"\n     },\n     {\n       \"field\": \"color_name\",\n       \"op\": \"in\",\n       \"meta\": {\n         \"group_title\": \"Color\",\n         \"type\": \"checkbox\",\n         \"values\": [\n           \"Blue\",\n           \"Black\",\n           \"Brown\"\n         ]\n       },\n       \"id\": \"colors1\"\n     }\n   ],\n   \"search_request_id\": \"1a278f4a-16eb-4d95-a002-88bd305493d4\",\n   \"cursor\": \"eyJjIjogMSwgInIiOiAwfQ==\"\n }\n </pre>\n\n Example request body for applying a filter:\n <pre>\n {\n    \"tenant\": \"foobar\"\n    \"market\": \"en\",\n    \"limit\": 20,\n    \"query\": \"hoodie\",\n    \"filters\": [\n        {\n            \"field\": \"color_name\",\n            \"op\": \"in\",\n            \"data\": [\"Blue\"]\n        }\n    ]\n }\n </pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "search",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-use-db-display-store",
+                "value": "false",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"cursor\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"op\": \"<string>\",\n      \"data\": \"<string>\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"op\": \"<string>\",\n      \"data\": \"<string>\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"<string>\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"order\": \"<string>\",\n    \"meta\": {\n      \"title\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1af3d314-eddf-4e80-9ebd-57bacb9b7b43",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-use-db-display-store",
+                    "value": "false",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"cursor\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"filters\": [\n    {\n      \"field\": \"string\",\n      \"op\": \"nin\",\n      \"data\": \"true\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 3668.1032331910455,\n        \"max\": 9209.634562284054,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"op\": \"neq\",\n      \"data\": \"true\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 9688.706307367682,\n        \"max\": 3934.9711865310455,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"string\",\n    \"order\": \"asc\",\n    \"meta\": {\n      \"title\": \"string\",\n      \"values\": [\n        \"desc\",\n        \"desc\"\n      ],\n      \"names\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"n_hits\": 6502,\n  \"search_request_id\": \"string\",\n  \"displays\": [],\n  \"sorts\": [\n    {\n      \"field\": \"string\",\n      \"order\": \"asc\",\n      \"meta\": {\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"names\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    {\n      \"field\": \"string\",\n      \"order\": \"desc\",\n      \"meta\": {\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"names\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"filters\": [\n    {\n      \"field\": \"string\",\n      \"op\": \"eq\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 793.0232075198818,\n        \"max\": 3589.1688997667125,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"op\": \"nin\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 3450.3393583015054,\n        \"max\": 4169.705648134534,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"cursor\": \"string\",\n  \"content_search_links\": [\n    {\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"page_url\": \"string\",\n      \"type\": \"content_link\",\n      \"image_url\": \"string\",\n      \"highlights\": [\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"page_url\": \"string\",\n      \"type\": \"content_link\",\n      \"image_url\": \"string\",\n      \"highlights\": [\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"debug_info\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2b49a32-02cd-4654-b4e7-93b89332f6c5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-use-db-display-store",
+                    "value": "false",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"cursor\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"filters\": [\n    {\n      \"field\": \"string\",\n      \"op\": \"nin\",\n      \"data\": \"true\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 3668.1032331910455,\n        \"max\": 9209.634562284054,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"op\": \"neq\",\n      \"data\": \"true\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 9688.706307367682,\n        \"max\": 3934.9711865310455,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"string\",\n    \"order\": \"asc\",\n    \"meta\": {\n      \"title\": \"string\",\n      \"values\": [\n        \"desc\",\n        \"desc\"\n      ],\n      \"names\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b111dd1-9115-4d10-a0df-37c7a9a9762f",
+          "name": "Get Suggestions",
+          "request": {
+            "name": "Get Suggestions",
+            "description": {
+              "content": "Returns suggestions for a given query. Call this while the user is typing to help\nthe user find what they're looking for. The suggestions are of two types:\n- suggestions for search queries that are related to the current query\n- suggestions for categories that are related to the current query\n\nExample response:\n<pre>\n{\n  \"suggestions_request_id\": \"c6fa5efd-1bde-43a8-9ac4-434605f53024\",\n  \"suggestions\": [\n    {\n      \"type\": \"query\",\n      \"title\": \"red hat\",\n      \"suggestions_result_id\": \"60c54958-8f2d-4ffd-a343-d316e79593b8\"\n    },\n    {\n      \"category_id\": \"sweaters-hoodies\",\n      \"title\": \"Sweaters & Hoodies\",\n      \"page_url\": \"https://foobar.com/sweaters-hoodies\",\n      \"type\": \"category\",\n      \"suggestions_result_id\": \"b11ee4a9-0d95-4559-b1fa-76479ca3e3ea\"\n    }\n  ]\n}\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "search",
+                "suggestions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "market",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "session_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dsid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cb5230e7-ad0a-404d-b220-6ecc471b6def",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "suggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dsid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"suggestions_request_id\": \"string\",\n  \"suggestions\": [\n    {\n      \"title\": \"string\",\n      \"suggestions_result_id\": \"string\",\n      \"type\": \"query\"\n    },\n    {\n      \"title\": \"string\",\n      \"suggestions_result_id\": \"string\",\n      \"type\": \"query\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcb136c2-8895-4118-94ca-121ad3a680ec",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "suggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dsid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f385ff55-2370-4aae-bc8f-7911c61b21e5",
+          "name": "Get Related Recommendations",
+          "request": {
+            "name": "Get Related Recommendations",
+            "description": {
+              "content": "Returns recommendations for products related to the search query. Note that this\nendpoint takes the same request body as the `/v2/search/results` endpoint, excluding\nthe pagination parameters. It should be called once the user has exhausted the\nsearch results for their query and the recommended products are typically shown\nbelow the search results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "search",
+                "related"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-use-db-display-store",
+                "value": "false",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"op\": \"<string>\",\n      \"data\": \"<string>\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"op\": \"<string>\",\n      \"data\": \"<string>\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"<string>\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"order\": \"<string>\",\n    \"meta\": {\n      \"title\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b83ca9e2-0dcd-48d4-80e5-2e2e42f20596",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "related"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-use-db-display-store",
+                    "value": "false",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"filters\": [\n    {\n      \"field\": \"string\",\n      \"op\": \"inrange\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 4214.365108798829,\n        \"max\": 993.7176935207804,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"op\": \"eq\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 6723.248530834436,\n        \"max\": 4153.563479558933,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"string\",\n    \"order\": \"desc\",\n    \"meta\": {\n      \"title\": \"string\",\n      \"values\": [\n        \"desc\",\n        \"desc\"\n      ],\n      \"names\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displays\": [],\n  \"error\": \"string\",\n  \"variant\": 2411,\n  \"experiment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00d9bb44-0f6f-426c-bb8c-9df821b0f71b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "related"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-use-db-display-store",
+                    "value": "false",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"filters\": [\n    {\n      \"field\": \"string\",\n      \"op\": \"inrange\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 4214.365108798829,\n        \"max\": 993.7176935207804,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"op\": \"eq\",\n      \"data\": \"false\",\n      \"meta\": {\n        \"type\": {},\n        \"min\": 6723.248530834436,\n        \"max\": 4153.563479558933,\n        \"group_title\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group_expanded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"sort\": {\n    \"field\": \"string\",\n    \"order\": \"desc\",\n    \"meta\": {\n      \"title\": \"string\",\n      \"values\": [\n        \"desc\",\n        \"desc\"\n      ],\n      \"names\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"session_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"dsid\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0fd1040-c71b-4e88-8e39-6681cc4c586f",
+          "name": "Search Through Text Content",
+          "request": {
+            "name": "Search Through Text Content",
+            "description": {
+              "content": "(EXPERIMENTAL) Search through text content. The indexed text content is configurable.\n\nExample response:\nWIP\n</pre>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "search",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "market",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "session_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dsid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "df483368-290c-48fe-858d-0795e6a285bf",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dsid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content_request_id\": \"string\",\n  \"links\": [\n    {\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"page_url\": \"string\",\n      \"type\": \"content_link\",\n      \"image_url\": \"string\",\n      \"highlights\": [\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"page_url\": \"string\",\n      \"type\": \"content_link\",\n      \"image_url\": \"string\",\n      \"highlights\": [\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"field\": \"string\",\n          \"snippet\": \"string\",\n          \"matched_tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67734b79-d349-444d-bf17-e0ff57227e7a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "search",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dsid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39076fdd-e30c-4ac2-8d53-872f3b819331",
+    "name": "Depict Lite Ab Test Search (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "item": [
+    {
+      "id": "0db38731-a07b-44f7-a2c7-8e0a2ee0700a",
+      "name": "Ab Test",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4154b32d-5fb8-4f91-a533-8c294681ce29",
+          "name": "Get Metrics",
+          "request": {
+            "name": "Get Metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "ab-test",
+                ":collection_id",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ce8f78aa-e1b1-4db1-931f-902be1232fd6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ab-test",
+                    ":collection_id",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page_views\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 3710,\n      \"metric_b\": 5651\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 7898,\n      \"metric_b\": 3079\n    }\n  ],\n  \"clicks\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 9358,\n      \"metric_b\": 9937\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 7153,\n      \"metric_b\": 7487\n    }\n  ],\n  \"click_thru_rate\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 6968,\n      \"metric_b\": 6723\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 5242,\n      \"metric_b\": 7218\n    }\n  ],\n  \"p_value_click_thru_rate\": 7629.356353155773,\n  \"add_to_carts\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 3050,\n      \"metric_b\": 5250\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 3327,\n      \"metric_b\": 4535\n    }\n  ],\n  \"add_to_cart_thru_rate\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 6833,\n      \"metric_b\": 498\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 8842,\n      \"metric_b\": 7053\n    }\n  ],\n  \"p_value_add_to_cart_thru_rate\": 9894.93890536772,\n  \"purchases\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 2866,\n      \"metric_b\": 5438\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 7430,\n      \"metric_b\": 6112\n    }\n  ],\n  \"purchases_thru_rate\": [\n    {\n      \"day\": \"string\",\n      \"metric_a\": 1135,\n      \"metric_b\": 4934\n    },\n    {\n      \"day\": \"string\",\n      \"metric_a\": 2557,\n      \"metric_b\": 8930\n    }\n  ],\n  \"p_value_purchases_thru_rate\": 6723.568571025288\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb3f24e5-2011-4d2d-a9f5-cf0822296587",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ab-test",
+                    ":collection_id",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "139df3a0-a0db-49ed-b59c-1da00c851ce2",
+          "name": "Generate Conclusion",
+          "request": {
+            "name": "Generate Conclusion",
+            "description": {},
+            "url": {
+              "path": [
+                "ab-test",
+                "generate_conclusion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metaobject\": {\n    \"handle\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"experiment_name\": \"<string>\",\n    \"notify_email\": \"<string>\",\n    \"id\": \"<string>\",\n    \"generated_conclusion\": \"<string>\"\n  },\n  \"data\": {\n    \"page_views\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"clicks\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"click_thru_rate\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"p_value_click_thru_rate\": \"<number>\",\n    \"add_to_carts\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"add_to_cart_thru_rate\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"p_value_add_to_cart_thru_rate\": \"<number>\",\n    \"purchases\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"purchases_thru_rate\": [\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      },\n      {\n        \"day\": \"<string>\",\n        \"metric_a\": \"<integer>\",\n        \"metric_b\": \"<integer>\"\n      }\n    ],\n    \"p_value_purchases_thru_rate\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c35e9359-9267-4ef5-94d5-65e749e83237",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ab-test",
+                    "generate_conclusion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metaobject\": {\n    \"handle\": \"string\",\n    \"start_date\": \"string\",\n    \"end_date\": \"string\",\n    \"experiment_name\": \"string\",\n    \"notify_email\": \"string\",\n    \"id\": \"string\",\n    \"generated_conclusion\": \"string\"\n  },\n  \"data\": {\n    \"page_views\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 7837,\n        \"metric_b\": 1189\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1114,\n        \"metric_b\": 4883\n      }\n    ],\n    \"clicks\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 7297,\n        \"metric_b\": 6575\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 265,\n        \"metric_b\": 9478\n      }\n    ],\n    \"click_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 8724,\n        \"metric_b\": 1015\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 4480,\n        \"metric_b\": 8708\n      }\n    ],\n    \"p_value_click_thru_rate\": 8091.346631686803,\n    \"add_to_carts\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1400,\n        \"metric_b\": 3000\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1225,\n        \"metric_b\": 1300\n      }\n    ],\n    \"add_to_cart_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9835,\n        \"metric_b\": 9395\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 3491,\n        \"metric_b\": 8100\n      }\n    ],\n    \"p_value_add_to_cart_thru_rate\": 5644.61375170757,\n    \"purchases\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9665,\n        \"metric_b\": 4656\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 2282,\n        \"metric_b\": 8353\n      }\n    ],\n    \"purchases_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 959,\n        \"metric_b\": 2780\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9071,\n        \"metric_b\": 4431\n      }\n    ],\n    \"p_value_purchases_thru_rate\": 3716.5851002906616\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aa4476a-4bb9-43f8-a1b5-cd2568c8b1d3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ab-test",
+                    "generate_conclusion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metaobject\": {\n    \"handle\": \"string\",\n    \"start_date\": \"string\",\n    \"end_date\": \"string\",\n    \"experiment_name\": \"string\",\n    \"notify_email\": \"string\",\n    \"id\": \"string\",\n    \"generated_conclusion\": \"string\"\n  },\n  \"data\": {\n    \"page_views\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 7837,\n        \"metric_b\": 1189\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1114,\n        \"metric_b\": 4883\n      }\n    ],\n    \"clicks\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 7297,\n        \"metric_b\": 6575\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 265,\n        \"metric_b\": 9478\n      }\n    ],\n    \"click_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 8724,\n        \"metric_b\": 1015\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 4480,\n        \"metric_b\": 8708\n      }\n    ],\n    \"p_value_click_thru_rate\": 8091.346631686803,\n    \"add_to_carts\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1400,\n        \"metric_b\": 3000\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 1225,\n        \"metric_b\": 1300\n      }\n    ],\n    \"add_to_cart_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9835,\n        \"metric_b\": 9395\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 3491,\n        \"metric_b\": 8100\n      }\n    ],\n    \"p_value_add_to_cart_thru_rate\": 5644.61375170757,\n    \"purchases\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9665,\n        \"metric_b\": 4656\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 2282,\n        \"metric_b\": 8353\n      }\n    ],\n    \"purchases_thru_rate\": [\n      {\n        \"day\": \"string\",\n        \"metric_a\": 959,\n        \"metric_b\": 2780\n      },\n      {\n        \"day\": \"string\",\n        \"metric_a\": 9071,\n        \"metric_b\": 4431\n      }\n    ],\n    \"p_value_purchases_thru_rate\": 3716.5851002906616\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d93cd51a-0dcc-471d-912a-15245bed58a6",
+    "name": "Depict Lite Ab Test API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

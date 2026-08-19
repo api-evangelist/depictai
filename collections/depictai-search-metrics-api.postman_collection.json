@@ -1,0 +1,267 @@
+{
+  "item": [
+    {
+      "id": "bd1c278c-1911-41d2-84df-78323388963f",
+      "name": "Search Metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10bf6dbc-a8a2-48b0-8621-1780ad55a01e",
+          "name": "Get Search Query Stats Endpoint",
+          "request": {
+            "name": "Get Search Query Stats Endpoint",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "merchants",
+                ":merchant_id",
+                "search",
+                "metrics",
+                "queries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_queries_per_market",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "market",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "merchant_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4de99458-7ec4-4cff-bda6-c162485f7370",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "merchants",
+                    ":merchant_id",
+                    "search",
+                    "metrics",
+                    "queries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_queries_per_market",
+                      "value": "10"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchant_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"markets\": [\n    {\n      \"market\": \"string\",\n      \"locale\": \"string\",\n      \"top_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 3298,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 863,\n          \"locale\": \"string\"\n        }\n      ],\n      \"top_no_result_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 304,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 41,\n          \"locale\": \"string\"\n        }\n      ]\n    },\n    {\n      \"market\": \"string\",\n      \"locale\": \"string\",\n      \"top_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 1906,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 9788,\n          \"locale\": \"string\"\n        }\n      ],\n      \"top_no_result_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 632,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 3079,\n          \"locale\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"prev_markets\": [\n    {\n      \"market\": \"string\",\n      \"locale\": \"string\",\n      \"top_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 6192,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 410,\n          \"locale\": \"string\"\n        }\n      ],\n      \"top_no_result_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 8568,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 6316,\n          \"locale\": \"string\"\n        }\n      ]\n    },\n    {\n      \"market\": \"string\",\n      \"locale\": \"string\",\n      \"top_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 6752,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 7609,\n          \"locale\": \"string\"\n        }\n      ],\n      \"top_no_result_queries\": [\n        {\n          \"query\": \"string\",\n          \"count\": 3431,\n          \"locale\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"count\": 6708,\n          \"locale\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66132c35-189d-40ca-b03e-8ea07b6d248c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "merchants",
+                    ":merchant_id",
+                    "search",
+                    "metrics",
+                    "queries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_queries_per_market",
+                      "value": "10"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchant_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5ee5f120-8e33-4fc5-84c0-9e0a3724fcb3",
+    "name": "Depict Lite Ab Test Search Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

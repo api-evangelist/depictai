@@ -1,0 +1,503 @@
+{
+  "item": [
+    {
+      "id": "9529574a-1c9d-4023-8ba3-a4b6cbcee11b",
+      "name": "Events (v2)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4093a914-7390-47a0-9f87-4d81d18c63c7",
+          "name": "Create Events",
+          "request": {
+            "name": "Create Events",
+            "description": {
+              "content": "There are 5 types of events:\n- page_view\n- click\n- add_to_cart\n- purchase\n- element_visible\n\nFor most integrations, we recommend sending `add_to_cart` events. Note that most of the event fields are not mandatory.\nSee more details about each event field below.\n\nFor events of type `click` the `recommendation_id` for the clicked recommendation (which is returned from the `/recommend` endpoint)\nshould be set if available.\n\n\nExamples requests:\n\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"page_view\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"click\",</mark>\n    \"user_id\": \"ga1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"bla-key-xxx\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\",\n    <mark>\"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\",</mark>\n    <mark>\"click_location\": \"landing_page_recommendation_1\"</mark>\n}]\n</pre>\n\n\n<details>\n  <summary>View more examples</summary>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"add_to_cart\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/awesome_mechanical_keyboard.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"purchase\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/checkout.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\"\n}]\n</pre>\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n    <mark>\"type\": \"element_visible\",</mark>\n    \"user_id\": \"GA1.2.00000000.0000000000\",\n    \"url\": \"https://my_store.com/checkout.html\",\n    \"product_id\": \"BLA-KEY-XXX\",\n    \"entity_identifiers\": {\n        \"sku\": \"31415\"\n    },\n    \"entity_price\": \"100$\",\n    \"document_width\": \"300\",\n    <mark>\"recommendation_id\": \"827ada29-92e7-4642-8805-8b7105a9c8a5\"</mark>\n}]\n</pre>\n</details>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "create-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "referer",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "user-agent",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "x-forwarded-for",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "x-forwarded-host",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"tenant\": \"<string>\",\n    \"market\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deduplication_id\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"session_id\": \"<string>\",\n    \"dsid\": \"<string>\",\n    \"ab_test_group\": \"<string>\",\n    \"product_id\": \"<string>\",\n    \"variant_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"url\": \"<string>\",\n    \"entity_price\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"document_referrer\": \"<string>\",\n    \"document_width\": \"<string>\",\n    \"attribution_id\": \"<string>\",\n    \"recommendation_id\": \"<string>\",\n    \"search_result_id\": \"<string>\",\n    \"product_listing_result_id\": \"<string>\",\n    \"click_location\": \"<string>\",\n    \"page_url\": \"<string>\",\n    \"recommendation_type\": \"<string>\"\n  },\n  {\n    \"tenant\": \"<string>\",\n    \"market\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deduplication_id\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"session_id\": \"<string>\",\n    \"dsid\": \"<string>\",\n    \"ab_test_group\": \"<string>\",\n    \"product_id\": \"<string>\",\n    \"variant_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"url\": \"<string>\",\n    \"entity_price\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"document_referrer\": \"<string>\",\n    \"document_width\": \"<string>\",\n    \"attribution_id\": \"<string>\",\n    \"recommendation_id\": \"<string>\",\n    \"search_result_id\": \"<string>\",\n    \"product_listing_result_id\": \"<string>\",\n    \"click_location\": \"<string>\",\n    \"page_url\": \"<string>\",\n    \"recommendation_type\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "880608b2-8496-41f5-9d5a-4815450d45d3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "create-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "user-agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-for",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-host",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tenant\": \"string\",\n    \"market\": \"string\",\n    \"type\": \"ws_click\",\n    \"deduplication_id\": \"string\",\n    \"user_id\": \"string\",\n    \"session_id\": \"string\",\n    \"dsid\": \"string\",\n    \"ab_test_group\": \"string\",\n    \"product_id\": \"string\",\n    \"variant_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"string\"\n    },\n    \"url\": \"string\",\n    \"entity_price\": \"string\",\n    \"currency\": \"string\",\n    \"document_referrer\": \"string\",\n    \"document_width\": \"string\",\n    \"attribution_id\": \"string\",\n    \"recommendation_id\": \"string\",\n    \"search_result_id\": \"string\",\n    \"product_listing_result_id\": \"string\",\n    \"click_location\": \"string\",\n    \"page_url\": \"string\",\n    \"recommendation_type\": \"string\"\n  },\n  {\n    \"tenant\": \"string\",\n    \"market\": \"string\",\n    \"type\": \"add_to_cart\",\n    \"deduplication_id\": \"string\",\n    \"user_id\": \"string\",\n    \"session_id\": \"string\",\n    \"dsid\": \"string\",\n    \"ab_test_group\": \"string\",\n    \"product_id\": \"string\",\n    \"variant_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"url\": \"string\",\n    \"entity_price\": \"string\",\n    \"currency\": \"string\",\n    \"document_referrer\": \"string\",\n    \"document_width\": \"string\",\n    \"attribution_id\": \"string\",\n    \"recommendation_id\": \"string\",\n    \"search_result_id\": \"string\",\n    \"product_listing_result_id\": \"string\",\n    \"click_location\": \"string\",\n    \"page_url\": \"string\",\n    \"recommendation_type\": \"string\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57b3b619-2b2f-4a13-b58b-8bd608a3fa2c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "create-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "referer",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "user-agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-for",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-host",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tenant\": \"string\",\n    \"market\": \"string\",\n    \"type\": \"ws_click\",\n    \"deduplication_id\": \"string\",\n    \"user_id\": \"string\",\n    \"session_id\": \"string\",\n    \"dsid\": \"string\",\n    \"ab_test_group\": \"string\",\n    \"product_id\": \"string\",\n    \"variant_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"string\"\n    },\n    \"url\": \"string\",\n    \"entity_price\": \"string\",\n    \"currency\": \"string\",\n    \"document_referrer\": \"string\",\n    \"document_width\": \"string\",\n    \"attribution_id\": \"string\",\n    \"recommendation_id\": \"string\",\n    \"search_result_id\": \"string\",\n    \"product_listing_result_id\": \"string\",\n    \"click_location\": \"string\",\n    \"page_url\": \"string\",\n    \"recommendation_type\": \"string\"\n  },\n  {\n    \"tenant\": \"string\",\n    \"market\": \"string\",\n    \"type\": \"add_to_cart\",\n    \"deduplication_id\": \"string\",\n    \"user_id\": \"string\",\n    \"session_id\": \"string\",\n    \"dsid\": \"string\",\n    \"ab_test_group\": \"string\",\n    \"product_id\": \"string\",\n    \"variant_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"entity_identifiers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"url\": \"string\",\n    \"entity_price\": \"string\",\n    \"currency\": \"string\",\n    \"document_referrer\": \"string\",\n    \"document_width\": \"string\",\n    \"attribution_id\": \"string\",\n    \"recommendation_id\": \"string\",\n    \"search_result_id\": \"string\",\n    \"product_listing_result_id\": \"string\",\n    \"click_location\": \"string\",\n    \"page_url\": \"string\",\n    \"recommendation_type\": \"string\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6f3ae1c-3108-48af-9116-263dfae47b80",
+          "name": "Track V2",
+          "request": {
+            "name": "Track V2",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"dsid\": \"<string>\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"dsid\": \"<string>\",\n      \"event_type\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "487225c5-44c5-4704-a8f5-9a1b5a64802a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96d30ecd-755b-4ae1-99d1-49ef1197af22",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af38d765-6346-48ac-8df0-4516f1469572",
+          "name": "Create Events V2",
+          "request": {
+            "name": "Create Events V2",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "create-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"dsid\": \"<string>\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"dsid\": \"<string>\",\n      \"event_type\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45358886-4f28-4bc3-8028-a410295a09e6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "create-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "387de385-3792-4b01-872d-9b2f70cac892",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "create-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenant\": \"<string>\",\n  \"market\": \"<string>\",\n  \"events\": [\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    },\n    {\n      \"transaction_id\": \"string\",\n      \"user_id\": \"string\",\n      \"session_id\": \"string\",\n      \"dsid\": \"string\",\n      \"event_type\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d282fe7b-3460-49b3-abc6-9bc663eff33f",
+    "name": "Depict Lite Ab Test Events (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

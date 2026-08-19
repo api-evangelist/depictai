@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Events (v2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/create-events",
+            "headers": [
+              {
+                "name": "referer",
+                "value": ""
+              },
+              {
+                "name": "user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              },
+              {
+                "name": "x-forwarded-host",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "There are 5 types of events:\n- page_view\n- click\n- add_to_cart\n- purchase\n- element_visible\n\nFor most integrations, we recommend sending `add_to_cart` events. Note that most of the event fields are not mandatory.\nSee more details about each event field below.\n\nFor events of type `click` the `recommendation_id` for the clicked recommendation (which is returned from the `/recommend` endpoint)\nshould be set if available.\n\n\nExamples requests:\n\n<pre>\n[{\n    \"tenant\": \"my_store\",\n    \"market\": \"us\",\n "
+        },
+        {
+          "info": {
+            "name": "Track V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/track",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Track V2"
+        },
+        {
+          "info": {
+            "name": "Create Events V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/v2/create-events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Events V2"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

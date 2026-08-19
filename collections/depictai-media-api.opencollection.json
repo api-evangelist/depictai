@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Media API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/media/:merchant_id/upload",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "The collection in which the merchant is when uploading the media. Used to determine the related collections."
+              },
+              {
+                "name": "alt_text",
+                "value": "",
+                "type": "query",
+                "description": "Alt text for the uploaded file"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Uploads media to shopify and waits until the file is ready in Shopify."
+        },
+        {
+          "info": {
+            "name": "Upload Media From Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/media/:merchant_id/upload_media_from_url",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "media_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "The collection in which the merchant is when uploading the media. Used to determine the related collections."
+              },
+              {
+                "name": "alt_text",
+                "value": "",
+                "type": "query",
+                "description": "Alt text for the uploaded file"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Uploads media to shopify from a URL by first creating a fileobject and then calling the upload_file endpoint"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

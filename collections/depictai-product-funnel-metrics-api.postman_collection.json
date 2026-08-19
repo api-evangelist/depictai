@@ -1,0 +1,273 @@
+{
+  "item": [
+    {
+      "id": "f1ecf46e-605d-469d-afa2-57f583ba3c66",
+      "name": "Product Funnel Metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e782b266-92ec-4be1-b45a-ad0fa15884df",
+          "name": "Get Product Funnel Metrics",
+          "request": {
+            "name": "Get Product Funnel Metrics",
+            "description": {
+              "content": "Get product funnel metrics for a given merchant and date range.\nReturns metrics including clicks, add to carts, orders, and various rates.\n\nArgs:\n    from_date: Start date for current period metrics\n    to_date: End date for current period metrics\n    merchant_id: Merchant ID to get metrics for\n    offset: Number of records to skip (for pagination)\n    order: Sort order for results (DESC or ASC)\n    order_by: Field to sort by (d_score, clicks, add_to_carts, or orders)\n    page_size: Number of records to return per page",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product-funnel-metrics",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "DESC"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "d_score"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "openid profile email"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://depict.eu.auth0.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6be05103-f844-48bc-a94f-b61ca9ec4fca",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product-funnel-metrics",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "order",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "d_score"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"merchant\": \"string\",\n    \"main_product_id\": \"string\",\n    \"clicks\": 7245,\n    \"prev_clicks\": 7374,\n    \"add_to_carts\": 9428,\n    \"prev_add_to_carts\": 7875,\n    \"orders\": 1298,\n    \"prev_orders\": 9223,\n    \"click_through_rate\": 4026.902156927176,\n    \"add_to_cart_rate\": 3953.795205109354,\n    \"order_through_rate\": 3105.587853579678,\n    \"d_score\": 3862.7804537720267,\n    \"prev_d_score\": 9701.004714160612,\n    \"normalized_d_score\": 2087.8132224568612,\n    \"normalized_prev_d_score\": 8406.504558763309,\n    \"product\": {\n      \"main_product_id\": \"string\",\n      \"title\": \"string\",\n      \"handle\": \"string\",\n      \"images\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"width\": 2801,\n          \"height\": 243,\n          \"alt\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"width\": 1607,\n          \"height\": 8744,\n          \"alt\": \"string\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": 7054.57420749149,\n      \"status\": \"ACTIVE\",\n      \"in_stock\": false,\n      \"quantity\": 1723,\n      \"badges\": [\n        {\n          \"type\": \"on_sale\",\n          \"sale_percentage\": 6321\n        },\n        {\n          \"type\": \"on_sale\",\n          \"sale_percentage\": 9972\n        }\n      ],\n      \"n_sold_current_period\": 960,\n      \"n_sold_last_7_days\": 1367,\n      \"clicks_current_period\": 8724,\n      \"skus\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1992-07-29T16:44:24.661Z\",\n      \"published_at\": \"1956-12-30T00:08:34.907Z\",\n      \"variants\": [\n        {\n          \"id\": \"string\",\n          \"image_url\": \"string\",\n          \"selected_options\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"image_url\": \"string\",\n          \"selected_options\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"collections\": [\n      {\n        \"collection_id\": \"string\",\n        \"position\": 2113,\n        \"title\": \"string\",\n        \"n_products\": 1934,\n        \"image_urls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_images\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"collection_id\": \"string\",\n        \"position\": 7412,\n        \"title\": \"string\",\n        \"n_products\": 8181,\n        \"image_urls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_images\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  {\n    \"merchant\": \"string\",\n    \"main_product_id\": \"string\",\n    \"clicks\": 9258,\n    \"prev_clicks\": 3753,\n    \"add_to_carts\": 4850,\n    \"prev_add_to_carts\": 8647,\n    \"orders\": 9975,\n    \"prev_orders\": 4710,\n    \"click_through_rate\": 3948.905011831869,\n    \"add_to_cart_rate\": 6230.655466749678,\n    \"order_through_rate\": 2641.284514675967,\n    \"d_score\": 3859.1482253212507,\n    \"prev_d_score\": 3985.7716926396656,\n    \"normalized_d_score\": 108.78957221580055,\n    \"normalized_prev_d_score\": 6015.172787937578,\n    \"product\": {\n      \"main_product_id\": \"string\",\n      \"title\": \"string\",\n      \"handle\": \"string\",\n      \"images\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"width\": 5339,\n          \"height\": 8899,\n          \"alt\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"width\": 6624,\n          \"height\": 5974,\n          \"alt\": \"string\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": 2466.129013839837,\n      \"status\": \"DRAFT\",\n      \"in_stock\": false,\n      \"quantity\": 7400,\n      \"badges\": [\n        {\n          \"type\": \"on_sale\",\n          \"sale_percentage\": 1278\n        },\n        {\n          \"type\": \"on_sale\",\n          \"sale_percentage\": 6060\n        }\n      ],\n      \"n_sold_current_period\": 7822,\n      \"n_sold_last_7_days\": 5937,\n      \"clicks_current_period\": 823,\n      \"skus\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1978-06-22T11:03:53.900Z\",\n      \"published_at\": \"2007-11-28T07:09:28.264Z\",\n      \"variants\": [\n        {\n          \"id\": \"string\",\n          \"image_url\": \"string\",\n          \"selected_options\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"image_url\": \"string\",\n          \"selected_options\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"collections\": [\n      {\n        \"collection_id\": \"string\",\n        \"position\": 4672,\n        \"title\": \"string\",\n        \"n_products\": 9567,\n        \"image_urls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_images\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"collection_id\": \"string\",\n        \"position\": 2409,\n        \"title\": \"string\",\n        \"n_products\": 7137,\n        \"image_urls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_images\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00265689-513e-45ff-aeae-574c74d78279",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product-funnel-metrics",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "order",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "d_score"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/lite",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7a05c18c-c456-47e1-93ae-78d35887c016",
+    "name": "Depict Lite Ab Test Product Funnel Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.",
+      "type": "text/plain"
+    }
+  }
+}

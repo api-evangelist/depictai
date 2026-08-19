@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Catalog Push API (v0) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog Push API (v0)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Product Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/product_ids"
+          },
+          "docs": "List Product Ids"
+        },
+        {
+          "info": {
+            "name": "List Category Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/category_ids"
+          },
+          "docs": "List Category Ids"
+        },
+        {
+          "info": {
+            "name": "Get Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/products",
+            "params": [
+              {
+                "name": "product_ids",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Products"
+        },
+        {
+          "info": {
+            "name": "Upsert Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/catalog/v0/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upsert Products"
+        },
+        {
+          "info": {
+            "name": "Delete Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/lite/catalog/v0/products",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete Products"
+        },
+        {
+          "info": {
+            "name": "Get Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/categories",
+            "params": [
+              {
+                "name": "category_ids",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Categories"
+        },
+        {
+          "info": {
+            "name": "Upsert Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/catalog/v0/categories",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upsert Categories"
+        },
+        {
+          "info": {
+            "name": "Delete Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/lite/catalog/v0/categories",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete Categories"
+        },
+        {
+          "info": {
+            "name": "Get Product Attribute Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/product_attribute_config"
+          },
+          "docs": "Get Product Attribute Config"
+        },
+        {
+          "info": {
+            "name": "Set Product Attribute Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/catalog/v0/product_attribute_config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Product Attribute Config"
+        },
+        {
+          "info": {
+            "name": "Get Category Attribute Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/catalog/v0/category_attribute_config"
+          },
+          "docs": "Get Category Attribute Config"
+        },
+        {
+          "info": {
+            "name": "Set Category Attribute Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/catalog/v0/category_attribute_config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Category Attribute Config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

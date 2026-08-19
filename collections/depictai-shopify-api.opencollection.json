@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Depict Lite Ab Test Shopify API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shopify",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get App Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/shopify/app-url/:merchant_id",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get App Url"
+        },
+        {
+          "info": {
+            "name": "Get Storefront Api Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/lite/shopify/storefront_api_credentials",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Storefront Api Credentials"
+        },
+        {
+          "info": {
+            "name": "Shopify Admin Api",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/lite/shopify/proxy/:merchant_id/admin-api/graphql.json",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://depict.eu.auth0.com/oauth/authorize",
+              "accessTokenUrl": "https://depict.eu.auth0.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Shopify Admin Api"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
