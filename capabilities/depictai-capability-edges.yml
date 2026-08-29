@@ -3,7 +3,7 @@ provider: Depict.AI
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Retail & Consumer Goods
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -13,24 +13,26 @@ capability_model:
   notice: NOTICE
 edge_count: 2
 edges:
+- tag: Catalog Push API (v0)
+  spec_file: depictai-catalog-push-api-v0-api-openapi.yml
+  capability_id: BC-2370.10
+  capability_id_l1: BC-2370
+  capability_name: Item Master Data Management
+  confidence: 0.75
+  evidence: POST /catalog/v0/products 'Upsert Products', POST /catalog/v0/categories 'Upsert Categories',
+    POST /catalog/v0/product_attribute_config; schemas APIProduct, APICategory, AttributeConfig, APIPricelistAttributes,
+    APIInventoryAttributes
+  reason: CRUD over product and category records plus attribute configuration and taxonomy — this is maintenance
+    of the item master record and its attribute hierarchy, i.e. Item Master Data Management. It is an
+    ingestion API for a downstream engine, which tempers confidence slightly.
 - tag: Ab Test
   spec_file: depictai-ab-test-api-openapi.yml
   capability_id: BC-4280.50
   capability_id_l1: BC-4280
   capability_name: A/B Test Execution
-  confidence: 0.8
-  evidence: GET /ab-test/{collection_id}/metrics "Get Metrics"; PUT /ab-test/generate_conclusion "Generate
-    Conclusion"; schemas ProAbTest, AbTestMetrics
-  reason: Operations read A/B test metrics and generate a test conclusion, which is execution and monitoring
-    of running A/B tests. Some ambiguity between A/B Test Execution and Experimentation Programme adjudication.
-- tag: Catalog Push API (v0)
-  spec_file: depictai-catalog-push-api-v0-api-openapi.yml
-  capability_id: BC-610.20
-  capability_id_l1: BC-610
-  capability_name: Master Data Management
-  confidence: 0.7
-  evidence: POST /catalog/v0/products "Upsert Products"; POST /catalog/v0/categories "Upsert Categories";
-    POST /catalog/v0/product_attribute_config "Set Product Attribute Config"
-  reason: Ingests and maintains product and category master records plus their attribute configuration
-    — product master data management. Alternative reading as product specification management is weaker
-    since these are catalogue records fed to the platform.
+  confidence: 0.74
+  evidence: GET /ab-test/{collection_id}/metrics Get Metrics; PUT /ab-test/generate_conclusion Generate
+    Conclusion; schemas ProAbTest, AbTestMetrics, AbTimeseriesMetric
+  reason: Operations monitor a running A/B test on a merchandised collection and generate its conclusion
+    — configuration/monitoring and adjudication of experiments. A/B Test Execution is the closest fit;
+    some overlap with experimentation programme management keeps confidence moderate.
