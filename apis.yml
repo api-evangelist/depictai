@@ -47,7 +47,7 @@ modified: '2026-07-18'
 image: https://depict.ai/en/opengraph-image?7e17831b390c6d53
 tags:
 - Company
-- E-Commerce
+- E Commerce
 - Search
 - Recommendations
 - Merchandising
@@ -196,7 +196,7 @@ apis:
   humanURL: https://docs.depict.ai/api-reference/headless/overview
   baseURL: https://api.depict.ai
   tags:
-  - Merchant
+  - merchant
   tags_raw:
   - merchant
   properties:
@@ -392,7 +392,7 @@ apis:
   humanURL: https://docs.depict.ai/api-reference/headless/overview
   baseURL: https://api.depict.ai
   tags:
-  - Tracking
+  - tracking
   tags_raw:
   - tracking
   properties:
