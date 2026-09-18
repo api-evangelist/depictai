@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Product Funnel Metrics API
+  title: Depict Lite Product Funnel Metrics API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
@@ -11,7 +11,26 @@ paths:
   /product-funnel-metrics/metrics:
     get:
       summary: Get Product Funnel Metrics
-      description: "Get product funnel metrics for a given merchant and date range.\nReturns metrics including clicks, add to carts, orders, and various rates.\n\nArgs:\n    from_date: Start date for current period metrics\n    to_date: End date for current period metrics\n    merchant_id: Merchant ID to get metrics for\n    offset: Number of records to skip (for pagination)\n    order: Sort order for results (DESC or ASC)\n    order_by: Field to sort by (d_score, clicks, add_to_carts, or orders)\n    page_size: Number of records to return per page"
+      description: 'Get product funnel metrics for a given merchant and date range.
+
+        Returns metrics including clicks, add to carts, orders, and various rates.
+
+
+        Args:
+
+        from_date: Start date for current period metrics
+
+        to_date: End date for current period metrics
+
+        merchant_id: Merchant ID to get metrics for
+
+        offset: Number of records to skip (for pagination)
+
+        order: Sort order for results (DESC or ASC)
+
+        order_by: Field to sort by (d_score, clicks, add_to_carts, or orders)
+
+        page_size: Number of records to return per page'
       operationId: get_product_funnel_metrics_product_funnel_metrics_metrics_get
       security:
       - Auth0: []
@@ -121,26 +140,6 @@ components:
       - id
       - url
       title: ShopifyImage
-    ProductStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - ARCHIVED
-      - DRAFT
-      title: ProductStatus
-    VariantOption:
-      properties:
-        name:
-          type: string
-          title: Name
-        value:
-          type: string
-          title: Value
-      type: object
-      required:
-      - name
-      - value
-      title: VariantOption
     OnSaleProductBadge:
       properties:
         type:
@@ -157,52 +156,80 @@ components:
       - type
       - sale_percentage
       title: OnSaleProductBadge
-    NewInProductBadge:
+    ProductFunnelMetricsResponse:
       properties:
-        type:
+        merchant:
           type: string
-          enum:
-          - new_in
-          const: new_in
-          title: Type
-        published_at:
+          title: Merchant
+        main_product_id:
           type: string
-          format: date-time
-          title: Published At
-      type: object
-      required:
-      - type
-      - published_at
-      title: NewInProductBadge
-    BestsellerProductBadge:
-      properties:
-        value:
-          type: number
-          title: Value
-        n_days:
+          title: Main Product Id
+        clicks:
           type: integer
-          title: N Days
-        type:
-          type: string
-          enum:
-          - bestseller
-          const: bestseller
-          title: Type
+          title: Clicks
+        prev_clicks:
+          type: integer
+          title: Prev Clicks
+        add_to_carts:
+          type: integer
+          title: Add To Carts
+        prev_add_to_carts:
+          type: integer
+          title: Prev Add To Carts
+        orders:
+          type: integer
+          title: Orders
+        prev_orders:
+          type: integer
+          title: Prev Orders
+        click_through_rate:
+          type: number
+          title: Click Through Rate
+        add_to_cart_rate:
+          type: number
+          title: Add To Cart Rate
+        order_through_rate:
+          type: number
+          title: Order Through Rate
+        d_score:
+          type: number
+          title: D Score
+        prev_d_score:
+          type: number
+          title: Prev D Score
+        normalized_d_score:
+          type: number
+          title: Normalized D Score
+        normalized_prev_d_score:
+          type: number
+          title: Normalized Prev D Score
+        product:
+          $ref: '#/components/schemas/LiteProductDto'
+        collections:
+          items:
+            $ref: '#/components/schemas/CollectionInfo'
+          type: array
+          title: Collections
       type: object
       required:
-      - value
-      - n_days
-      - type
-      title: BestsellerProductBadge
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - merchant
+      - main_product_id
+      - clicks
+      - prev_clicks
+      - add_to_carts
+      - prev_add_to_carts
+      - orders
+      - prev_orders
+      - click_through_rate
+      - add_to_cart_rate
+      - order_through_rate
+      - d_score
+      - prev_d_score
+      - normalized_d_score
+      - normalized_prev_d_score
+      - product
+      - collections
+      title: ProductFunnelMetricsResponse
     ValidationError:
       properties:
         loc:
@@ -224,50 +251,6 @@ components:
       - msg
       - type
       title: ValidationError
-    SlowMoverProductBadge:
-      properties:
-        value:
-          type: number
-          title: Value
-        n_days:
-          type: integer
-          title: N Days
-        type:
-          type: string
-          enum:
-          - slow_mover
-          const: slow_mover
-          title: Type
-      type: object
-      required:
-      - value
-      - n_days
-      - type
-      title: SlowMoverProductBadge
-    FewVariantsAvailableProductBadge:
-      properties:
-        type:
-          type: string
-          enum:
-          - few_variants_available
-          const: few_variants_available
-          title: Type
-        variant_options_available:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Variant Options Available
-        n_variants_total:
-          type: integer
-          title: N Variants Total
-      type: object
-      required:
-      - type
-      - variant_options_available
-      - n_variants_total
-      title: FewVariantsAvailableProductBadge
     LiteProductDto:
       properties:
         main_product_id:
@@ -373,27 +356,6 @@ components:
       - published_at
       - variants
       title: LiteProductDto
-    LiteVariant:
-      properties:
-        id:
-          type: string
-          title: Id
-        image_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image Url
-        selected_options:
-          items:
-            $ref: '#/components/schemas/VariantOption'
-          type: array
-          title: Selected Options
-      type: object
-      required:
-      - id
-      - image_url
-      - selected_options
-      title: LiteVariant
     OutOfStockProductBadge:
       properties:
         type:
@@ -406,6 +368,15 @@ components:
       required:
       - type
       title: OutOfStockProductBadge
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CollectionInfo:
       properties:
         collection_id:
@@ -441,80 +412,128 @@ components:
       - image_urls
       - product_images
       title: CollectionInfo
-    ProductFunnelMetricsResponse:
+    FewVariantsAvailableProductBadge:
       properties:
-        merchant:
+        type:
           type: string
-          title: Merchant
-        main_product_id:
-          type: string
-          title: Main Product Id
-        clicks:
-          type: integer
-          title: Clicks
-        prev_clicks:
-          type: integer
-          title: Prev Clicks
-        add_to_carts:
-          type: integer
-          title: Add To Carts
-        prev_add_to_carts:
-          type: integer
-          title: Prev Add To Carts
-        orders:
-          type: integer
-          title: Orders
-        prev_orders:
-          type: integer
-          title: Prev Orders
-        click_through_rate:
-          type: number
-          title: Click Through Rate
-        add_to_cart_rate:
-          type: number
-          title: Add To Cart Rate
-        order_through_rate:
-          type: number
-          title: Order Through Rate
-        d_score:
-          type: number
-          title: D Score
-        prev_d_score:
-          type: number
-          title: Prev D Score
-        normalized_d_score:
-          type: number
-          title: Normalized D Score
-        normalized_prev_d_score:
-          type: number
-          title: Normalized Prev D Score
-        product:
-          $ref: '#/components/schemas/LiteProductDto'
-        collections:
+          enum:
+          - few_variants_available
+          const: few_variants_available
+          title: Type
+        variant_options_available:
           items:
-            $ref: '#/components/schemas/CollectionInfo'
+            additionalProperties:
+              type: string
+            type: object
           type: array
-          title: Collections
+          title: Variant Options Available
+        n_variants_total:
+          type: integer
+          title: N Variants Total
       type: object
       required:
-      - merchant
-      - main_product_id
-      - clicks
-      - prev_clicks
-      - add_to_carts
-      - prev_add_to_carts
-      - orders
-      - prev_orders
-      - click_through_rate
-      - add_to_cart_rate
-      - order_through_rate
-      - d_score
-      - prev_d_score
-      - normalized_d_score
-      - normalized_prev_d_score
-      - product
-      - collections
-      title: ProductFunnelMetricsResponse
+      - type
+      - variant_options_available
+      - n_variants_total
+      title: FewVariantsAvailableProductBadge
+    VariantOption:
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - name
+      - value
+      title: VariantOption
+    ProductStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - DRAFT
+      title: ProductStatus
+    BestsellerProductBadge:
+      properties:
+        value:
+          type: number
+          title: Value
+        n_days:
+          type: integer
+          title: N Days
+        type:
+          type: string
+          enum:
+          - bestseller
+          const: bestseller
+          title: Type
+      type: object
+      required:
+      - value
+      - n_days
+      - type
+      title: BestsellerProductBadge
+    LiteVariant:
+      properties:
+        id:
+          type: string
+          title: Id
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        selected_options:
+          items:
+            $ref: '#/components/schemas/VariantOption'
+          type: array
+          title: Selected Options
+      type: object
+      required:
+      - id
+      - image_url
+      - selected_options
+      title: LiteVariant
+    NewInProductBadge:
+      properties:
+        type:
+          type: string
+          enum:
+          - new_in
+          const: new_in
+          title: Type
+        published_at:
+          type: string
+          format: date-time
+          title: Published At
+      type: object
+      required:
+      - type
+      - published_at
+      title: NewInProductBadge
+    SlowMoverProductBadge:
+      properties:
+        value:
+          type: number
+          title: Value
+        n_days:
+          type: integer
+          title: N Days
+        type:
+          type: string
+          enum:
+          - slow_mover
+          const: slow_mover
+          title: Type
+      type: object
+      required:
+      - value
+      - n_days
+      - type
+      title: SlowMoverProductBadge
     TrendingProductBadge:
       properties:
         value:

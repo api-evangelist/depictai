@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Boost Bury API
+  title: Depict Lite Boost Bury API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
@@ -105,119 +105,6 @@ paths:
       - Boost Bury
 components:
   schemas:
-    CollectionBoostBuryRule:
-      properties:
-        strength:
-          type: integer
-          title: Strength
-        type:
-          type: string
-          enum:
-          - collection
-          const: collection
-          title: Type
-          default: collection
-        collection_id:
-          type: string
-          title: Collection Id
-      type: object
-      required:
-      - strength
-      - collection_id
-      title: CollectionBoostBuryRule
-    BadgeBoostBuryRule:
-      properties:
-        strength:
-          type: integer
-          title: Strength
-        type:
-          type: string
-          enum:
-          - badge
-          const: badge
-          title: Type
-          default: badge
-        badge:
-          $ref: '#/components/schemas/ProductBadgeType'
-      type: object
-      required:
-      - strength
-      - badge
-      title: BadgeBoostBuryRule
-    UpdateRulesRequest:
-      properties:
-        rules:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/BadgeBoostBuryRule'
-            - $ref: '#/components/schemas/CollectionBoostBuryRule'
-            - $ref: '#/components/schemas/TagBoostBuryRule'
-            discriminator:
-              propertyName: type
-              mapping:
-                badge: '#/components/schemas/BadgeBoostBuryRule'
-                collection: '#/components/schemas/CollectionBoostBuryRule'
-                tag: '#/components/schemas/TagBoostBuryRule'
-          type: array
-          title: Rules
-      type: object
-      required:
-      - rules
-      title: UpdateRulesRequest
-    ProductBadgeType:
-      type: string
-      enum:
-      - on_sale
-      - out_of_stock
-      - new_in
-      - bestseller
-      - slow_mover
-      - few_variants_available
-      - trending
-      title: ProductBadgeType
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TagBoostBuryRule:
-      properties:
-        strength:
-          type: integer
-          title: Strength
-        type:
-          type: string
-          enum:
-          - tag
-          const: tag
-          title: Type
-          default: tag
-        tags:
-          items:
-            type: string
-          type: array
-          title: Tags
-      type: object
-      required:
-      - strength
-      - tags
-      title: TagBoostBuryRule
     BoostBuryRuleWithId:
       properties:
         id:
@@ -245,6 +132,48 @@ components:
       - created_at
       - rule
       title: BoostBuryRuleWithId
+    TagBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - tag
+          const: tag
+          title: Type
+          default: tag
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - strength
+      - tags
+      title: TagBoostBuryRule
+    UpdateRulesRequest:
+      properties:
+        rules:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/BadgeBoostBuryRule'
+            - $ref: '#/components/schemas/CollectionBoostBuryRule'
+            - $ref: '#/components/schemas/TagBoostBuryRule'
+            discriminator:
+              propertyName: type
+              mapping:
+                badge: '#/components/schemas/BadgeBoostBuryRule'
+                collection: '#/components/schemas/CollectionBoostBuryRule'
+                tag: '#/components/schemas/TagBoostBuryRule'
+          type: array
+          title: Rules
+      type: object
+      required:
+      - rules
+      title: UpdateRulesRequest
     HTTPValidationError:
       properties:
         detail:
@@ -254,6 +183,77 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    BadgeBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - badge
+          const: badge
+          title: Type
+          default: badge
+        badge:
+          $ref: '#/components/schemas/ProductBadgeType'
+      type: object
+      required:
+      - strength
+      - badge
+      title: BadgeBoostBuryRule
+    CollectionBoostBuryRule:
+      properties:
+        strength:
+          type: integer
+          title: Strength
+        type:
+          type: string
+          enum:
+          - collection
+          const: collection
+          title: Type
+          default: collection
+        collection_id:
+          type: string
+          title: Collection Id
+      type: object
+      required:
+      - strength
+      - collection_id
+      title: CollectionBoostBuryRule
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ProductBadgeType:
+      type: string
+      enum:
+      - on_sale
+      - out_of_stock
+      - new_in
+      - bestseller
+      - slow_mover
+      - few_variants_available
+      - trending
+      title: ProductBadgeType
   securitySchemes:
     Auth0:
       type: oauth2

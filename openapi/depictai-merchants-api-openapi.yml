@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Merchants API
+  title: Depict Portal Merchants API
   version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  description: 'REST API behind the Depict merchant portal: merchants, products, collections, curation, metrics, analytics and search insights. All endpoints require an Auth0-issued bearer token.'
 servers:
-- url: /api/lite
+- url: ''
 tags:
 - name: Merchants
 paths:
@@ -71,32 +71,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MerchantProductStatus:
+    app__usecase__list_merchants__MarketGroup:
       properties:
-        recommendations_state:
+        id:
           type: string
-          title: Recommendations State
-          default: inactive
-        search_state:
+          title: Id
+        display_name:
           type: string
-          title: Search State
-          default: inactive
-        plp_state:
-          type: string
-          title: Plp State
-          default: inactive
+          title: Display Name
       type: object
-      title: MerchantProductStatus
-    ListMerchantsResult:
-      properties:
-        merchants:
-          items:
-            $ref: '#/components/schemas/app__usecase__list_merchants__Merchant'
-          type: array
-          title: Merchants
-          default: []
-      type: object
-      title: ListMerchantsResult
+      required:
+      - id
+      - display_name
+      title: MarketGroup
     app__usecase__list_merchants__Merchant:
       properties:
         id:
@@ -134,40 +121,41 @@ components:
       - default_market_id
       - default_locale_id
       title: Merchant
-    ValidationError:
+    MerchantProductStatus:
       properties:
-        loc:
+        recommendations_state:
+          type: string
+          title: Recommendations State
+          default: inactive
+        search_state:
+          type: string
+          title: Search State
+          default: inactive
+        plp_state:
+          type: string
+          title: Plp State
+          default: inactive
+      type: object
+      title: MerchantProductStatus
+    ListMerchantsResult:
+      properties:
+        merchants:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/app__usecase__list_merchants__Merchant'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Merchants
+          default: []
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    app__usecase__list_merchants__MarketGroup:
+      title: ListMerchantsResult
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          title: Id
-        display_name:
-          type: string
-          title: Display Name
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - display_name
-      title: MarketGroup
+      title: HTTPValidationError
     GetMerchantResult:
       properties:
         id:
@@ -217,15 +205,27 @@ components:
       - markets
       - locale_ids
       title: GetMerchantResult
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     Auth0:
       type: oauth2

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Brand Features API
+  title: Depict Lite Brand Features API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
@@ -157,6 +157,15 @@ paths:
       - Brand Features
 components:
   schemas:
+    LinkType:
+      type: string
+      enum:
+      - collection
+      - page
+      - product
+      - article
+      - url
+      title: LinkType
     HTTPValidationError:
       properties:
         detail:
@@ -182,126 +191,40 @@ components:
           title: Height
       type: object
       title: ProSpaceContent
-    ProInstagramVideoContent:
+    ContentBlockTextProperties:
       properties:
-        type:
+        html_tag:
           type: string
-          enum:
-          - instagram_video
-          const: instagram_video
-          title: Type
-          default: instagram_video
-        gid:
-          type: string
-          title: Gid
-        creator:
-          type: string
-          title: Creator
-        post_url:
-          type: string
-          title: Post Url
-        post_id:
-          type: string
-          title: Post Id
-        media_id:
-          type: string
-          title: Media Id
-      type: object
-      required:
-      - gid
-      - creator
-      - post_url
-      - post_id
-      - media_id
-      title: ProInstagramVideoContent
-    StringDetailError:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringDetailError
-    ProInstagramImageContent:
-      properties:
-        type:
-          type: string
-          enum:
-          - instagram_image
-          const: instagram_image
-          title: Type
-          default: instagram_image
-        gid:
-          type: string
-          title: Gid
-        creator:
-          type: string
-          title: Creator
-        post_url:
-          type: string
-          title: Post Url
-        post_id:
-          type: string
-          title: Post Id
-        media_id:
-          type: string
-          title: Media Id
-        alt_text:
+          title: Html Tag
+        color_hex:
           anyOf:
           - type: string
           - type: 'null'
-          title: Alt Text
-      type: object
-      required:
-      - gid
-      - creator
-      - post_url
-      - post_id
-      - media_id
-      title: ProInstagramImageContent
-    ProImageContent:
-      properties:
-        type:
-          type: string
-          enum:
-          - image
-          const: image
-          title: Type
-          default: image
-        gid:
-          type: string
-          title: Gid
-        filename:
-          type: string
-          title: Filename
-        alt_text:
+          title: Color Hex
+        bold:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Bold
+        italic:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Italic
+        underline:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Underline
+        text:
           anyOf:
           - type: string
           - type: 'null'
-          title: Alt Text
+          title: Text
       type: object
       required:
-      - gid
-      - filename
-      title: ProImageContent
-    LiteCollectionContentBlockClicksRow:
-      properties:
-        content_block_id:
-          type: integer
-          title: Content Block Id
-        handle:
-          type: string
-          title: Handle
-        nbr_clicks:
-          type: integer
-          title: Nbr Clicks
-      type: object
-      required:
-      - content_block_id
-      - handle
-      - nbr_clicks
-      title: LiteCollectionContentBlockClicksRow
+      - html_tag
+      title: ContentBlockTextProperties
     BrandFeatureUpdateRequest:
       properties:
         brand_feature_type:
@@ -394,71 +317,68 @@ components:
       - span_columns
       - content
       title: ProContentBlock
-    ValidationError:
+    LiteMultiStoreDataNotFound:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        feature_type:
+          $ref: '#/components/schemas/BrandFeatureType'
+        target_merchant_display_name:
+          type: string
+          title: Target Merchant Display Name
+        message:
           type: string
           title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    LinkType:
-      type: string
-      enum:
-      - collection
-      - page
-      - product
-      - article
-      - url
-      title: LinkType
-    ProAbTest:
-      properties:
-        id:
+        product_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Id
+          title: Product Id
+      type: object
+      required:
+      - feature_type
+      - target_merchant_display_name
+      - message
+      title: LiteMultiStoreDataNotFound
+    ContentLink:
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkType'
+        gid:
+          type: string
+          title: Gid
         handle:
           type: string
           title: Handle
-        start_date:
-          type: string
-          title: Start Date
-        end_date:
-          type: string
-          title: End Date
-        experiment_name:
-          type: string
-          title: Experiment Name
-        notify_email:
-          type: string
-          title: Notify Email
-        generated_conclusion:
+        url:
           anyOf:
           - type: string
           - type: 'null'
-          title: Generated Conclusion
+          title: Url
       type: object
       required:
+      - type
+      - gid
       - handle
-      - start_date
-      - end_date
-      - experiment_name
-      - notify_email
-      title: ProAbTest
+      title: ContentLink
+    ProVideoContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - video
+          const: video
+          title: Type
+          default: video
+        gid:
+          type: string
+          title: Gid
+        filename:
+          type: string
+          title: Filename
+      type: object
+      required:
+      - gid
+      - filename
+      title: ProVideoContent
     ProContentBlockText:
       properties:
         header:
@@ -499,137 +419,80 @@ components:
           title: Gap
       type: object
       title: ProContentBlockText
-    ContentLink:
-      properties:
-        type:
-          $ref: '#/components/schemas/LinkType'
-        gid:
-          type: string
-          title: Gid
-        handle:
-          type: string
-          title: Handle
-        url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Url
-      type: object
-      required:
-      - type
-      - gid
-      - handle
-      title: ContentLink
-    LiteMultiStoreDataNotFound:
-      properties:
-        feature_type:
-          $ref: '#/components/schemas/BrandFeatureType'
-        target_merchant_display_name:
-          type: string
-          title: Target Merchant Display Name
-        message:
-          type: string
-          title: Message
-        product_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Product Id
-      type: object
-      required:
-      - feature_type
-      - target_merchant_display_name
-      - message
-      title: LiteMultiStoreDataNotFound
-    ProImageSetting:
-      properties:
-        id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Id
-        handle:
-          type: string
-          title: Handle
-        product_gid:
-          type: string
-          title: Product Gid
-        default_image_gid:
-          type: string
-          title: Default Image Gid
-        hover_image_gid:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hover Image Gid
-      type: object
-      required:
-      - handle
-      - product_gid
-      - default_image_gid
-      title: ProImageSetting
-    BrandFeatureType:
-      type: string
-      enum:
-      - content_block
-      - image_setting
-      - product_duplicate
-      - ab_test
-      title: BrandFeatureType
-    ProVideoContent:
+    ProImageContent:
       properties:
         type:
           type: string
           enum:
-          - video
-          const: video
+          - image
+          const: image
           title: Type
-          default: video
+          default: image
         gid:
           type: string
           title: Gid
         filename:
           type: string
           title: Filename
+        alt_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Text
       type: object
       required:
       - gid
       - filename
-      title: ProVideoContent
-    ContentBlockTextProperties:
+      title: ProImageContent
+    LiteCollectionContentBlockClicksRow:
       properties:
-        html_tag:
+        content_block_id:
+          type: integer
+          title: Content Block Id
+        handle:
           type: string
-          title: Html Tag
-        color_hex:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Color Hex
-        bold:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Bold
-        italic:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Italic
-        underline:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Underline
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
+          title: Handle
+        nbr_clicks:
+          type: integer
+          title: Nbr Clicks
       type: object
       required:
-      - html_tag
-      title: ContentBlockTextProperties
+      - content_block_id
+      - handle
+      - nbr_clicks
+      title: LiteCollectionContentBlockClicksRow
+    ProInstagramVideoContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - instagram_video
+          const: instagram_video
+          title: Type
+          default: instagram_video
+        gid:
+          type: string
+          title: Gid
+        creator:
+          type: string
+          title: Creator
+        post_url:
+          type: string
+          title: Post Url
+        post_id:
+          type: string
+          title: Post Id
+        media_id:
+          type: string
+          title: Media Id
+      type: object
+      required:
+      - gid
+      - creator
+      - post_url
+      - post_id
+      - media_id
+      title: ProInstagramVideoContent
     ProProductDuplicate:
       properties:
         id:
@@ -667,6 +530,143 @@ components:
       - product_gid
       - default_image_gid
       title: ProProductDuplicate
+    StringDetailError:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringDetailError
+    ProImageSetting:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        product_gid:
+          type: string
+          title: Product Gid
+        default_image_gid:
+          type: string
+          title: Default Image Gid
+        hover_image_gid:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hover Image Gid
+      type: object
+      required:
+      - handle
+      - product_gid
+      - default_image_gid
+      title: ProImageSetting
+    ProAbTest:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        handle:
+          type: string
+          title: Handle
+        start_date:
+          type: string
+          title: Start Date
+        end_date:
+          type: string
+          title: End Date
+        experiment_name:
+          type: string
+          title: Experiment Name
+        notify_email:
+          type: string
+          title: Notify Email
+        generated_conclusion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Generated Conclusion
+      type: object
+      required:
+      - handle
+      - start_date
+      - end_date
+      - experiment_name
+      - notify_email
+      title: ProAbTest
+    BrandFeatureType:
+      type: string
+      enum:
+      - content_block
+      - image_setting
+      - product_duplicate
+      - ab_test
+      title: BrandFeatureType
+    ProInstagramImageContent:
+      properties:
+        type:
+          type: string
+          enum:
+          - instagram_image
+          const: instagram_image
+          title: Type
+          default: instagram_image
+        gid:
+          type: string
+          title: Gid
+        creator:
+          type: string
+          title: Creator
+        post_url:
+          type: string
+          title: Post Url
+        post_id:
+          type: string
+          title: Post Id
+        media_id:
+          type: string
+          title: Media Id
+        alt_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Text
+      type: object
+      required:
+      - gid
+      - creator
+      - post_url
+      - post_id
+      - media_id
+      title: ProInstagramImageContent
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     Auth0:
       type: oauth2

@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Product Images API
+  title: Depict Portal Product Images API
   version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  description: 'REST API behind the Depict merchant portal: merchants, products, collections, curation, metrics, analytics and search insights. All endpoints require an Auth0-issued bearer token.'
 servers:
-- url: /api/lite
+- url: ''
 tags:
 - name: Product Images
 paths:
@@ -101,25 +101,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UpdateCollectionProductImagesResult:
+    HTTPValidationError:
       properties:
-        main_product_id:
-          type: string
-          title: Main Product Id
-        collection_id:
-          type: string
-          title: Collection Id
-        product_ids:
+        detail:
           items:
-            type: string
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Product Ids
+          title: Detail
       type: object
-      required:
-      - main_product_id
-      - collection_id
-      - product_ids
-      title: UpdateCollectionProductImagesResult
+      title: HTTPValidationError
     UpdateCollectionProductImagesRequest:
       properties:
         main_image_url:
@@ -153,15 +143,6 @@ components:
           title: Hover Image Url
       type: object
       title: UpdateProductMediaRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -183,6 +164,25 @@ components:
       - msg
       - type
       title: ValidationError
+    UpdateCollectionProductImagesResult:
+      properties:
+        main_product_id:
+          type: string
+          title: Main Product Id
+        collection_id:
+          type: string
+          title: Collection Id
+        product_ids:
+          items:
+            type: string
+          type: array
+          title: Product Ids
+      type: object
+      required:
+      - main_product_id
+      - collection_id
+      - product_ids
+      title: UpdateCollectionProductImagesResult
     UpdateProductMediaResult:
       properties:
         main_product_id:

@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Product Metrics API
+  title: Depict Portal Product Metrics API
   version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  description: 'REST API behind the Depict merchant portal: merchants, products, collections, curation, metrics, analytics and search insights. All endpoints require an Auth0-issued bearer token.'
 servers:
-- url: /api/lite
+- url: ''
 tags:
 - name: Product Metrics
 paths:
@@ -204,20 +204,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ProductWeeklyStatsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/WeeklyDailyDataPoint'
-          type: array
-          title: Data
-          default: []
-        currency:
-          type: string
-          title: Currency
-          default: ''
-      type: object
-      title: ProductWeeklyStatsResponse
     ProductBasicMetricsResponse:
       properties:
         currency:
@@ -298,6 +284,60 @@ components:
           default: 0
       type: object
       title: ProductBasicMetricsResponse
+    ProductToplistResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CollectionPosition'
+          type: array
+          title: Data
+          default: []
+      type: object
+      title: ProductToplistResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CollectionPosition:
+      properties:
+        collection_id:
+          type: string
+          title: Collection Id
+        clicks:
+          type: integer
+          title: Clicks
+          default: 0
+        position:
+          type: integer
+          title: Position
+          default: 0
+        total_products:
+          type: integer
+          title: Total Products
+          default: 0
+      type: object
+      required:
+      - collection_id
+      title: CollectionPosition
+    ProductWeeklyStatsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WeeklyDailyDataPoint'
+          type: array
+          title: Data
+          default: []
+        currency:
+          type: string
+          title: Currency
+          default: ''
+      type: object
+      title: ProductWeeklyStatsResponse
     WeeklyDailyDataPoint:
       properties:
         date:
@@ -321,20 +361,6 @@ components:
       required:
       - date
       title: WeeklyDailyDataPoint
-    ProductOverviewChartResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ChartDataPoint'
-          type: array
-          title: Data
-          default: []
-        currency:
-          type: string
-          title: Currency
-          default: ''
-      type: object
-      title: ProductOverviewChartResponse
     ValidationError:
       properties:
         loc:
@@ -356,37 +382,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ProductToplistResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/CollectionPosition'
-          type: array
-          title: Data
-          default: []
-      type: object
-      title: ProductToplistResponse
-    CollectionPosition:
-      properties:
-        collection_id:
-          type: string
-          title: Collection Id
-        clicks:
-          type: integer
-          title: Clicks
-          default: 0
-        position:
-          type: integer
-          title: Position
-          default: 0
-        total_products:
-          type: integer
-          title: Total Products
-          default: 0
-      type: object
-      required:
-      - collection_id
-      title: CollectionPosition
     ChartDataPoint:
       properties:
         week:
@@ -410,15 +405,20 @@ components:
       required:
       - week
       title: ChartDataPoint
-    HTTPValidationError:
+    ProductOverviewChartResponse:
       properties:
-        detail:
+        data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/ChartDataPoint'
           type: array
-          title: Detail
+          title: Data
+          default: []
+        currency:
+          type: string
+          title: Currency
+          default: ''
       type: object
-      title: HTTPValidationError
+      title: ProductOverviewChartResponse
   securitySchemes:
     Auth0:
       type: oauth2

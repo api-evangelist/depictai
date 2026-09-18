@@ -1,17 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test merchant API
+  title: Depict Lite Merchant API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
 - url: /api/lite
 tags:
-- name: merchant
+- name: Merchant
 paths:
   /merchants/:
     get:
       tags:
-      - merchant
+      - Merchant
       summary: Read Authorized Merchants
       operationId: read_authorized_merchants_merchants__get
       responses:
@@ -29,7 +29,7 @@ paths:
   /merchants/{merchant_id}:
     get:
       tags:
-      - merchant
+      - Merchant
       summary: Get Merchant
       operationId: get_merchant_merchants__merchant_id__get
       security:
@@ -57,7 +57,7 @@ paths:
   /merchants/{merchant_id}/column-settings:
     put:
       tags:
-      - merchant
+      - Merchant
       summary: Update Column Settings
       operationId: update_column_settings_merchants__merchant_id__column_settings_put
       security:
@@ -90,7 +90,7 @@ paths:
   /merchants/{merchant_id}/variant_group_by_name:
     put:
       tags:
-      - merchant
+      - Merchant
       summary: Update Variant Group By Name
       operationId: update_variant_group_by_name_merchants__merchant_id__variant_group_by_name_put
       security:
@@ -125,7 +125,7 @@ paths:
   /merchants/{merchant_id}/ingestion-status:
     get:
       tags:
-      - merchant
+      - Merchant
       summary: Get Shopify Ingestion Status
       operationId: get_shopify_ingestion_status_merchants__merchant_id__ingestion_status_get
       security:
@@ -153,7 +153,7 @@ paths:
   /merchants/{merchant_id}/storefront-password-protected:
     get:
       tags:
-      - merchant
+      - Merchant
       summary: Get Storefront Password Protected
       operationId: get_storefront_password_protected_merchants__merchant_id__storefront_password_protected_get
       security:
@@ -194,6 +194,15 @@ components:
       - has_run_at_least_one_ingestion
       - completion_percentage
       title: IngestionStatusDTO
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     LiteMerchant:
       properties:
         id:
@@ -300,15 +309,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     Auth0:
       type: oauth2

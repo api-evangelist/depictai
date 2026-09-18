@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Search Metrics API
+  title: Depict Portal Search Metrics API
   version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  description: 'REST API behind the Depict merchant portal: merchants, products, collections, curation, metrics, analytics and search insights. All endpoints require an Auth0-issued bearer token.'
 servers:
-- url: /api/lite
+- url: ''
 tags:
 - name: Search Metrics
 paths:
@@ -69,31 +69,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MarketSearchQueries:
+    SearchQueryStatsResponse:
       properties:
-        market:
-          type: string
-          title: Market
-        locale:
-          type: string
-          title: Locale
-        top_queries:
+        markets:
           items:
-            $ref: '#/components/schemas/SearchQuery'
+            $ref: '#/components/schemas/MarketSearchQueries'
           type: array
-          title: Top Queries
-        top_no_result_queries:
+          title: Markets
+        prev_markets:
           items:
-            $ref: '#/components/schemas/SearchQuery'
+            $ref: '#/components/schemas/MarketSearchQueries'
           type: array
-          title: Top No Result Queries
+          title: Prev Markets
       type: object
       required:
-      - market
-      - locale
-      - top_queries
-      - top_no_result_queries
-      title: MarketSearchQueries
+      - markets
+      - prev_markets
+      title: SearchQueryStatsResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     SearchQuery:
       properties:
         query:
@@ -132,32 +133,31 @@ components:
       - msg
       - type
       title: ValidationError
-    SearchQueryStatsResponse:
+    MarketSearchQueries:
       properties:
-        markets:
+        market:
+          type: string
+          title: Market
+        locale:
+          type: string
+          title: Locale
+        top_queries:
           items:
-            $ref: '#/components/schemas/MarketSearchQueries'
+            $ref: '#/components/schemas/SearchQuery'
           type: array
-          title: Markets
-        prev_markets:
+          title: Top Queries
+        top_no_result_queries:
           items:
-            $ref: '#/components/schemas/MarketSearchQueries'
+            $ref: '#/components/schemas/SearchQuery'
           type: array
-          title: Prev Markets
+          title: Top No Result Queries
       type: object
       required:
-      - markets
-      - prev_markets
-      title: SearchQueryStatsResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - market
+      - locale
+      - top_queries
+      - top_no_result_queries
+      title: MarketSearchQueries
   securitySchemes:
     Auth0:
       type: oauth2

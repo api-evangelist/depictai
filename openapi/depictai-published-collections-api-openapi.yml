@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Published Collections API
+  title: Depict Lite Published Collections API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
@@ -118,13 +118,15 @@ paths:
       - Published Collections
 components:
   schemas:
-    LiteFeatures:
-      type: string
-      enum:
-      - content_block
-      - product_duplicate
-      - image_setting
-      title: LiteFeatures
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     PublishedCollectionsSortOrder:
       type: string
       enum:
@@ -179,6 +181,21 @@ components:
       - merchant_display_name
       - shopify_base_url
       title: LitePublishedCollectionDto
+    CreatePublishedCollectionRequest:
+      properties:
+        template_suffix:
+          type: string
+          title: Template Suffix
+        used_features:
+          items:
+            $ref: '#/components/schemas/LiteFeatures'
+          type: array
+          title: Used Features
+      type: object
+      required:
+      - template_suffix
+      - used_features
+      title: CreatePublishedCollectionRequest
     LikedCollectionRequest:
       properties:
         collection_id:
@@ -196,6 +213,13 @@ components:
       - merchant_id
       - likes
       title: LikedCollectionRequest
+    LiteFeatures:
+      type: string
+      enum:
+      - content_block
+      - product_duplicate
+      - image_setting
+      title: LiteFeatures
     ValidationError:
       properties:
         loc:
@@ -217,30 +241,6 @@ components:
       - msg
       - type
       title: ValidationError
-    CreatePublishedCollectionRequest:
-      properties:
-        template_suffix:
-          type: string
-          title: Template Suffix
-        used_features:
-          items:
-            $ref: '#/components/schemas/LiteFeatures'
-          type: array
-          title: Used Features
-      type: object
-      required:
-      - template_suffix
-      - used_features
-      title: CreatePublishedCollectionRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     Auth0:
       type: oauth2

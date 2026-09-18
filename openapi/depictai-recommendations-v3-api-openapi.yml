@@ -1,10 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Recommendations (v3) API
-  version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  title: Depict Storefront Recommendations (v3) API
+  version: '1.0'
 servers:
-- url: /api/lite
+- url: https://api.depict.ai
 tags:
 - name: Recommendations (v3)
 paths:
@@ -46,6 +45,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     RecommendResponseV3:
       properties:
         displays:
@@ -63,6 +71,27 @@ components:
       required:
       - displays
       title: RecommendResponseV3
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     RecommendRequestV3:
       properties:
         merchant:
@@ -110,27 +139,6 @@ components:
       - locale
       - type
       title: RecommendRequestV3
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     APIDisplay:
       properties:
         variant_index:
@@ -158,24 +166,19 @@ components:
       - variant_skus
       - variant_product_ids
       title: APIDisplay
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
-    Auth0:
-      type: oauth2
-      flows:
-        authorizationCode:
-          scopes:
-            openid: OpenID Connect
-            profile: User profile
-            email: User email
-          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
-          tokenUrl: https://depict.eu.auth0.com/oauth/token
-      x-tokenName: id_token
+    APIKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: X-API-KEY
+    HTTPBearer:
+      type: http
+      scheme: bearer

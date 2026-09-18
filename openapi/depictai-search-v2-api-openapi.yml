@@ -1,10 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Search (v2) API
-  version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  title: Depict Storefront Search (v2) API
+  version: '1.0'
 servers:
-- url: /api/lite
+- url: https://api.depict.ai
 tags:
 - name: Search (v2)
 paths:
@@ -13,7 +12,189 @@ paths:
       tags:
       - Search (v2)
       summary: Get Results
-      description: "Used to get search results that match the given query. Has support for filtering and\nsorting.\n\nExample response:\n<pre>\n{\n   \"n_hits\": 1,\n   \"displays\": [\n     {\n         \"product_id\": \"foobar\",\n         \"title\": \"Foobar\"\n     }\n   ],\n   \"sorts\": [\n     {\n       \"field\": \"_relevance\",\n       \"order\": \"desc\",\n       \"meta\": {\n         \"title\": \"Relevance\",\n         \"values\": [\n           \"desc\"\n         ],\n         \"names\": [\n           \"Relevance\"\n         ]\n       }\n     },\n     {\n       \"field\": \"title\",\n       \"order\": \"asc\",\n       \"meta\": {\n         \"title\": \"Title\",\n         \"values\": [\n           \"asc\",\n           \"desc\"\n         ],\n         \"names\": [\n           \"A-Z\",\n           \"Z-A\"\n         ]\n       }\n     }\n   ],\n   \"filters\": [\n     {\n       \"field\": \"sale_price\",\n       \"op\": \"inrange\",\n       \"data\": [\n         0,\n         2500\n       ],\n       \"meta\": {\n         \"group_title\": \"Price\",\n         \"type\": \"range\",\n         \"min\": 0,\n         \"max\": 2500,\n         \"currency\": \"EUR\"\n       },\n       \"id\": \"price0\"\n     },\n     {\n       \"field\": \"color_name\",\n       \"op\": \"in\",\n       \"meta\": {\n         \"group_title\": \"Color\",\n         \"type\": \"checkbox\",\n         \"values\": [\n           \"Blue\",\n           \"Black\",\n           \"Brown\"\n         ]\n       },\n       \"id\": \"colors1\"\n     }\n   ],\n   \"search_request_id\": \"1a278f4a-16eb-4d95-a002-88bd305493d4\",\n   \"cursor\": \"eyJjIjogMSwgInIiOiAwfQ==\"\n }\n </pre>\n\n Example request body for applying a filter:\n <pre>\n {\n    \"tenant\": \"foobar\"\n    \"market\": \"en\",\n    \"limit\": 20,\n    \"query\": \"hoodie\",\n    \"filters\": [\n        {\n            \"field\": \"color_name\",\n            \"op\": \"in\",\n            \"data\": [\"Blue\"]\n        }\n    ]\n }\n </pre>"
+      description: 'Used to get search results that match the given query. Has support for filtering and
+
+        sorting.
+
+
+        Example response:
+
+
+        {
+
+        "n_hits": 1,
+
+        "displays": [
+
+        {
+
+        "product_id": "foobar",
+
+        "title": "Foobar"
+
+        }
+
+        ],
+
+        "sorts": [
+
+        {
+
+        "field": "_relevance",
+
+        "order": "desc",
+
+        "meta": {
+
+        "title": "Relevance",
+
+        "values": [
+
+        "desc"
+
+        ],
+
+        "names": [
+
+        "Relevance"
+
+        ]
+
+        }
+
+        },
+
+        {
+
+        "field": "title",
+
+        "order": "asc",
+
+        "meta": {
+
+        "title": "Title",
+
+        "values": [
+
+        "asc",
+
+        "desc"
+
+        ],
+
+        "names": [
+
+        "A-Z",
+
+        "Z-A"
+
+        ]
+
+        }
+
+        }
+
+        ],
+
+        "filters": [
+
+        {
+
+        "field": "sale_price",
+
+        "op": "inrange",
+
+        "data": [
+
+        0,
+
+        2500
+
+        ],
+
+        "meta": {
+
+        "group_title": "Price",
+
+        "type": "range",
+
+        "min": 0,
+
+        "max": 2500,
+
+        "currency": "EUR"
+
+        },
+
+        "id": "price0"
+
+        },
+
+        {
+
+        "field": "color_name",
+
+        "op": "in",
+
+        "meta": {
+
+        "group_title": "Color",
+
+        "type": "checkbox",
+
+        "values": [
+
+        "Blue",
+
+        "Black",
+
+        "Brown"
+
+        ]
+
+        },
+
+        "id": "colors1"
+
+        }
+
+        ],
+
+        "search_request_id": "1a278f4a-16eb-4d95-a002-88bd305493d4",
+
+        "cursor": "eyJjIjogMSwgInIiOiAwfQ=="
+
+        }
+
+
+        Example request body for applying a filter:
+
+
+        {
+
+        "tenant": "foobar"
+
+        "market": "en",
+
+        "limit": 20,
+
+        "query": "hoodie",
+
+        "filters": [
+
+        {
+
+        "field": "color_name",
+
+        "op": "in",
+
+        "data": ["Blue"]
+
+        }
+
+        ]
+
+        }'
       operationId: Get_results_v2_search_results_post
       security:
       - APIKeyQuery: []
@@ -51,7 +232,51 @@ paths:
       tags:
       - Search (v2)
       summary: Get Suggestions
-      description: "Returns suggestions for a given query. Call this while the user is typing to help\nthe user find what they're looking for. The suggestions are of two types:\n- suggestions for search queries that are related to the current query\n- suggestions for categories that are related to the current query\n\nExample response:\n<pre>\n{\n  \"suggestions_request_id\": \"c6fa5efd-1bde-43a8-9ac4-434605f53024\",\n  \"suggestions\": [\n    {\n      \"type\": \"query\",\n      \"title\": \"red hat\",\n      \"suggestions_result_id\": \"60c54958-8f2d-4ffd-a343-d316e79593b8\"\n    },\n    {\n      \"category_id\": \"sweaters-hoodies\",\n      \"title\": \"Sweaters & Hoodies\",\n      \"page_url\": \"https://foobar.com/sweaters-hoodies\",\n      \"type\": \"category\",\n      \"suggestions_result_id\": \"b11ee4a9-0d95-4559-b1fa-76479ca3e3ea\"\n    }\n  ]\n}\n</pre>"
+      description: 'Returns suggestions for a given query. Call this while the user is typing to help
+
+        the user find what they''re looking for. The suggestions are of two types:
+
+        - suggestions for search queries that are related to the current query
+
+        - suggestions for categories that are related to the current query
+
+
+        Example response:
+
+
+        {
+
+        "suggestions_request_id": "c6fa5efd-1bde-43a8-9ac4-434605f53024",
+
+        "suggestions": [
+
+        {
+
+        "type": "query",
+
+        "title": "red hat",
+
+        "suggestions_result_id": "60c54958-8f2d-4ffd-a343-d316e79593b8"
+
+        },
+
+        {
+
+        "category_id": "sweaters-hoodies",
+
+        "title": "Sweaters & Hoodies",
+
+        "page_url": "https://foobar.com/sweaters-hoodies",
+
+        "type": "category",
+
+        "suggestions_result_id": "b11ee4a9-0d95-4559-b1fa-76479ca3e3ea"
+
+        }
+
+        ]
+
+        }'
       operationId: Get_suggestions_v2_search_suggestions_get
       security:
       - APIKeyQuery: []
@@ -190,9 +415,7 @@ paths:
 
         Example response:
 
-        WIP
-
-        </pre>'
+        WIP'
       operationId: Search_through_text_content_v2_search_content_get
       security:
       - APIKeyQuery: []
@@ -269,26 +492,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    TypesenseHighlights:
-      properties:
-        field:
-          type: string
-          title: Field
-        snippet:
-          type: string
-          title: Snippet
-        matched_tokens:
-          items:
-            type: string
-          type: array
-          title: Matched Tokens
-      additionalProperties: false
-      type: object
-      required:
-      - field
-      - snippet
-      - matched_tokens
-      title: TypesenseHighlights
     SearchRequestV2:
       properties:
         cursor:
@@ -372,27 +575,6 @@ components:
       - market
       - tenant
       title: SearchRequestV2
-    SortModel-Input:
-      properties:
-        field:
-          type: string
-          title: Field
-          description: The field to sort by.
-        order:
-          allOf:
-          - $ref: '#/components/schemas/SortingOrder'
-          description: The order to sort by.
-        meta:
-          anyOf:
-          - $ref: '#/components/schemas/SortMeta'
-          - type: 'null'
-          description: 'Metadata about the sort that can be used for rendering. '
-      additionalProperties: false
-      type: object
-      required:
-      - field
-      - order
-      title: SortModel
     HTTPValidationError:
       properties:
         detail:
@@ -402,6 +584,23 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ContentSearchResponse:
+      properties:
+        content_request_id:
+          type: string
+          title: Content Request Id
+        links:
+          items:
+            $ref: '#/components/schemas/ContentLink'
+          type: array
+          title: Links
+          description: List of links to content pages that match the search query.
+      additionalProperties: false
+      type: object
+      required:
+      - content_request_id
+      - links
+      title: ContentSearchResponse
     RangeFilterMeta:
       properties:
         group_title:
@@ -446,6 +645,339 @@ components:
       - min
       - max
       title: RangeFilterMeta
+    SearchResponse:
+      properties:
+        n_hits:
+          type: integer
+          title: N Hits
+          description: Total number of results for this query. Not necessarily exact.
+        sorts:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SortModel-Output'
+            type: array
+          - type: 'null'
+          title: Sorts
+          description: Available methods for sorting the response. Any element from this list can be sent as `sort` in subsequent requests.
+        filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SearchFilter'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: Available filters that can be used for filtering in the subsequent request.
+        search_request_id:
+          type: string
+          title: Search Request Id
+        cursor:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Cursor
+          description: Cursor that can be used in the next request to get subsequent results. If this is not set, there are no more results.
+        content_search_links:
+          items:
+            $ref: '#/components/schemas/ContentLink'
+          type: array
+          title: Content Search Links
+          description: List of links to content pages that match the search query.
+        displays:
+          items:
+            type: object
+          type: array
+          title: Displays
+          description: The search results.
+        debug_info:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Debug Info
+      additionalProperties: false
+      type: object
+      required:
+      - n_hits
+      - search_request_id
+      - displays
+      title: SearchResponse
+    LegacyCategorySuggestion:
+      properties:
+        category_id:
+          type: string
+          title: Category Id
+          description: Unique identifier of the category.
+        title:
+          type: string
+          title: Title
+          description: The title of the category
+        page_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Page Url
+          description: The full URL to the category page
+        query_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query Id
+          description: Optionally a unique query ID for the category
+        uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Uri
+          description: Optionally a unique URI for the category, for example men/shoes
+        category_type:
+          allOf:
+          - $ref: '#/components/schemas/ECategoryType'
+          description: The type of category, for example CAMPAIGN, TAG, or CATEGORY
+          default: CATEGORY
+        type:
+          const: category
+          title: Type
+          description: type
+          default: category
+        suggestions_result_id:
+          type: string
+          title: Suggestions Result Id
+      additionalProperties: true
+      type: object
+      required:
+      - category_id
+      - title
+      - suggestions_result_id
+      title: LegacyCategorySuggestion
+    SortModel-Input:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to sort by.
+        order:
+          allOf:
+          - $ref: '#/components/schemas/SortingOrder'
+          description: The order to sort by.
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/SortMeta'
+          - type: 'null'
+          description: 'Metadata about the sort that can be used for rendering. '
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - order
+      title: SortModel
+    ContentLink:
+      properties:
+        type:
+          const: content_link
+          title: Type
+          default: content_link
+        title:
+          type: string
+          title: Title
+          description: Title for the content page
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Short human-readable description for the content page
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+          description: URL for the content page image
+        page_url:
+          type: string
+          title: Page Url
+          description: URL for the content page
+        highlights:
+          items:
+            $ref: '#/components/schemas/TypesenseHighlights'
+          type: array
+          title: Highlights
+          description: Highlights that show why the search query matched this content page
+      additionalProperties: false
+      type: object
+      required:
+      - title
+      - description
+      - page_url
+      title: ContentLink
+    common__schema__search__QuerySuggestion:
+      properties:
+        type:
+          const: query
+          title: Type
+          default: query
+        title:
+          type: string
+          title: Title
+          description: Title for suggestion.
+        suggestions_result_id:
+          type: string
+          title: Suggestions Result Id
+      additionalProperties: false
+      type: object
+      required:
+      - title
+      - suggestions_result_id
+      title: QuerySuggestion
+    SortingOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: SortingOrder
+    RecommendResponse:
+      properties:
+        displays:
+          items:
+            type: object
+          type: array
+          title: Displays
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        variant:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Variant
+        experiment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Experiment Id
+      additionalProperties: false
+      type: object
+      required:
+      - displays
+      title: RecommendResponse
+    SearchSuggestionsResponse:
+      properties:
+        suggestions_request_id:
+          type: string
+          title: Suggestions Request Id
+        suggestions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/common__schema__search__QuerySuggestion'
+            - $ref: '#/components/schemas/LegacyCategorySuggestion'
+          type: array
+          title: Suggestions
+          description: List of suggestions for search queries that should be shown to the user while they are typing.
+      additionalProperties: false
+      type: object
+      required:
+      - suggestions_request_id
+      - suggestions
+      title: SearchSuggestionsResponse
+    ECategoryType:
+      type: string
+      enum:
+      - TAG
+      - CATEGORY
+      - TENANT_CATEGORY
+      - TENANT_SECONDARY_CATEGORY
+      - CAMPAIGN
+      - BRAND
+      title: ECategoryType
+    TypesenseHighlights:
+      properties:
+        field:
+          type: string
+          title: Field
+        snippet:
+          type: string
+          title: Snippet
+        matched_tokens:
+          items:
+            type: string
+          type: array
+          title: Matched Tokens
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - snippet
+      - matched_tokens
+      title: TypesenseHighlights
+    SortModel-Output:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to sort by.
+        order:
+          allOf:
+          - $ref: '#/components/schemas/SortingOrder'
+          description: The order to sort by.
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/SortMeta'
+          - type: 'null'
+          description: 'Metadata about the sort that can be used for rendering. '
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - order
+      title: SortModel
+    HierarchicalValuesFilterMeta:
+      properties:
+        group_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Title
+          description: Title of the group, where a group consists of all the filters that share an ID.
+        group_expanded:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Group Expanded
+          description: Whether the filter group should be expanded by default or not.
+        type:
+          const: checkbox-hierarchical
+          title: Type
+        values:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+          title: Values
+          description: Selectable hierarchical values
+        counts:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Counts
+          description: Counts for values
+        names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Names
+          description: Names for hierarchical values, this is what you should display in the UI (not values)
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - values
+      title: HierarchicalValuesFilterMeta
     ValuesFilterMeta:
       properties:
         group_title:
@@ -528,62 +1060,6 @@ components:
       - type
       - values
       title: ValuesFilterMeta
-    SearchResponse:
-      properties:
-        n_hits:
-          type: integer
-          title: N Hits
-          description: Total number of results for this query. Not necessarily exact.
-        sorts:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/SortModel-Output'
-            type: array
-          - type: 'null'
-          title: Sorts
-          description: Available methods for sorting the response. Any element from this list can be sent as `sort` in subsequent requests.
-        filters:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/SearchFilter'
-            type: array
-          - type: 'null'
-          title: Filters
-          description: Available filters that can be used for filtering in the subsequent request.
-        search_request_id:
-          type: string
-          title: Search Request Id
-        cursor:
-          anyOf:
-          - type: string
-            maxLength: 500
-          - type: 'null'
-          title: Cursor
-          description: Cursor that can be used in the next request to get subsequent results. If this is not set, there are no more results.
-        content_search_links:
-          items:
-            $ref: '#/components/schemas/ContentLink'
-          type: array
-          title: Content Search Links
-          description: List of links to content pages that match the search query.
-        displays:
-          items:
-            type: object
-          type: array
-          title: Displays
-          description: The search results.
-        debug_info:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Debug Info
-      additionalProperties: false
-      type: object
-      required:
-      - n_hits
-      - search_request_id
-      - displays
-      title: SearchResponse
     SearchFilter:
       properties:
         field:
@@ -707,232 +1183,6 @@ components:
       - field
       - op
       title: SearchFilter
-    SearchSuggestionsResponse:
-      properties:
-        suggestions_request_id:
-          type: string
-          title: Suggestions Request Id
-        suggestions:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/common__schema__search__QuerySuggestion'
-            - $ref: '#/components/schemas/LegacyCategorySuggestion'
-          type: array
-          title: Suggestions
-          description: List of suggestions for search queries that should be shown to the user while they are typing.
-      additionalProperties: false
-      type: object
-      required:
-      - suggestions_request_id
-      - suggestions
-      title: SearchSuggestionsResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HierarchicalValuesFilterMeta:
-      properties:
-        group_title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Title
-          description: Title of the group, where a group consists of all the filters that share an ID.
-        group_expanded:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Group Expanded
-          description: Whether the filter group should be expanded by default or not.
-        type:
-          const: checkbox-hierarchical
-          title: Type
-        values:
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-          title: Values
-          description: Selectable hierarchical values
-        counts:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Counts
-          description: Counts for values
-        names:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Names
-          description: Names for hierarchical values, this is what you should display in the UI (not values)
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - values
-      title: HierarchicalValuesFilterMeta
-    common__schema__search__QuerySuggestion:
-      properties:
-        type:
-          const: query
-          title: Type
-          default: query
-        title:
-          type: string
-          title: Title
-          description: Title for suggestion.
-        suggestions_result_id:
-          type: string
-          title: Suggestions Result Id
-      additionalProperties: false
-      type: object
-      required:
-      - title
-      - suggestions_result_id
-      title: QuerySuggestion
-    SortingOrder:
-      type: string
-      enum:
-      - asc
-      - desc
-      title: SortingOrder
-    RecommendResponse:
-      properties:
-        displays:
-          items:
-            type: object
-          type: array
-          title: Displays
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-        variant:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Variant
-        experiment_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Experiment Id
-      additionalProperties: false
-      type: object
-      required:
-      - displays
-      title: RecommendResponse
-    LegacyCategorySuggestion:
-      properties:
-        category_id:
-          type: string
-          title: Category Id
-          description: Unique identifier of the category.
-        title:
-          type: string
-          title: Title
-          description: The title of the category
-        page_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Page Url
-          description: The full URL to the category page
-        query_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Query Id
-          description: Optionally a unique query ID for the category
-        uri:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Uri
-          description: Optionally a unique URI for the category, for example men/shoes
-        category_type:
-          allOf:
-          - $ref: '#/components/schemas/ECategoryType'
-          description: The type of category, for example CAMPAIGN, TAG, or CATEGORY
-          default: CATEGORY
-        type:
-          const: category
-          title: Type
-          description: type
-          default: category
-        suggestions_result_id:
-          type: string
-          title: Suggestions Result Id
-      additionalProperties: true
-      type: object
-      required:
-      - category_id
-      - title
-      - suggestions_result_id
-      title: LegacyCategorySuggestion
-    ContentLink:
-      properties:
-        type:
-          const: content_link
-          title: Type
-          default: content_link
-        title:
-          type: string
-          title: Title
-          description: Title for the content page
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Short human-readable description for the content page
-        image_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image Url
-          description: URL for the content page image
-        page_url:
-          type: string
-          title: Page Url
-          description: URL for the content page
-        highlights:
-          items:
-            $ref: '#/components/schemas/TypesenseHighlights'
-          type: array
-          title: Highlights
-          description: Highlights that show why the search query matched this content page
-      additionalProperties: false
-      type: object
-      required:
-      - title
-      - description
-      - page_url
-      title: ContentLink
     BaseSearchRequestV2:
       properties:
         market:
@@ -1001,33 +1251,27 @@ components:
       - market
       - tenant
       title: BaseSearchRequestV2
-    ECategoryType:
-      type: string
-      enum:
-      - TAG
-      - CATEGORY
-      - TENANT_CATEGORY
-      - TENANT_SECONDARY_CATEGORY
-      - CAMPAIGN
-      - BRAND
-      title: ECategoryType
-    ContentSearchResponse:
+    ValidationError:
       properties:
-        content_request_id:
-          type: string
-          title: Content Request Id
-        links:
+        loc:
           items:
-            $ref: '#/components/schemas/ContentLink'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Links
-          description: List of links to content pages that match the search query.
-      additionalProperties: false
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - content_request_id
-      - links
-      title: ContentSearchResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
     SortMeta:
       properties:
         title:
@@ -1052,36 +1296,19 @@ components:
       required:
       - title
       title: SortMeta
-    SortModel-Output:
-      properties:
-        field:
-          type: string
-          title: Field
-          description: The field to sort by.
-        order:
-          allOf:
-          - $ref: '#/components/schemas/SortingOrder'
-          description: The order to sort by.
-        meta:
-          anyOf:
-          - $ref: '#/components/schemas/SortMeta'
-          - type: 'null'
-          description: 'Metadata about the sort that can be used for rendering. '
-      additionalProperties: false
-      type: object
-      required:
-      - field
-      - order
-      title: SortModel
   securitySchemes:
-    Auth0:
-      type: oauth2
-      flows:
-        authorizationCode:
-          scopes:
-            openid: OpenID Connect
-            profile: User profile
-            email: User email
-          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
-          tokenUrl: https://depict.eu.auth0.com/oauth/token
-      x-tokenName: id_token
+    APIKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: X-API-KEY
+    HTTPBearer:
+      type: http
+      scheme: bearer

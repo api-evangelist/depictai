@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Shopify Collection Template API
+  title: Depict Lite Shopify Collection Template API
   version: 1.0.0
   description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
 servers:
@@ -158,14 +158,6 @@ paths:
       - Shopify Collection Template
 components:
   schemas:
-    ThemeOnboardingStatus:
-      type: string
-      enum:
-      - success
-      - warning
-      - failure
-      - pending
-      title: ThemeOnboardingStatus
     LiteColumnSettings:
       properties:
         desktop_columns:
@@ -179,19 +171,6 @@ components:
       - desktop_columns
       - mobile_columns
       title: LiteColumnSettings
-    CollectionTemplate:
-      properties:
-        template_suffix:
-          type: string
-          title: Template Suffix
-        is_depict_template:
-          type: boolean
-          title: Is Depict Template
-      type: object
-      required:
-      - template_suffix
-      - is_depict_template
-      title: CollectionTemplate
     CollectionTemplateWithActiveAndWrittenStatus:
       properties:
         template_suffix:
@@ -213,6 +192,54 @@ components:
       - active
       - written
       title: CollectionTemplateWithActiveAndWrittenStatus
+    CollectionTemplate:
+      properties:
+        template_suffix:
+          type: string
+          title: Template Suffix
+        is_depict_template:
+          type: boolean
+          title: Is Depict Template
+      type: object
+      required:
+      - template_suffix
+      - is_depict_template
+      title: CollectionTemplate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ThemeOnboardingStatus:
+      type: string
+      enum:
+      - success
+      - warning
+      - failure
+      - pending
+      title: ThemeOnboardingStatus
+    GetCollectionTemplatesResponse:
+      properties:
+        theme_onboarding_status:
+          $ref: '#/components/schemas/ThemeOnboardingStatus'
+        user_approved:
+          type: boolean
+          title: User Approved
+        templates:
+          items:
+            $ref: '#/components/schemas/CollectionTemplateWithActiveAndWrittenStatus'
+          type: array
+          title: Templates
+      type: object
+      required:
+      - theme_onboarding_status
+      - user_approved
+      - templates
+      title: GetCollectionTemplatesResponse
     ValidationError:
       properties:
         loc:
@@ -234,33 +261,6 @@ components:
       - msg
       - type
       title: ValidationError
-    GetCollectionTemplatesResponse:
-      properties:
-        theme_onboarding_status:
-          $ref: '#/components/schemas/ThemeOnboardingStatus'
-        user_approved:
-          type: boolean
-          title: User Approved
-        templates:
-          items:
-            $ref: '#/components/schemas/CollectionTemplateWithActiveAndWrittenStatus'
-          type: array
-          title: Templates
-      type: object
-      required:
-      - theme_onboarding_status
-      - user_approved
-      - templates
-      title: GetCollectionTemplatesResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     Auth0:
       type: oauth2

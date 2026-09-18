@@ -1,10 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Depict Lite Ab Test Listing (v2) API
-  version: 1.0.0
-  description: 'REST API behind Depict Lite, the native Shopify app: onboarding, collections, boost & bury, dashboards, A/B testing and multi-store management. Endpoints are served under the /api/lite prefix and require an Auth0-issued bearer token.'
+  title: Depict Storefront Listing (v2) API
+  version: '1.0'
 servers:
-- url: /api/lite
+- url: https://api.depict.ai
 tags:
 - name: Listing (v2)
 paths:
@@ -47,6 +46,25 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    PLPMetadata:
+      properties:
+        title:
+          type: string
+          title: Title
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        replace_meta_tags:
+          type: boolean
+          title: Replace Meta Tags
+          description: Whether to replace the page meta tags, e.g., title and description, with the ones from the collection.
+          default: false
+      type: object
+      required:
+      - title
+      title: PLPMetadata
     ProductListingType:
       type: string
       enum:
@@ -54,7 +72,7 @@ components:
       - collection
       - scollection
       title: ProductListingType
-    RangeFilterMeta:
+    HierarchicalValuesFilterMeta:
       properties:
         group_title:
           anyOf:
@@ -69,35 +87,38 @@ components:
           title: Group Expanded
           description: Whether the filter group should be expanded by default or not.
         type:
-          const: range
+          const: checkbox-hierarchical
           title: Type
-        min:
-          type: number
-          title: Min
-          description: The minimum value that can be selected in the range.
-        max:
-          type: number
-          title: Max
-          description: The maximum value that can be selected in the range.
-        unit:
+        values:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+          title: Values
+          description: Selectable hierarchical values
+        counts:
           anyOf:
-          - type: string
+          - items:
+              type: integer
+            type: array
           - type: 'null'
-          title: Unit
-          description: The unit of the range values.
-        currency:
+          title: Counts
+          description: Counts for values
+        names:
           anyOf:
-          - type: string
+          - items:
+              type: string
+            type: array
           - type: 'null'
-          title: Currency
-          description: The currency of the range values.
+          title: Names
+          description: Names for hierarchical values, this is what you should display in the UI (not values)
       additionalProperties: false
       type: object
       required:
       - type
-      - min
-      - max
-      title: RangeFilterMeta
+      - values
+      title: HierarchicalValuesFilterMeta
     ValuesFilterMeta:
       properties:
         group_title:
@@ -180,6 +201,42 @@ components:
       - type
       - values
       title: ValuesFilterMeta
+    SortModel-Input:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to sort by.
+        order:
+          allOf:
+          - $ref: '#/components/schemas/SortingOrder'
+          description: The order to sort by.
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/SortMeta'
+          - type: 'null'
+          description: 'Metadata about the sort that can be used for rendering. '
+      additionalProperties: false
+      type: object
+      required:
+      - field
+      - order
+      title: SortModel
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SortingOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: SortingOrder
     ProductListingRequestV2:
       properties:
         cursor:
@@ -373,65 +430,6 @@ components:
       - category_id
       - title
       title: BaseCategoryDisplay
-    ECategoryType:
-      type: string
-      enum:
-      - TAG
-      - CATEGORY
-      - TENANT_CATEGORY
-      - TENANT_SECONDARY_CATEGORY
-      - CAMPAIGN
-      - BRAND
-      title: ECategoryType
-    PLPMetadata:
-      properties:
-        title:
-          type: string
-          title: Title
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        replace_meta_tags:
-          type: boolean
-          title: Replace Meta Tags
-          description: Whether to replace the page meta tags, e.g., title and description, with the ones from the collection.
-          default: false
-      type: object
-      required:
-      - title
-      title: PLPMetadata
-    SortModel-Input:
-      properties:
-        field:
-          type: string
-          title: Field
-          description: The field to sort by.
-        order:
-          allOf:
-          - $ref: '#/components/schemas/SortingOrder'
-          description: The order to sort by.
-        meta:
-          anyOf:
-          - $ref: '#/components/schemas/SortMeta'
-          - type: 'null'
-          description: 'Metadata about the sort that can be used for rendering. '
-      additionalProperties: false
-      type: object
-      required:
-      - field
-      - order
-      title: SortModel
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     SearchFilter:
       properties:
         field:
@@ -555,74 +553,6 @@ components:
       - field
       - op
       title: SearchFilter
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HierarchicalValuesFilterMeta:
-      properties:
-        group_title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Title
-          description: Title of the group, where a group consists of all the filters that share an ID.
-        group_expanded:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Group Expanded
-          description: Whether the filter group should be expanded by default or not.
-        type:
-          const: checkbox-hierarchical
-          title: Type
-        values:
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-          title: Values
-          description: Selectable hierarchical values
-        counts:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Counts
-          description: Counts for values
-        names:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Names
-          description: Names for hierarchical values, this is what you should display in the UI (not values)
-      additionalProperties: false
-      type: object
-      required:
-      - type
-      - values
-      title: HierarchicalValuesFilterMeta
     SortMeta:
       properties:
         title:
@@ -647,12 +577,71 @@ components:
       required:
       - title
       title: SortMeta
-    SortingOrder:
-      type: string
-      enum:
-      - asc
-      - desc
-      title: SortingOrder
+    RangeFilterMeta:
+      properties:
+        group_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Title
+          description: Title of the group, where a group consists of all the filters that share an ID.
+        group_expanded:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Group Expanded
+          description: Whether the filter group should be expanded by default or not.
+        type:
+          const: range
+          title: Type
+        min:
+          type: number
+          title: Min
+          description: The minimum value that can be selected in the range.
+        max:
+          type: number
+          title: Max
+          description: The maximum value that can be selected in the range.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+          description: The unit of the range values.
+        currency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Currency
+          description: The currency of the range values.
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      - min
+      - max
+      title: RangeFilterMeta
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     SortModel-Output:
       properties:
         field:
@@ -674,15 +663,29 @@ components:
       - field
       - order
       title: SortModel
+    ECategoryType:
+      type: string
+      enum:
+      - TAG
+      - CATEGORY
+      - TENANT_CATEGORY
+      - TENANT_SECONDARY_CATEGORY
+      - CAMPAIGN
+      - BRAND
+      title: ECategoryType
   securitySchemes:
-    Auth0:
-      type: oauth2
-      flows:
-        authorizationCode:
-          scopes:
-            openid: OpenID Connect
-            profile: User profile
-            email: User email
-          authorizationUrl: https://depict.eu.auth0.com/oauth/authorize
-          tokenUrl: https://depict.eu.auth0.com/oauth/token
-      x-tokenName: id_token
+    APIKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: X-API-KEY
+    HTTPBearer:
+      type: http
+      scheme: bearer
